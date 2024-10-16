@@ -1,0 +1,34 @@
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ThreadsComponent } from './components/threads/threads.component';
+import { ThreadDetailComponent } from './components/thread-detail/thread-detail.component';
+import { CreateThreadComponent } from './components/create-thread/create-thread.component';
+import { EditThreadComponent } from './components/edit-thread/edit-thread.component';
+import { TagComponent } from './components/tag/tag.component';
+import { TagThreadComponent } from './components/tag-thread/tag-thread.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    ThreadsComponent,
+    ThreadDetailComponent,
+    CreateThreadComponent,
+    EditThreadComponent,
+    TagComponent,
+    TagThreadComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
