@@ -1,0 +1,74 @@
+const Thread = require('../models/threadModel');
+
+// Create a new thread
+exports.createThread = async (req, res) => {
+    const { title, content, is_anonymous, tags, expire_at } = req.body;
+    const newThread = new Thread({
+        title,
+        content,
+        user_id: req.user.id,
+        user_name: req.user.username,
+        is_anonymous,
+        tags,
+        expire_at
+    });
+
+    try {
+        await newThread.save();
+        res.status(201).json(newThread);
+    } catch (error) {
+        res.status(400).json({ message: 'Error creating thread', error });
+    }
+};
+
+// Get all threads
+exports.getAllThreads = async (req, res) => {
+    try {
+        const threads = await Thread.find().exec(); // Removed populate
+        res.json(threads);
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving threads', error });
+    }
+};
+
+
+// Get a thread by ID
+exports.getThreadById = async (req, res) => {
+    const thread = await Thread.findById(req.params.id).populate('user_id', 'username').exec();
+    if (thread) {
+        res.json(thread);
+    } else {
+        res.status(404).json({ message: 'Thread not found' });
+    }
+};
+
+// Edit a thread
+exports.updateThread = async (req, res) => {
+    const { title, content } = req.body;
+    const thread = await Thread.findById(req.params.id);
+
+    if (thread && String(thread.user_id) === req.user.id) {
+        thread.title = title;
+        thread.content = content;
+        await thread.save();
+        res.json(thread);
+    } else {
+        res.status(403).json({ message: 'Unauthorized to edit this thread' });
+    }
+};
+
+// Delete a thread
+exports.deleteThread = async (req, res) => {
+    try {
+        const thread = await Thread.findById(req.params.id);
+        if (thread && String(thread.user_id) === req.user.id) {
+            await Thread.findByIdAndDelete(req.params.id); // Use findByIdAndDelete
+            res.json({ message: 'Thread deleted successfully' });
+        } else {
+            res.status(403).json({ message: 'Unauthorized to delete this thread' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting thread', error });
+    }
+};
+
