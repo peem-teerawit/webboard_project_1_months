@@ -1,0 +1,130 @@
+:host {
+    display: contents;
+}
+
+.login-page {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #000;
+    padding: 70px 30px; 
+    font: 400 18px 'Sansita One', sans-serif; 
+    overflow: hidden;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 450px; 
+}
+
+.app-title {
+    align-self: center;
+    width: 100%;
+    font-size: 30px;
+    color: #fff;
+    padding: 15px 30px;
+    text-align: center;
+    border-radius: 6px; 
+    background-color: #1867b5;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.form-label {
+    display: block;
+    font-size: 24px; 
+    margin-top: 20px; 
+    line-height: 1;
+}
+
+.form-input {
+    width: 100%;
+    padding: 15px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 6px;
+    background-color: #edebe5;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+    color: #8f8f8f;
+    line-height: 1;
+}
+
+.password-input-wrapper {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px; 
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 35px; 
+    height: 28px; 
+}
+
+.forgot-password {
+    color: #1867b5; 
+    text-decoration: underline; 
+    line-height: 1.5; 
+    margin-top: 15px;
+    align-self: flex-end;
+    font-size: 18px; 
+    transition: color 0.3s; 
+}
+
+.submit-button {
+    width: 100%;
+    margin-top: 15px; 
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.submit-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.submit-icon {
+    width: 100%;
+    border-radius: 6px; 
+}
+
+.register-link {
+    display: block;
+    margin-top: 15px;
+    padding: 15px; 
+    font-size: 24px; 
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 6px; 
+    background-color: #edebe5;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+    line-height: 1;
+}
+
+@media (max-width: 991px) {
+    .login-page {
+        padding: 50px 20px;
+    }
+
+    .app-title {
+        font-size: 28px; 
+        padding: 10px; 
+    }
+
+    .form-label {
+        margin-top: 15px;
+    }
+
+    .form-input,
+    .register-link {
+        padding: 10px;
+    }
+}

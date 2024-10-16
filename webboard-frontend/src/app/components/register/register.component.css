@@ -1,0 +1,86 @@
+:host {
+    display: contents;
+}
+
+builder-component {
+    max-width: none !important;
+}
+
+.register-page {
+    background-color: rgba(255, 255, 255, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgba(0, 0, 0, 1);
+    justify-content: center;
+    padding: 30px 15px; 
+    font: 400 20px Sansita One, sans-serif;
+}
+
+@media (max-width: 991px) {
+    .register-page {
+        padding: 15px; 
+    }
+}
+
+.div {
+    display: flex;
+    width: 100%; 
+    max-width: 500px;
+    flex-direction: column;
+}
+
+.ลงทะเบียน {
+    border-radius: 10px;
+    background-color: rgba(24, 103, 181, 1);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    align-self: center;
+    width: 100%;
+    max-width: 350px; 
+    font-size: 28px; 
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    padding: 15px 0; 
+}
+
+.username, .email, .password, .confirm-password {
+    line-height: 1.5; 
+    align-self: start;
+    margin-top: 15px;
+}
+
+.กรุณากรอกชื่อ, .กรุณากรอกอีเมล, .กรุณากรอกรหัสผ่าน, .กรุณายืนยันรหัสผ่าน {
+    border-radius: 10px;
+    background-color: rgba(237, 235, 229, 1);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 18px; 
+    color: rgba(143, 143, 143, 1);
+    padding: 10px 20px; 
+    width: 100%;
+    border: none;
+}
+
+.ลงทะเบียน-2 {
+    border-radius: 10px;
+    background-color: rgba(246, 202, 21, 1);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-top: 20px; 
+    font-size: 30px; 
+    color: rgba(67, 14, 0, 1);
+    text-align: center;
+    line-height: 1; 
+    padding: 20px 0; 
+    border: none;
+    cursor: pointer;
+}
+
+@media (max-width: 991px) {
+    .ลงทะเบียน, .ลงทะเบียน-2 {
+        font-size: 24px; 
+        padding: 10px;
+    }
+
+    .div {
+        width: 100%; 
+    }
+}

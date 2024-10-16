@@ -1,1 +1,16 @@
-<p>register works!</p>
+<div class="register-page">
+    <div class="div">
+      <div class="ลงทะเบียน">ลงทะเบียน</div>
+      <div class="username">Username</div>
+      <input class="กรุณากรอกชื่อ" placeholder="กรุณากรอกชื่อ" [(ngModel)]="username">
+      <div class="email">Email</div>
+      <input class="กรุณากรอกอีเมล" placeholder="กรุณากรอกอีเมล" [(ngModel)]="email">
+      <div class="password">Password</div>
+      <input class="กรุณากรอกรหัสผ่าน" placeholder="กรุณากรอกรหัสผ่าน" type="password" [(ngModel)]="password">
+      <div class="confirm-password">Confirm Password</div>
+      <input class="กรุณายืนยันรหัสผ่าน" placeholder="กรุณายืนยันรหัสผ่าน" type="password" [(ngModel)]="confirmPassword">
+      <button class="ลงทะเบียน-2" (click)="onRegister()">ลงทะเบียน</button>
+      <a (click)="navigateToLogin()" class="login-link">เข้าสู่ระบบ</a>
+    </div>
+  </div>
+

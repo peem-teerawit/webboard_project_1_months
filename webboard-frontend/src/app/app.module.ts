@@ -11,6 +11,8 @@ import { CreateThreadComponent } from './components/create-thread/create-thread.
 import { EditThreadComponent } from './components/edit-thread/edit-thread.component';
 import { TagComponent } from './components/tag/tag.component';
 import { TagThreadComponent } from './components/tag-thread/tag-thread.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { TagThreadComponent } from './components/tag-thread/tag-thread.component
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
