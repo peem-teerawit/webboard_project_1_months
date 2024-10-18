@@ -76,6 +76,7 @@ h2 {
     font-size: 1.5em; /* Larger font size for title */
     margin: 10px 0; /* Space above and below */
     color: rgba(0, 0, 0, 0.85); /* Darker title */
+    font-weight: bold;
 }
 
 .post-content {

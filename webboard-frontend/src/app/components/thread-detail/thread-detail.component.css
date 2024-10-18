@@ -86,3 +86,95 @@
     padding: 5px 10px; /* Padding inside tags */
 }
 
+
+/* Replies Section */
+.comment-section {
+    width: 100%; /* Full width of container */
+    max-width: 800px; /* Limit the max width */
+    margin-top: 10px; /* Space above replies */
+}
+
+.comment-input {
+    margin-bottom: 40px; /* Space below the input area */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to start */
+    gap: 10px; /* Space between input elements */
+    width: 100%;
+}
+
+textarea {
+    width: 100%; /* Full width textarea */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Add some padding */
+    border: 1px solid #ccc; /* Light border */
+}
+
+.post-reply-button {
+    background-color: rgba(246, 202, 21, 1); /* Main color */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding inside button */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth background change */
+}
+
+.post-reply-button:hover {
+    background-color: rgba(246, 202, 21, 1); /* Darker shade on hover */
+}
+
+.comments-list {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    width: 100%; /* Full width */
+}
+
+.reply-container {
+    border-radius: 10px; /* Rounded corners */
+    background-color: rgba(251, 248, 239, 1); /* Same background as threads */
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin: 15px 0; /* Spacing between replies */
+    padding: 15px; /* Internal padding */
+    border: 1px solid rgba(188, 188, 188, 0.5); /* Lighter border */
+    display: flex;
+    flex-direction: column; /* Stack reply content vertically */
+}
+
+.div-reply-header {
+    display: flex;
+    justify-content: space-between; /* Space between name and time */
+    align-items: center;
+    margin-bottom: 5px; /* Space below header */
+}
+
+.reply-time {
+    color: rgba(97, 97, 97, 1); /* Time text color */
+    font-size: 14px;
+}
+
+.reply-content {
+    margin-bottom: 10px; /* Space below content */
+    color: rgba(0, 0, 0, 0.6); /* Lighter color */
+}
+
+.reply-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between icons */
+}
+
+.reply-likes {
+    display: flex;
+    align-items: center;
+}
+
+.reply-likes img {
+    width: 20px; /* Adjust icon size */
+    height: 20px;
+    margin-right: 5px; /* Space between icon and number */
+}
+
+.reply-likes span {
+    font-size: 14px; /* Adjust font size */
+}
