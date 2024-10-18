@@ -1,23 +1,29 @@
 <div class="container thread-history-page">
-  <h2 class="section-title">Threads History </h2>
-
-  <div *ngIf="userThreads.length === 0" class="no-threads">
-    <p>No threads posted yet.</p>
+    <h2 class="section-title">Threads History </h2>
+  
+    <div *ngIf="userThreads.length === 0" class="no-threads">
+      <p>No threads posted yet.</p>
+    </div>
+  
+    <ul class="thread-list">
+      <li *ngFor="let thread of userThreads" class="thread-item">
+        <div class="thread-header">
+          <!-- Link to navigate to thread detail using the thread's _id -->
+          <h3>
+            <a [routerLink]="['/threads', thread._id]" class="thread-title-link" style="text-decoration: none;">
+              {{ thread.title }}
+            </a>
+          </h3>
+          <small>Posted on: {{ thread.created_at | date:'short' }}</small>
+        </div>
+        <p>{{ thread.content }}</p>
+        <div class="thread-actions">
+          <!-- Link to edit the thread -->
+          <a [routerLink]="['/edit-thread', thread._id]" class="action-link">Edit</a>
+          <!-- Delete button -->
+          <button (click)="deleteThread(thread._id)" class="action-button">Delete</button>
+        </div>
+      </li>
+    </ul>
   </div>
-
-  <ul class="thread-list">
-    <li *ngFor="let thread of userThreads" class="thread-item">
-      <div class="thread-header">
-        <h3>{{ thread.title }}</h3>
-        <small>Posted on: {{ thread.created_at | date:'short' }}</small>
-      </div>
-      <p>{{ thread.content }}</p>
-      <div class="thread-actions">
-        <!-- Link to edit the thread -->
-        <a [routerLink]="['/edit-thread', thread._id]" class="action-link">Edit</a>
-        <!-- Delete button -->
-        <button (click)="deleteThread(thread._id)" class="action-button">Delete</button>
-      </div>
-    </li>
-  </ul>
-</div>
+  

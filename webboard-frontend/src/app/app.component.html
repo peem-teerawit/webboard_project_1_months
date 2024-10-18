@@ -34,13 +34,12 @@
               </button>
               <div *ngIf="dropdownOpen" class="dropdown-content">
                 <span *ngIf="username">Welcome, {{ username }}!</span>
-                <a routerLink="/login" class="dropdown-item">เข้าสู่ระบบ</a>
-                <a routerLink="/register" class="dropdown-item">ลงทะเบียนบัญชีใหม่</a>
+                <a *ngIf="!username" routerLink="/login" class="dropdown-item">เข้าสู่ระบบ</a>
+                <!-- <a routerLink="/register" class="dropdown-item">ลงทะเบียนบัญชีใหม่</a> -->
                 <a routerLink="/thread-history" class="dropdown-item">ประวัติกระทู้</a> 
-                <button (click)="logOut()" class="dropdown-item">ออกจากระบบ</button>
-              </div>
+                <button *ngIf="username" (click)="logOut()" class="dropdown-item">ออกจากระบบ</button>
+              </div>              
             </div>
-            
           </nav>
         </div>
       </div>

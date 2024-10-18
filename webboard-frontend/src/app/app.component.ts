@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router'; // Import Router
 
 @Component({
   selector: 'app-root',
@@ -7,11 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'webboard-frontend';
-  
-  username: string | null = '';
-  dropdownOpen = false; 
 
-  constructor() {
+  username: string | null = '';
+  dropdownOpen = false;
+
+  constructor(private router: Router) { // Inject Router in the constructor
     this.username = localStorage.getItem('username');
   }
 
@@ -19,8 +20,11 @@ export class AppComponent {
   logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
-    this.username = null; 
-    this.closeDropdown(); 
+    this.username = null;
+    this.closeDropdown();
+
+    // Navigate to the thread page after logout
+    this.router.navigate(['/threads']); // Change '/threads' to the appropriate path if needed
   }
 
   toggleDropdown() {
