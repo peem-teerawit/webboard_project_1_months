@@ -1,26 +1,123 @@
 .container {
+  margin: 80px auto;
+  max-width: 800px;
+  background-color: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.section-title {
+  color: #192838;
+  font: 700 32px 'Inter', sans-serif;
+  margin-bottom: 40px;
+  text-align: center;
+  position: relative;
+}
+
+.section-title:after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: #f9e92f;
+  margin: 15px auto 0;
+  border-radius: 2px;
+}
+
+.no-threads {
+  text-align: center;
+  font-size: 18px;
+  color: #888;
+}
+
+.thread-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.thread-item {
+  border-bottom: 1px solid #ddd;
+  padding: 20px 0;
+}
+
+.thread-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.thread-item h3 {
+  margin: 0;
+  font: 600 20px 'Inter', sans-serif;
+  color: #192838;
+}
+
+.thread-item p {
+  margin: 10px 0 5px;
+  color: #555;
+  font-size: 16px;
+}
+
+.thread-item small {
+  color: #888;
+  font-size: 14px;
+}
+
+.thread-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+.action-link {
+  color: #f9e92f;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.action-link:hover {
+  color: #fade1a;
+}
+
+.action-button {
+  background-color: #f9e92f;
+  border: none;
+  color: #192838;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.action-button:hover {
+  background-color: #fade1a;
+  transform: translateY(-2px);
+}
+
+.action-button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .container {
     margin: 20px;
+    padding: 30px 20px;
   }
-  
-  .thread-list {
-    list-style-type: none;
-    padding: 0;
+
+  .thread-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
-  
-  .thread-item {
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
+
+  .thread-actions {
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 10px;
   }
-  
-  .thread-item h3 {
-    margin: 0;
-  }
-  
-  .thread-item p {
-    margin: 5px 0;
-  }
-  
-  .thread-item small {
-    color: #888;
-  }
-  
+}
