@@ -5,6 +5,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ThreadsComponent } from './components/threads/threads.component';
 import { ThreadDetailComponent } from './components/thread-detail/thread-detail.component';
 import { CreateThreadComponent } from './components/create-thread/create-thread.component';
+import { ThreadHistoryComponent } from './components/thread-history/thread-history.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/threads', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'threads', component: ThreadsComponent },
   { path: 'threads/:id', component: ThreadDetailComponent },
   { path: 'create-thread', component: CreateThreadComponent },
+  { path: 'thread-history', component: ThreadHistoryComponent }
 ];
 
 @NgModule({
