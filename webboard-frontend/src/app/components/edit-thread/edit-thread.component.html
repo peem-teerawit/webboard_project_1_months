@@ -1,1 +1,19 @@
-<p>edit-thread works!</p>
+<div class="container">
+    <h2>Edit Thread</h2>
+    <form (ngSubmit)="updateThread()">
+      <div>
+        <label for="title">Title:</label>
+        <input id="title" [(ngModel)]="threadData.title" name="title" required />
+      </div>
+      <div>
+        <label for="content">Content:</label>
+        <textarea id="content" [(ngModel)]="threadData.content" name="content" required></textarea>
+      </div>
+      <div>
+        <label for="tags">Tags:</label>
+        <input id="tags" [(ngModel)]="threadData.tags" name="tags" placeholder="Comma-separated tags" />
+      </div>
+      <button type="submit">Update Thread</button>
+    </form>
+  </div>
+  

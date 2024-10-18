@@ -1,0 +1,26 @@
+.container {
+    margin: 20px;
+  }
+  
+  .thread-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .thread-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+  
+  .thread-item h3 {
+    margin: 0;
+  }
+  
+  .thread-item p {
+    margin: 5px 0;
+  }
+  
+  .thread-item small {
+    color: #888;
+  }
+  

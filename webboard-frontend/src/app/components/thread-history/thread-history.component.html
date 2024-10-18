@@ -1,1 +1,20 @@
-<p>thread-history works!</p>
+<div class="container">
+    <h2>Threads Posted by {{ username }}</h2>
+  
+    <div *ngIf="userThreads.length === 0">
+      <p>No threads posted yet.</p>
+    </div>
+  
+    <ul class="thread-list">
+      <li *ngFor="let thread of userThreads" class="thread-item">
+        <h3>{{ thread.title }}</h3>
+        <p>{{ thread.content }}</p>
+        <small>Posted on: {{ thread.created_at | date:'short' }}</small>
+        <!-- Link to edit the thread -->
+        <a [routerLink]="['/edit-thread', thread._id]">Edit</a>
+        <!-- Delete button -->
+        <button (click)="deleteThread(thread._id)">Delete</button>
+      </li>
+    </ul>
+  </div>
+  

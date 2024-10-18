@@ -74,3 +74,18 @@ exports.deleteThread = async (req, res) => {
     }
 };
 
+// Get all threads by a specific username
+exports.getThreadsByUsername = async (req, res) => {
+    try {
+        const username = req.user.username; // Assuming username is available in req.user (from JWT token)
+
+        // Find all threads where the user_name matches the logged-in user's username
+        const userThreads = await Thread.find({ user_name: username });
+
+        res.json(userThreads);
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving user threads', error });
+    }
+};
+
+

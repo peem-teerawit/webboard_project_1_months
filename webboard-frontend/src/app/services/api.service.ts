@@ -36,7 +36,7 @@ export class ApiService {
 
   getRepliesByThreadId(threadId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/replies?thread_id=${threadId}`);
-}
+  }
 
 
   createReply(threadId: string, content: string, isAnonymous: boolean): Observable<any> {
@@ -49,6 +49,28 @@ export class ApiService {
         is_anonymous: isAnonymous
     }, { headers }); // Include headers in the request
   }
+
+  getUserThreads(): Observable<any> {
+    const token = localStorage.getItem('token'); // Retrieve token from localStorage
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    
+    return this.http.get(`${this.baseUrl}/threads/user/threads`, { headers });
+  }
+
+  deleteThread(threadId: string): Observable<any> {
+    const token = localStorage.getItem('token'); // Get the token from local storage
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`); // Set the token in the headers
+  
+    return this.http.delete(`${this.baseUrl}/threads/${threadId}`, { headers });
+  }
+
+  updateThread(threadId: string, threadData: any): Observable<any> {
+    const token = localStorage.getItem('token'); // Get the token from local storage
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`); // Set the token in the headers
+    
+    return this.http.put(`${this.baseUrl}/threads/${threadId}`, threadData, { headers });
+  }
+  
   
 
 

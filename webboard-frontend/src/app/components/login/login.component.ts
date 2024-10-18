@@ -27,7 +27,9 @@ export class LoginComponent {
           localStorage.setItem('username', this.username); // Store username
           
           // Navigate to the threads page after successful login
-          this.router.navigate(['/threads']);
+          this.router.navigate(['/threads']).then(() => {
+            window.location.reload(); // Refresh the page
+          });
         },
         (error) => {
           console.error('Login failed', error);
