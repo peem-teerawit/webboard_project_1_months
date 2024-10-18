@@ -1,17 +1,17 @@
 <main class="login-page">
     <section class="login-container">
-      <h1 class="app-title">ThreadHub</h1>
+      <h1 class="app-title">Login</h1>
       <form class="login-form" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="email" class="form-label">Email</label>
+          <label for="username" class="form-label">username</label>
           <input
-            type="email"
-            id="email"
+            type="username"
+            id="username"
             class="form-input"
-            placeholder="กรุณากรอกอีเมลของคุณ"
-            aria-label="Enter your email"
-            [(ngModel)]="email"
-            name="email"
+            placeholder="กรุณากรอกusernameของคุณ"
+            aria-label="Enter your username"
+            [(ngModel)]="username"
+            name="username"
             required
           />
         </div>
@@ -43,7 +43,7 @@
           <a class="forgot-password" href="#">ลืมรหัสผ่าน?</a>
         </div>
         
-        <button type="submit" class="submit-button" [disabled]="!email || !password">
+        <button type="submit" class="submit-button" [disabled]="!username || !password">
           <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5d1855470898432afe5f574345e5b33b6cd82eaa668072f869a03f4fef8881b4?placeholderIfAbsent=true&apiKey=83b04d3998304303a4379a0eca926c98" alt="Submit login" class="submit-icon" />
         </button>
       </form>

@@ -8,7 +8,7 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  email: string = '';
+  username: string = '';
   password: string = '';
   showPassword: boolean = false;
 
@@ -19,11 +19,12 @@ export class LoginComponent {
   }
 
   onSubmit(): void {
-    if (this.email && this.password) {
-      this.apiService.login(this.email, this.password).subscribe(
+    if (this.username && this.password) {
+      this.apiService.login(this.username, this.password).subscribe(
         (response: any) => {
           // Assuming the response contains the token in the 'token' field
           localStorage.setItem('token', response.token);
+          localStorage.setItem('username', this.username); // Store username
           
           // Navigate to the threads page after successful login
           this.router.navigate(['/threads']);

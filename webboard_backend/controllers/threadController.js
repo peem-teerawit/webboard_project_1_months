@@ -3,6 +3,8 @@ const Thread = require('../models/threadModel');
 // Create a new thread
 exports.createThread = async (req, res) => {
     const { title, content, is_anonymous, tags, expire_at } = req.body;
+
+    // Set expire_at to null if not provided
     const newThread = new Thread({
         title,
         content,
@@ -10,7 +12,7 @@ exports.createThread = async (req, res) => {
         user_name: req.user.username,
         is_anonymous,
         tags,
-        expire_at
+        expire_at: expire_at || null // Set to null if not provided
     });
 
     try {

@@ -45,3 +45,14 @@ exports.deleteReply = async (req, res) => {
     }
 };
 
+// Fetch replies by thread ID
+exports.getRepliesByThreadId = async (req, res) => {
+    const { thread_id } = req.query; // Get thread_id from query parameters
+    try {
+        const replies = await Reply.find({ thread_id }); // Find replies with the specified thread_id
+        res.json(replies); // Return the replies
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching replies', error });
+    }
+};
+

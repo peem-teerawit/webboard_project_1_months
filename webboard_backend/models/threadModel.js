@@ -8,7 +8,7 @@ const threadSchema = new mongoose.Schema({
     created_at: { type: Date, default: Date.now },
     is_anonymous: { type: Boolean, default: false },
     tags: { type: [String], default: [] },
-    expire_at: { type: Date }
+    expire_at: { type: Date, required: false }
 });
 
 const Thread = mongoose.model('Thread', threadSchema);

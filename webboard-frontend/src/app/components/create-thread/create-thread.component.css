@@ -1,0 +1,113 @@
+body {
+
+    font-family: 'Inter', sans-serif; /* Ensure consistent font */
+  }
+  
+  .create-thread-page {
+    border-radius: 12px; /* Rounded corners */
+    padding: 40px 30px; /* Adequate padding */
+    max-width: 600px; /* Limit max width */
+    margin: 50px auto; /* Center on the page with margin */
+  }
+  
+  .section-title {
+    color: #192838;
+    font: 700 26px 'Inter', sans-serif; /* Bold title */
+    margin-bottom: 30px; /* Space below title */
+    text-align: center; /* Center title */
+  }
+  
+  .input-label {
+    color: #192838;
+    font: 500 18px 'Inter', sans-serif; /* Slightly smaller font */
+    margin-top: 20px; /* Space above labels */
+  }
+  
+  .input-field {
+    border-radius: 25px;
+    background-color: #fbf8ef;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: #7e858c;
+    font: 400 16px 'Inter', sans-serif;
+    border: 1px solid #bcbcbc;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 20px; /* Ample padding for input fields */
+    margin-top: 8px; /* Spacing between label and input */
+  }
+  
+  .thread-title,
+  .thread-tags,
+  .thread-content {
+    margin-top: 15px; /* Space between fields */
+  }
+  
+  .thread-content {
+    resize: vertical;
+    min-height: 150px; /* Set minimum height for textarea */
+  }
+  
+  .options-container {
+    display: flex;
+    justify-content: space-between; /* Space between elements */
+    align-items: center; /* Align items vertically */
+    margin-top: 20px; /* Top margin for separation */
+  }
+  
+  .temporary-post {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between checkbox and label */
+  }
+  
+  .checkbox-label {
+    cursor: pointer;
+    font: 400 16px 'Inter', sans-serif; /* Consistent font */
+  }
+  
+  .expiration-container {
+    display: flex;
+    flex-direction: column; /* Stack label and input */
+  }
+  
+  .action-buttons {
+    display: flex;
+    justify-content: center; /* Center the button */
+    margin-top: 30px; /* Space above buttons */
+  }
+  
+  .action-button {
+    border-radius: 25px;
+    background-color: #f9e92f;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    color: #430e00;
+    font: 500 20px 'Sansita One', sans-serif;
+    border: 1px solid #bcbcbc;
+    padding: 15px 40px; /* Adjust padding */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+  }
+  
+  .action-button:hover {
+    background-color: #e1d026; /* Darken on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
+  }
+
+  @media (max-width: 600px) {
+    .create-thread-page {
+      padding: 20px 15px; /* Reduce padding on smaller screens */
+    }
+  
+    .section-title {
+      margin-bottom: 20px; /* Adjust margins */
+    }
+  
+    .input-field {
+      padding: 10px; /* Adjust padding */
+    }
+  
+    .action-buttons {
+      margin-top: 20px; /* Reduce margin */
+    }
+  }
+  

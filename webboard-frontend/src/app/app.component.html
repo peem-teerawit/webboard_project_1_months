@@ -1,13 +1,50 @@
-
 <div>
   <nav>
-    <div class="nav-left">Welcome to Webboard</div>
-    <div class="nav-right">
-      <a routerLink="/threads">Threads</a>
-      <a routerLink="/login">Login</a>
-    </div>
+    <header class="navbar">
+      <div class="navbar-content">
+        <a routerLink="/threads" class="brand-title-link" style="text-decoration: none;">
+          <h1 class="brand-title">ThreadHub</h1>
+        </a>
+        <form class="search-form" role="search">
+          <label for="search-input" class="visually-hidden">Search</label>
+          <input id="search-input" type="search" class="search-input" placeholder="Search" aria-label="Search">
+          <button type="submit" class="search-button" aria-label="Submit search">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/26f821edfea7b2d4986ddc8a202bf783c65071ce0a45996630862979a5adbf39?placeholderIfAbsent=true&apiKey=192ff7338de4457c8649492ee5300f1f"
+              alt="Search" class="search-icon">
+          </button>
+        </form>
+        <div class="navbar-content2">
+          <a routerLink="/create-thread" style="text-decoration: none;">
+            <button class="create-button" aria-label="Create a new thread">
+              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1867f60c4e36021020824775ec699e367a7e4dca19e247b633b0f07f66d8dcb0?placeholderIfAbsent=true&apiKey=192ff7338de4457c8649492ee5300f1f"
+                alt="Create" class="create-icon">
+              <span>Create</span>
+            </button>
+          </a>
+          <nav class="user-nav">
+            <button class="notification-button" aria-label="Notifications">
+              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cb39bdcd2f8b8e8f5b5b8eca0d08c38f0dac613a1927b1d9067b914c838149f3?placeholderIfAbsent=true&apiKey=192ff7338de4457c8649492ee5300f1f"
+                alt="Notifications" class="notification-icon">
+            </button>
+            <ng-container *ngIf="username; else loggedOut">
+              <span>Welcome {{ username }}</span>
+              <button class="profile-button" (click)="logOut()" aria-label="Log out">
+                <span>Log out</span>
+              </button>
+            </ng-container>
+            <ng-template #loggedOut>
+              <a routerLink="/login" style="text-decoration: none;">
+                <button class="profile-button" aria-label="User profile">
+                  <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/fdb62f0621af96e810da139cf12cd6ca867c7bc75fd0fbd964747a96c9f5e0ae?placeholderIfAbsent=true&apiKey=192ff7338de4457c8649492ee5300f1f"
+                    alt="Profile" class="profile-icon">
+                </button>
+              </a>
+            </ng-template>
+          </nav>          
+        </div>
+      </div>
+    </header>
   </nav>
-  <br>
   <div class="container mt-3">
     <router-outlet></router-outlet>
   </div>
