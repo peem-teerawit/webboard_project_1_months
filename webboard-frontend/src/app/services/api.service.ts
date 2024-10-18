@@ -34,9 +34,10 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/threads`, { title, content, is_anonymous: isAnonymous, tags, expire_at: expireAt }, { headers });
   }
 
-  getRepliesByThreadId(threadId: string) {
-    return this.http.get<any[]>(`/api/replies?thread_id=${threadId}`);
-  }
+  getRepliesByThreadId(threadId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/replies?thread_id=${threadId}`);
+}
+
 
   createReply(threadId: string, content: string, isAnonymous: boolean): Observable<any> {
     const token = localStorage.getItem('token'); // Get the token from local storage
