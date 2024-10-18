@@ -26,21 +26,20 @@
               <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cb39bdcd2f8b8e8f5b5b8eca0d08c38f0dac613a1927b1d9067b914c838149f3?placeholderIfAbsent=true&apiKey=192ff7338de4457c8649492ee5300f1f"
                 alt="Notifications" class="notification-icon">
             </button>
-            <ng-container *ngIf="username; else loggedOut">
-              <span>Welcome {{ username }}</span>
-              <button class="profile-button" (click)="logOut()" aria-label="Log out">
-                <span>Log out</span>
+
+            <div class="dropdown">
+              <button class="profile-button" aria-label="User profile" (click)="toggleDropdown()">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/fdb62f0621af96e810da139cf12cd6ca867c7bc75fd0fbd964747a96c9f5e0ae?placeholderIfAbsent=true&apiKey=192ff7338de4457c8649492ee5300f1f"
+                  alt="Profile" class="profile-icon">
               </button>
-            </ng-container>
-            <ng-template #loggedOut>
-              <a routerLink="/login" style="text-decoration: none;">
-                <button class="profile-button" aria-label="User profile">
-                  <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/fdb62f0621af96e810da139cf12cd6ca867c7bc75fd0fbd964747a96c9f5e0ae?placeholderIfAbsent=true&apiKey=192ff7338de4457c8649492ee5300f1f"
-                    alt="Profile" class="profile-icon">
-                </button>
-              </a>
-            </ng-template>
-          </nav>          
+              <div *ngIf="dropdownOpen" class="dropdown-content">
+                <span *ngIf="username">Welcome, {{ username }}!</span>
+                <a routerLink="/login" class="dropdown-item">เข้าสู่ระบบ</a>
+                <a routerLink="/register" class="dropdown-item">ลงทะเบียนบัญชีใหม่</a>
+                <button (click)="logOut()" class="dropdown-item">ออกจากระบบ</button>
+              </div>
+            </div>
+          </nav>
         </div>
       </div>
     </header>

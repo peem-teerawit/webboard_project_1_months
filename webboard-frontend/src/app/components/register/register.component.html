@@ -1,15 +1,43 @@
 <div class="register-page">
-    <div class="div">
-      <div class="ลงทะเบียน">ลงทะเบียน</div>
-      <div class="username">Username</div>
-      <input class="กรุณากรอกชื่อ" placeholder="กรุณากรอกชื่อ" [(ngModel)]="username">
-      <div class="email">Email</div>
-      <input class="กรุณากรอกอีเมล" placeholder="กรุณากรอกอีเมล" [(ngModel)]="email">
-      <div class="password">Password</div>
-      <input class="กรุณากรอกรหัสผ่าน" placeholder="กรุณากรอกรหัสผ่าน" type="password" [(ngModel)]="password">
-      <div class="confirm-password">Confirm Password</div>
-      <input class="กรุณายืนยันรหัสผ่าน" placeholder="กรุณายืนยันรหัสผ่าน" type="password" [(ngModel)]="confirmPassword">
-      <button class="ลงทะเบียน-2" (click)="onRegister()">ลงทะเบียน</button>
-    </div>
-  </div>
+  <div class="div">
+    <div class="ลงทะเบียน">ลงทะเบียน</div>
 
+    <!-- Username Field -->
+    <div class="username">Username <span class="text-danger" *ngIf="errorMessages.username">{{ errorMessages.username }}</span></div>
+    <input class="กรุณากรอกชื่อ" placeholder="กรุณากรอกชื่อ" [(ngModel)]="username">
+
+    <!-- Email Field -->
+    <div class="email">Email <span class="text-danger" *ngIf="errorMessages.email">{{ errorMessages.email }}</span></div>
+    <input class="กรุณากรอกอีเมล" placeholder="กรุณากรอกอีเมล" [(ngModel)]="email">
+
+    <!-- Password Field -->
+    <div class="password">
+      Password 
+      <span class="text-danger" *ngIf="errorMessages.password">{{ errorMessages.password }}</span>
+      <div class="password-container">
+        <input class="กรุณากรอกรหัสผ่าน" placeholder="กรุณากรอกรหัสผ่าน" [type]="showPassword ? 'text' : 'password'" [(ngModel)]="password">
+        <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+          <i [ngClass]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Confirm Password Field -->
+    <div class="confirm-password">
+      Confirm Password 
+      <span class="text-danger" *ngIf="errorMessages.confirmPassword">{{ errorMessages.confirmPassword }}</span>
+      <div class="password-container">
+        <input class="กรุณายืนยันรหัสผ่าน" placeholder="กรุณายืนยันรหัสผ่าน" [type]="showConfirmPassword ? 'text' : 'password'" [(ngModel)]="confirmPassword">
+        <button type="button" class="toggle-password" (click)="toggleConfirmPasswordVisibility()">
+          <i [ngClass]="showConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Register Button -->
+    <button class="ลงทะเบียน-2" (click)="onRegister()">ลงทะเบียน</button>
+
+    <!-- General Error Message -->
+    <div class="text-danger" *ngIf="errorMessages.general">{{ errorMessages.general }}</div>
+  </div>
+</div>

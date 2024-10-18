@@ -1,113 +1,189 @@
 body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f5f5f5;
+}
 
-    font-family: 'Inter', sans-serif; /* Ensure consistent font */
-  }
-  
-  .create-thread-page {
-    border-radius: 12px; /* Rounded corners */
-    padding: 40px 30px; /* Adequate padding */
-    max-width: 600px; /* Limit max width */
-    margin: 50px auto; /* Center on the page with margin */
-  }
-  
-  .section-title {
+.create-thread-page {
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 800px;
+    margin: 80px auto;
+    background-color: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.section-title {
     color: #192838;
-    font: 700 26px 'Inter', sans-serif; /* Bold title */
-    margin-bottom: 30px; /* Space below title */
-    text-align: center; /* Center title */
-  }
-  
-  .input-label {
+    font: 700 32px 'Inter', sans-serif;
+    margin-bottom: 40px;
+    text-align: center;
+    position: relative;
+}
+
+.section-title:after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: #f9e92f;
+    margin: 15px auto 0;
+    border-radius: 2px;
+}
+
+.input-group {
+    margin-bottom: 25px;
+}
+
+.input-label {
     color: #192838;
-    font: 500 18px 'Inter', sans-serif; /* Slightly smaller font */
-    margin-top: 20px; /* Space above labels */
-  }
-  
-  .input-field {
-    border-radius: 25px;
+    font: 600 16px 'Inter', sans-serif;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.input-field {
+    border-radius: 12px;
     background-color: #fbf8ef;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    color: #7e858c;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    color: #192838;
     font: 400 16px 'Inter', sans-serif;
-    border: 1px solid #bcbcbc;
+    border: 2px solid transparent;
     width: 100%;
     box-sizing: border-box;
-    padding: 12px 20px; /* Ample padding for input fields */
-    margin-top: 8px; /* Spacing between label and input */
-  }
-  
-  .thread-title,
-  .thread-tags,
-  .thread-content {
-    margin-top: 15px; /* Space between fields */
-  }
-  
-  .thread-content {
+    padding: 14px 18px;
+    transition: all 0.3s ease;
+}
+
+.input-field:focus {
+    border-color: #f9e92f;
+    background-color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(249, 233, 47, 0.1);
+}
+
+.thread-content {
     resize: vertical;
-    min-height: 150px; /* Set minimum height for textarea */
-  }
-  
-  .options-container {
+    min-height: 200px;
+    line-height: 1.6;
+}
+
+.options-container {
     display: flex;
-    justify-content: space-between; /* Space between elements */
-    align-items: center; /* Align items vertically */
-    margin-top: 20px; /* Top margin for separation */
-  }
-  
-  .temporary-post {
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fbf8ef;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 30px 0;
+}
+
+.temporary-post {
     display: flex;
     align-items: center;
-    gap: 10px; /* Space between checkbox and label */
-  }
-  
-  .checkbox-label {
-    cursor: pointer;
-    font: 400 16px 'Inter', sans-serif; /* Consistent font */
-  }
-  
-  .expiration-container {
-    display: flex;
-    flex-direction: column; /* Stack label and input */
-  }
-  
-  .action-buttons {
-    display: flex;
-    justify-content: center; /* Center the button */
-    margin-top: 30px; /* Space above buttons */
-  }
-  
-  .action-button {
-    border-radius: 25px;
-    background-color: #f9e92f;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    color: #430e00;
-    font: 500 20px 'Sansita One', sans-serif;
-    border: 1px solid #bcbcbc;
-    padding: 15px 40px; /* Adjust padding */
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
-  }
-  
-  .action-button:hover {
-    background-color: #e1d026; /* Darken on hover */
-    transform: translateY(-2px); /* Lift effect on hover */
-  }
+    gap: 12px;
+}
 
-  @media (max-width: 600px) {
+/* Custom checkbox styling */
+.styled-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #f9e92f;
+}
+
+.checkbox-label {
+    cursor: pointer;
+    font: 500 16px 'Inter', sans-serif;
+    color: #192838;
+}
+
+.expiration-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.expiration-container .input-field {
+    width: auto;
+    padding: 10px 15px;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.action-button {
+    border-radius: 30px;
+    background-color: #f9e92f;
+    box-shadow: 0 4px 15px rgba(249, 233, 47, 0.3);
+    color: #192838;
+    font: 600 18px 'Inter', sans-serif;
+    border: none;
+    padding: 16px 48px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.action-button:hover {
+    background-color: #fade1a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(249, 233, 47, 0.4);
+}
+
+.action-button:active {
+    transform: translateY(0);
+}
+
+::placeholder {
+    color: #a0a0a0;
+    opacity: 0.7;
+}
+
+.input-field.error {
+    border-color: #ff4d4d;
+    background-color: #fff9f9;
+}
+
+@media (max-width: 768px) {
     .create-thread-page {
-      padding: 20px 15px; /* Reduce padding on smaller screens */
+        margin: 20px;
+        padding: 30px 20px;
     }
-  
-    .section-title {
-      margin-bottom: 20px; /* Adjust margins */
+
+    .options-container {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
     }
-  
-    .input-field {
-      padding: 10px; /* Adjust padding */
+
+    .expiration-container {
+        width: 100%;
     }
-  
-    .action-buttons {
-      margin-top: 20px; /* Reduce margin */
+
+    .expiration-container .input-field {
+        width: 100%;
     }
-  }
-  
+
+    .action-button {
+        width: 100%;
+    }
+}
+
+.action-button.loading {
+    background-color: #e5e5e5;
+    cursor: not-allowed;
+}
+
+@keyframes success-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.success {
+    animation: success-pulse 0.5s ease;
+}

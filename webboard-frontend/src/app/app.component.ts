@@ -8,11 +8,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'webboard-frontend';
   
-  // Property to hold the username
   username: string | null = '';
+  dropdownOpen = false; 
 
   constructor() {
-    // Get the username from localStorage
     this.username = localStorage.getItem('username');
   }
 
@@ -20,6 +19,15 @@ export class AppComponent {
   logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
-    this.username = null; // Reset username
+    this.username = null; 
+    this.closeDropdown(); 
+  }
+
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  closeDropdown() {
+    this.dropdownOpen = false;
   }
 }
