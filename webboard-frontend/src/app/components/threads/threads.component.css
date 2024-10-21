@@ -112,3 +112,15 @@ h2 {
 .create-thread-button:hover {
     background-color: #3b47b3; /* Darker shade on hover */
 }
+
+.action-link {
+    color: #4e5ae8; /* Main color for the link */
+    font-weight: bold; /* Bold text */
+    text-decoration: none; /* Remove underline */
+    margin-left: 10px; /* Space between icons and link */
+    transition: color 0.3s; /* Smooth color change on hover */
+}
+
+.action-link:hover {
+    color: #3b47b3; /* Darker shade on hover */
+}

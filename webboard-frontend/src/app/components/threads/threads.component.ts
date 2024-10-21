@@ -9,8 +9,12 @@ import { formatDistanceToNow } from 'date-fns';
 })
 export class ThreadsComponent implements OnInit {
   threads: any[] = [];
+  currentUsername: string | null;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService) {
+    // Get the username from local storage
+    this.currentUsername = localStorage.getItem('username'); // Adjust the key as needed
+  }
 
   ngOnInit() {
     this.loadThreads();
@@ -19,9 +23,7 @@ export class ThreadsComponent implements OnInit {
   loadThreads() {
     this.apiService.getThreads().subscribe(
       (data) => {
-        this.threads = data.sort((a: any, b: any) => {
-          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-        });
+        this.threads = data;
       },
       (error) => {
         console.error('Error loading threads', error);
@@ -29,13 +31,15 @@ export class ThreadsComponent implements OnInit {
     );
   }
 
+  // Method to format tags
   formatTags(tags: string[]): string {
-    return tags.map(tag => `#${tag}`).join(' '); 
+    return tags.map(tag => `#${tag}`).join(' '); // Format tags as #tag1 #tag2
   }
 
+  // Method to format the created_at timestamp
   formatCreatedAt(createdAt: string): string {
-    const date = new Date(createdAt); 
-    return formatDistanceToNow(date, { addSuffix: true });
+    const date = new Date(createdAt); // Convert string to Date object
+    return formatDistanceToNow(date, { addSuffix: true }); // Format to relative time
   }
 
   // Method to truncate content to 50 words
@@ -50,5 +54,10 @@ export class ThreadsComponent implements OnInit {
       return combinedWords.slice(0, 50).join(' ') + '...'; // Join first 50 words and add '...'
     }
     return content; // Return original content if it's 50 words or fewer
+  }
+
+  // Method to check if the current user can edit the thread
+  canEdit(thread: any): boolean {
+    return thread.user_name === this.currentUsername; // Compare thread username with current username
   }
 }
