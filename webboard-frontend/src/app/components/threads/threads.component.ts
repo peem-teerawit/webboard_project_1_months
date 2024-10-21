@@ -37,4 +37,18 @@ export class ThreadsComponent implements OnInit {
     const date = new Date(createdAt); // Convert string to Date object
     return formatDistanceToNow(date, { addSuffix: true }); // Format to relative time
   }
+
+  // Method to truncate content to 50 words
+  truncateContent(content: string): string {
+    const englishWords = content.match(/\w+('\w+)?/g) || []; // Match English words
+    const thaiWords = content.match(/[\u0E00-\u0E7F]+/g) || []; // Match Thai words
+
+    // Combine both word arrays, ensuring uniqueness
+    const combinedWords = [...new Set([...englishWords, ...thaiWords])];
+
+    if (combinedWords.length > 50) {
+      return combinedWords.slice(0, 50).join(' ') + '...'; // Join first 50 words and add '...'
+    }
+    return content; // Return original content if it's 50 words or fewer
+  }
 }

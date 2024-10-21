@@ -31,6 +31,8 @@ h2 {
     display: flex;
     flex-direction: column;
     transition: transform 0.3s; /* Smooth transition */
+    max-width: 100%; /* Ensure container stays within the parent width */
+    overflow: hidden; /* Hide overflowing content */
 }
 
 .post-container:hover {
@@ -82,6 +84,10 @@ h2 {
 .post-content {
     color: rgba(0, 0, 0, 0.6); /* Lighter content */
     margin: 10px 0; /* Space above and below */
+    white-space: normal; /* Allow text to wrap to next line */
+    word-break: break-word; /* Break words that are too long */
+    overflow-wrap: break-word; /* Ensure long words break within the container */
+    max-width: 100%; /* Ensure text does not overflow */
 }
 
 .div-10 {
