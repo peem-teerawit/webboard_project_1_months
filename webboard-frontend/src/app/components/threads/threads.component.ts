@@ -19,7 +19,9 @@ export class ThreadsComponent implements OnInit {
   loadThreads() {
     this.apiService.getThreads().subscribe(
       (data) => {
-        this.threads = data;
+        this.threads = data.sort((a: any, b: any) => {
+          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        });
       },
       (error) => {
         console.error('Error loading threads', error);
@@ -27,14 +29,12 @@ export class ThreadsComponent implements OnInit {
     );
   }
 
-  // Method to format tags
   formatTags(tags: string[]): string {
-    return tags.map(tag => `#${tag}`).join(' '); // Format tags as #tag1 #tag2
+    return tags.map(tag => `#${tag}`).join(' '); 
   }
 
-  // Method to format the created_at timestamp
   formatCreatedAt(createdAt: string): string {
-    const date = new Date(createdAt); // Convert string to Date object
-    return formatDistanceToNow(date, { addSuffix: true }); // Format to relative time
+    const date = new Date(createdAt); 
+    return formatDistanceToNow(date, { addSuffix: true });
   }
 }
