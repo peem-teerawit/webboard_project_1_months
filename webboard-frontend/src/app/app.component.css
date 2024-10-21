@@ -119,7 +119,7 @@
 /* User Navigation Styles */
 .user-nav {
     display: flex;
-    gap: 15px; /* เพิ่มช่องว่างระหว่างไอคอน */
+    gap: 15px; 
     align-items: center;
 }
 
@@ -238,4 +238,20 @@
     }
 }
 
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; 
+}
 
+.loading-text {
+    font-size: 18px;
+    color: #1867B5; 
+}

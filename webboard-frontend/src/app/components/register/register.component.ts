@@ -12,10 +12,10 @@ export class RegisterComponent {
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
-
+  
   showPassword: boolean = false;
   showConfirmPassword: boolean = false;
-
+  
   // Error messages for form validation
   errorMessages = {
     username: '',
@@ -24,6 +24,9 @@ export class RegisterComponent {
     confirmPassword: '',
     general: ''
   };
+
+  // Loading state
+  isLoading: boolean = false;
 
   constructor(private apiService: ApiService, private router: Router) {}
 
@@ -37,7 +40,7 @@ export class RegisterComponent {
 
   onRegister(): void {
     this.clearErrorMessages();
-
+    
     // Validate inputs
     if (!this.username) {
       this.errorMessages.username = '* กรุณากรอกชื่อ';
@@ -62,6 +65,9 @@ export class RegisterComponent {
       return;
     }
 
+    // Set loading state to true
+    this.isLoading = true;
+
     this.apiService.register(this.username, this.email, this.password).subscribe(
       () => {
         alert('ลงทะเบียนสำเร็จ'); 
@@ -70,6 +76,10 @@ export class RegisterComponent {
       (error) => {
         console.error('Registration failed', error);
         this.errorMessages.general = 'อีเมลหรือรหัสผ่านไม่ถูกต้อง';
+      },
+      () => {
+        // Reset loading state when the request completes
+        this.isLoading = false;
       }
     );
   }

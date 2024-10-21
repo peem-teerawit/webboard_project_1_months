@@ -35,7 +35,14 @@
     </div>
 
     <!-- Register Button -->
-    <button class="ลงทะเบียน-2" (click)="onRegister()">ลงทะเบียน</button>
+    <button class="ลงทะเบียน-2" (click)="onRegister()" [disabled]="isLoading">
+      ลงทะเบียน
+    </button>
+
+    <!-- Loading Spinner -->
+    <div *ngIf="isLoading" class="loading-spinner">
+      <div class="spinner"></div>
+    </div>
 
     <!-- General Error Message -->
     <div class="text-danger" *ngIf="errorMessages.general">{{ errorMessages.general }}</div>

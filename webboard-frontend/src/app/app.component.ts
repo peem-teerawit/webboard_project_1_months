@@ -11,25 +11,31 @@ export class AppComponent implements OnInit {
   username: string | null = '';
   token: string | null = '';
   dropdownOpen = false;
+  loading = false; 
 
   constructor(private router: Router) { }
 
   // Lifecycle hook to check token and username
   ngOnInit() {
-    this.token = localStorage.getItem('token'); // Check if token exists
-    this.username = localStorage.getItem('username'); // Get username if logged in
+    this.token = localStorage.getItem('token'); 
+    this.username = localStorage.getItem('username'); 
   }
 
   // Method to log out
-  logOut() {
+  async logOut() {
+    this.loading = true; 
     localStorage.removeItem('token');
     localStorage.removeItem('username');
-    this.token = null; // Update token and username to null after logout
+    this.token = null; 
     this.username = null;
     this.closeDropdown();
 
+    // Simulate a delay for the logout process (optional)
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
     // Navigate to the thread page after logout
-    this.router.navigate(['/threads']); // Change '/threads' if needed
+    this.router.navigate(['/threads']); 
+    this.loading = false; 
   }
 
   toggleDropdown() {

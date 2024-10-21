@@ -100,4 +100,30 @@
     background-color: rgba(200, 200, 200, 1);
     cursor: not-allowed;
   }
+
+  .loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* ระยะห่างจากปุ่ม */
+  }
+  
+  .spinner {
+    border: 8px solid rgba(255, 255, 255, 0.3); /* สีพื้นหลัง */
+    border-top: 8px solid #007bff; /* สีของเส้นที่หมุน */
+    border-radius: 50%;
+    width: 40px; /* ขนาดวงกลม */
+    height: 40px; /* ขนาดวงกลม */
+    animation: spin 1s linear infinite; /* ทำให้หมุน */
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
   

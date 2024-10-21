@@ -55,6 +55,11 @@
     </header>
   </nav>
 
+  <!-- Loading Overlay -->
+  <div *ngIf="loading" class="loading-overlay">
+    <span class="loading-text">กำลังออกจากระบบ...</span>
+  </div>
+
   <div class="container mt-3">
     <router-outlet></router-outlet>
   </div>

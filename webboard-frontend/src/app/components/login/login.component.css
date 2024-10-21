@@ -1,117 +1,148 @@
 :host {
-    display: contents;
+  display: contents;
 }
 
 .login-page {
-    background-color: rgba(255, 255, 255, 1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 70px 30px;
-    color: rgba(0, 0, 0, 0.8);
-    font: 400 20px 'Sansita One', sans-serif;
-  }
-  
-  .login-container {
-    display: flex;
-    width: 100%;
-    max-width: 500px;
-    flex-direction: column;
-    border-radius: 20px;
-    padding: 40px;
-    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
-    background-color: rgba(250, 250, 250, 1);
-  }
-  
-  .app-title {
-    background-color: rgba(24, 103, 181, 1);
-    color: white;
-    padding: 20px;
-    font-size: 30px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-  }
-  
-  .form-label {
-    font-size: 18px;
-    margin-top: 20px;
-  }
-  
-  .form-input {
-    padding: 10px;
-    width: 100%;
-    border: 1px solid rgba(200, 200, 200, 1);
-    border-radius: 8px;
-    font-size: 16px;
-    background-color: #EDEBE5;
-  }
-  
-  .password-input-wrapper {
-    position: relative;
-  }
-  
-  .password-toggle {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    width: 30px;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
+  background-color: rgba(255, 255, 255, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 30px;
+  color: rgba(0, 0, 0, 0.8);
+  font: 400 20px 'Sansita One', sans-serif;
+}
+
+.login-container {
+  display: flex;
+  width: 100%;
+  max-width: 500px;
+  flex-direction: column;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+  background-color: rgba(250, 250, 250, 1);
+}
+
+.app-title {
+  background-color: rgba(24, 103, 181, 1);
+  color: white;
+  padding: 20px;
+  font-size: 30px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.form-label {
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.form-input {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid rgba(200, 200, 200, 1);
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #EDEBE5;
+}
+
+.password-input-wrapper {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  width: 30px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 .submit-button {
-    width: 100%;
-    margin-top: 15px; 
-    padding: 0;
-    background: none;
-    border: none;
-    cursor: pointer;
+  width: 100%;
+  margin-top: 15px; 
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .submit-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .submit-icon {
-    width: 100%;
-    border-radius: 6px; 
+  width: 100%;
+  border-radius: 6px; 
 }
 
 .register-link {
-    display: block;
-    margin-top: 15px;
-    padding: 15px; 
-    font-size: 24px; 
-    text-align: center;
-    text-decoration: none;
-    color: inherit;
-    border-radius: 6px; 
-    background-color: #edebe5;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
-    line-height: 1;
+  display: block;
+  margin-top: 15px;
+  padding: 15px; 
+  font-size: 24px; 
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 6px; 
+  background-color: #edebe5;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+  line-height: 1;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
 }
 
 @media (max-width: 991px) {
-    .login-page {
-        padding: 50px 20px;
-    }
+  .login-page {
+    padding: 50px 20px;
+  }
 
-    .app-title {
-        font-size: 28px; 
-        padding: 10px; 
-    }
+  .app-title {
+    font-size: 28px; 
+    padding: 10px; 
+  }
 
-    .form-label {
-        margin-top: 15px;
-    }
+  .form-label {
+    margin-top: 15px;
+  }
 
-    .form-input,
-    .register-link {
-        padding: 10px;
-    }
+  .form-input,
+  .register-link {
+    padding: 10px;
+  }
+}
+
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+}
+
+.spinner {
+  border: 8px solid rgba(255, 255, 255, 0.3); 
+  border-top: 8px solid #007bff; 
+  border-radius: 50%;
+  width: 40px; 
+  height: 40px; 
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

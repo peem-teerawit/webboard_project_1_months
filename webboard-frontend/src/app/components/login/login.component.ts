@@ -11,6 +11,8 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
   showPassword: boolean = false;
+  errorMessage: string = '';
+  isLoading: boolean = false; 
 
   constructor(private apiService: ApiService, private router: Router) {}
 
@@ -19,20 +21,27 @@ export class LoginComponent {
   }
 
   onSubmit(): void {
+    this.errorMessage = ''; 
     if (this.username && this.password) {
+      this.isLoading = true; 
       this.apiService.login(this.username, this.password).subscribe(
         (response: any) => {
-          // Assuming the response contains the token in the 'token' field
           localStorage.setItem('token', response.token);
-          localStorage.setItem('username', this.username); // Store username
-          
-          // Navigate to the threads page after successful login
+          localStorage.setItem('username', this.username);
           this.router.navigate(['/threads']).then(() => {
-            window.location.reload(); // Refresh the page
+            window.location.reload();
           });
         },
         (error) => {
-          console.error('Login failed', error);
+          this.isLoading = false; 
+          if (error.status === 401 || error.status === 404) {
+            this.errorMessage = 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง'; 
+          } else {
+            this.errorMessage = 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง'; 
+          }
+        },
+        () => {
+          this.isLoading = false; 
         }
       );
     }
