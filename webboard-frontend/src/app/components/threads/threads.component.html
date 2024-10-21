@@ -14,18 +14,18 @@
                     </div>
                 </div>
                 <div class="post-title">{{ thread.title }}</div>
-                <div class="post-content">{{ truncateContent(thread.content) }}</div> <!-- Call truncateContent method -->
-                <div class="div-10">
-                    <div class="div-11">
-                        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/d7e7499a56be9b581e37d9a0bddb00227978dba8f8e63869f9048e4e4cbaf3bc?placeholderIfAbsent=true&apiKey=192ff7338de4457c8649492ee5300f1f" class="img-5" alt="Likes icon" />
-                        <div>{{ thread.likes }}</div>
-                    </div>
-                    <div class="div-12">
-                        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/a7466bc6960d24a1c98c4d6c6809f81ffc65c56595a63787cda6cc957989b4c0?placeholderIfAbsent=true&apiKey=192ff7338de4457c8649492ee5300f1f" class="img-6" alt="Comments icon" />
-                        <div class="comments-count">{{ thread.comments }}</div>
-                    </div>
-                </div>
+                <div class="post-content">{{ thread.content }}</div>
             </a>
+            <div class="div-10">
+                <div class="div-11">
+                    <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/d7e7499a56be9b581e37d9a0bddb00227978dba8f8e63869f9048e4e4cbaf3bc?placeholderIfAbsent=true&apiKey=192ff7338de4457c8649492ee5300f1f" class="img-5" alt="Likes icon" />
+                    <div>{{ thread.likes }}</div>
+                </div>
+                <div class="div-12">
+                    <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/a7466bc6960d24a1c98c4d6c6809f81ffc65c56595a63787cda6cc957989b4c0?placeholderIfAbsent=true&apiKey=192ff7338de4457c8649492ee5300f1f" class="img-6" alt="Comments icon" />
+                    <div class="comments-count">{{ thread.comments }}</div>
+                </div>
+            </div>
         </li>
     </ul>
 </div>
