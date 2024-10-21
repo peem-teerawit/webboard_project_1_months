@@ -1,69 +1,78 @@
 <div class="container create-thread-page">
-    <form (ngSubmit)="createThread()" class="thread-form">
+  <form (ngSubmit)="createThread()" class="thread-form">
       <!-- Title Input -->
       <label for="title" class="input-label">Title:</label>
-      <input 
-        type="text" 
-        id="title" 
-        class="input-field thread-title"
-        [(ngModel)]="title" 
-        name="title" 
-        placeholder="Enter thread title" 
-        required
-      >
+      <input
+          type="text"
+          id="title"
+          class="input-field thread-title"
+          [(ngModel)]="title"
+          name="title"
+          placeholder="Enter thread title"
+          required
+      />
+
       <!-- Tags Input -->
-      <label for="tags" class="input-label">Tags:</label>
-      <input 
-        type="text" 
-        id="tags" 
-        class="input-field thread-tags"
-        [(ngModel)]="tagsString" 
-        name="tags" 
-        placeholder="Enter tags separated by commas" 
-        required
-      >
-  
+      <label for="tags" class="input-label">Tags (max 5):</label>
+      <input
+          type="text"
+          id="tags"
+          class="input-field thread-tags"
+          [(ngModel)]="tagsString"
+          (input)="checkTagLimit()"
+          name="tags"
+          placeholder="Enter tags separated by commas"
+          required
+      />
+
       <!-- Content Input -->
       <label for="content" class="input-label">Content:</label>
-      <textarea 
-        id="content" 
-        class="input-field thread-content"
-        [(ngModel)]="content" 
-        name="content" 
-        placeholder="Enter thread content" 
-        required
+      <textarea
+          id="content"
+          class="input-field thread-content"
+          [(ngModel)]="content"
+          name="content"
+          placeholder="Enter thread content"
+          required
       ></textarea>
-  
+
       <!-- Anonymous Post Checkbox -->
       <div class="options-container">
-        <div class="temporary-post">
-          <input 
-            type="checkbox" 
-            id="isAnonymous" 
-            class="styled-checkbox"
-            [(ngModel)]="isAnonymous" 
-            name="isAnonymous"
-          >
-          <label for="isAnonymous" class="checkbox-label">Post Anonymously</label>
-        </div>
-  
-        <!-- Expiration Date Input -->
-        <div class="expiration-container">
-          <label for="expireAt" class="input-label">Expire At:</label>
-          <input 
-            type="datetime-local" 
-            id="expireAt" 
-            class="input-field"
-            [(ngModel)]="expireAt" 
-            name="expireAt"
-          >
-        </div>
+          <div class="temporary-post">
+              <input
+                  type="checkbox"
+                  id="isAnonymous"
+                  class="styled-checkbox"
+                  [(ngModel)]="isAnonymous"
+                  name="isAnonymous"
+              />
+              <label for="isAnonymous" class="checkbox-label">Post Anonymously</label>
+          </div>
+
+          <!-- Expiration Date Input -->
+          <div class="expiration-container">
+              <label for="expireAt" class="input-label">Expire At:</label>
+              <input
+                  type="datetime-local"
+                  id="expireAt"
+                  class="input-field"
+                  [(ngModel)]="expireAt"
+                  name="expireAt"
+              />
+          </div>
       </div>
-  
+
       <!-- Submit Button -->
       <div class="action-buttons">
-        <button type="submit" class="action-button post">Create Thread</button>
+          <button type="submit" class="action-button post">Create Thread</button>
       </div>
-    </form>
+  </form>
+
+  <!-- Popup Modal -->
+  <div class="popup" *ngIf="showPopup">
+      <div class="popup-content">
+          <p>{{ popupMessage }}</p>
+          <button (click)="closePopup()" class="popup-button">Close</button>
+      </div>
   </div>
-  
+</div>

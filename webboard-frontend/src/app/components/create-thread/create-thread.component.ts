@@ -11,17 +11,33 @@ export class CreateThreadComponent {
   title: string = '';
   content: string = '';
   isAnonymous: boolean = false;
-  tagsString: string = ''; // Used to handle input as a comma-separated string
-  tags: string[] = []; // Will be used to store parsed tags as an array
-  expireAt?: Date; // Allow expireAt to be a Date or undefined
+  tagsString: string = ''; 
+  tags: string[] = []; 
+  expireAt?: Date;
+  showPopup: boolean = false;
+  popupMessage: string = '';
 
   constructor(private apiService: ApiService, private router: Router) {}
 
-  createThread() {
-    // Convert comma-separated tags string to an array of trimmed tags
+  checkTagLimit() {
     this.tags = this.tagsString.split(',').map(tag => tag.trim());
+    if (this.tags.length > 5) {
+      this.showPopup = true;
+      this.popupMessage = 'คุณสามารถเพิ่มแท็กได้สูงสุด 5 แท็กเท่านั้น';
+    }
+  }
 
-    // Create thread using ApiService
+  closePopup() {
+    this.showPopup = false;
+  }
+
+  createThread() {
+    if (this.tags.length > 5) {
+      this.showPopup = true;
+      this.popupMessage = 'คุณสามารถเพิ่มแท็กได้สูงสุด 5 แท็กเท่านั้น';
+      return;
+    }
+
     this.apiService.createThread(this.title, this.content, this.isAnonymous, this.tags, this.expireAt).subscribe(
       (response) => {
         console.log('Thread created', response);

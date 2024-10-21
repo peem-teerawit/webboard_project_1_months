@@ -31,13 +31,18 @@
                 alt="Notifications" class="notification-icon">
             </button>
 
+            <div class="user-welcome" *ngIf="username">
+              <span class="welcome-text">Welcome, {{ username }}!</span>
+              <a *ngIf="!username" routerLink="/login" class="dropdown-item">เข้าสู่ระบบ</a>
+            </div>
+
             <div class="dropdown">
               <button class="profile-button" aria-label="User profile" (click)="toggleDropdown()">
                 <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/fdb62f0621af96e810da139cf12cd6ca867c7bc75fd0fbd964747a96c9f5e0ae?placeholderIfAbsent=true&apiKey=192ff7338de4457c8649492ee5300f1f"
                   alt="Profile" class="profile-icon">
               </button>
+              
               <div *ngIf="dropdownOpen" class="dropdown-content">
-                <span *ngIf="username">Welcome, {{ username }}!</span>
                 <a *ngIf="!username" routerLink="/login" class="dropdown-item">เข้าสู่ระบบ</a>
                 <!-- Conditionally show thread history if token exists -->
                 <a *ngIf="token" routerLink="/thread-history" class="dropdown-item">ประวัติกระทู้</a>
