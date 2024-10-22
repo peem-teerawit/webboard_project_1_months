@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'; 
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -42,7 +42,7 @@ export class EditThreadComponent implements OnInit {
       this.apiService.updateThread(this.threadId, this.threadData).subscribe(
         () => {
           console.log('Thread updated successfully');
-          this.router.navigate(['/thread-history']); // Redirect to the threads page after successful update
+          this.router.navigate([`/thread-detail/${this.threadId}`]); // Redirect to the thread detail page after successful update
         },
         (error) => {
           console.error('Error updating thread', error);

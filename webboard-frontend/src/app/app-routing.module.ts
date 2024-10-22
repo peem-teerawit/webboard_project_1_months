@@ -17,6 +17,8 @@ const routes: Routes = [
   { path: 'create-thread', component: CreateThreadComponent },
   { path: 'thread-history', component: ThreadHistoryComponent },
   { path: 'edit-thread/:id', component: EditThreadComponent },
+  { path: 'threads/edit/:id', component: EditThreadComponent },
+  { path: 'thread-detail/:id', component: ThreadDetailComponent },
 ];
 
 @NgModule({
