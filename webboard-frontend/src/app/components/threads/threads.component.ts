@@ -22,7 +22,6 @@ export class ThreadsComponent implements OnInit {
   loadThreads() {
     this.apiService.getThreads().subscribe(
       (data) => {
-        // เรียงลำดับ threads จากวันที่ล่าสุดไปเก่าสุด
         this.threads = data.sort((a: any, b: any) => {
           return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
         });

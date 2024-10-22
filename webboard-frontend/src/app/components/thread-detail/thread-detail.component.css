@@ -1,50 +1,50 @@
 :host {
-    display: block; /* Changed to block for better structure */
+    display: block; 
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center content */
+    align-items: center; 
     padding: 50px;
 }
 
 .thread-list {
-    list-style-type: none; /* Remove bullet points */
-    padding: 0; /* Remove default padding */
-    width: 100%; /* Full width for list */
-    max-width: 800px; /* Maximum width for better readability */
+    list-style-type: none; 
+    padding: 0; 
+    width: 100%; 
+    max-width: 800px;
 }
 
 .post-container {
-    border-radius: 10px; /* More subtle rounding */
+    border-radius: 10px; 
     background-color: rgba(251, 248, 239, 1);
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px 0; /* Spacing between posts */
-    padding: 20px; /* Internal padding */
-    border: 1px solid rgba(188, 188, 188, 0.5); /* Lighter border */
+    margin: 20px 0;
+    padding: 20px; 
+    border: 1px solid rgba(188, 188, 188, 0.5);
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s; /* Smooth transition */
-    overflow: visible; /* Ensure content is not cut off */
-    word-wrap: break-word; /* Ensure long words break correctly */
+    transition: transform 0.3s; 
+    overflow: visible;
+    word-wrap: break-word;
 }
 
 .div-7 {
     display: flex;
-    justify-content: space-between; /* Space between elements */
-    align-items: center; /* Center vertically */
-    margin-bottom: 10px; /* Space below this section */
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 10px; 
 }
 
 .div-8 {
     display: flex;
-    flex-direction: row; /* Stack user info */
+    flex-direction: row; 
     gap: 10px;
 }
 
 .user-001 {
-    font-weight: bold; /* Emphasize user name */
+    font-weight: bold; 
 }
 
 .time-ago {
@@ -52,133 +52,136 @@
     font-size: 14px;
 }
 
-.div-9 {
-    display: flex;
-    margin-top: 7px;
-    gap: 10px; /* Space between tags */
-}
-
-.tag {
-    color: rgba(97, 97, 97, 1);
-    padding: 5px 10px; /* Padding for tags */
-    border-radius: 5px; /* Rounded corners */
-}
-
 .post-title {
-    font-size: 1.5em; /* Larger font size for title */
-    margin: 10px 0; /* Space above and below */
-    color: rgba(0, 0, 0, 0.85); /* Darker title */
+    font-size: 1.5em; 
+    margin: 10px 0; 
+    color: rgba(0, 0, 0, 0.85); 
 }
 
 .post-content {
-    white-space: pre-wrap; /* Preserve whitespace and line breaks */
-    color: rgba(0, 0, 0, 0.6); /* Lighter content */
-    margin: 10px 0; /* Space above and below */
+    white-space: pre-wrap; 
+    color: rgba(0, 0, 0, 0.6);
+    margin: 10px 0;
 }
 
 .post-tags {
-    margin-top: 10px; /* Space above the tags */
-    font-size: 16px; /* Font size for tags */
-    color: #616161; /* Color for tags */
+    margin-top: 10px; 
+    font-size: 16px; 
+    color: #616161; 
+    display: flex; 
+    flex-wrap: wrap; 
 }
 
 .tag {
-    margin-right: 2px; /* Space between tags */
-    padding: 5px 10px; /* Padding inside tags */
+    background-color: #f7d11a; 
+    color: #333; 
+    padding: 5px 10px; 
+    border-radius: 12px;
+    margin: 5px; 
+    transition: background-color 0.3s; 
 }
 
+.tag:hover {
+    background-color: #eef691;
+    cursor: pointer; 
+}
 
 /* Replies Section */
 .comment-section {
-    width: 100%; /* Full width of container */
-    max-width: 800px; /* Limit the max width */
-    margin-top: 10px; /* Space above replies */
-}
-
-.comment-input {
-    margin-bottom: 40px; /* Space below the input area */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Align items to start */
-    gap: 10px; /* Space between input elements */
-    width: 100%;
-}
-
-textarea {
-    width: 100%; /* Full width textarea */
-    border-radius: 5px; /* Rounded corners */
-    padding: 10px; /* Add some padding */
-    border: 1px solid #ccc; /* Light border */
-}
-
-.post-reply-button {
-    background-color: rgba(246, 202, 21, 1); /* Main color */
-    color: white; /* Text color */
-    padding: 10px 20px; /* Padding inside button */
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s; /* Smooth background change */
-}
-
-.post-reply-button:hover {
-    background-color: rgba(246, 202, 21, 1); /* Darker shade on hover */
+    width: 100%; 
+    max-width: 800px; 
+    margin-top: 10px; 
 }
 
 .comments-list {
-    list-style-type: none; /* Remove bullet points */
-    padding: 0; /* Remove default padding */
-    width: 100%; /* Full width */
+    list-style-type: none; 
+    padding: 0;
+    width: 100%; 
 }
 
 .reply-container {
-    border-radius: 10px; /* Rounded corners */
-    background-color: rgba(251, 248, 239, 1); /* Same background as threads */
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    margin: 15px 0; /* Spacing between replies */
-    padding: 15px; /* Internal padding */
-    border: 1px solid rgba(188, 188, 188, 0.5); /* Lighter border */
+    border-radius: 10px; 
+    background-color: rgba(251, 248, 239, 1); 
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); 
+    margin: 15px 0; 
+    padding: 15px; 
+    border: 1px solid rgba(188, 188, 188, 0.5);
     display: flex;
-    flex-direction: column; /* Stack reply content vertically */
-    overflow: visible; /* Ensure content is not cut off */
-    word-wrap: break-word; /* Ensure long words break correctly */
+    flex-direction: column; 
+    overflow: visible; 
+    word-wrap: break-word; 
 }
 
 .div-reply-header {
     display: flex;
-    justify-content: space-between; /* Space between name and time */
+    justify-content: space-between; 
     align-items: center;
-    margin-bottom: 5px; /* Space below header */
+    margin-bottom: 5px; 
 }
 
 .reply-time {
-    color: rgba(97, 97, 97, 1); /* Time text color */
+    color: rgba(97, 97, 97, 1); 
     font-size: 14px;
 }
 
 .reply-content {
-    white-space: pre-wrap; /* Preserve line breaks in reply content */
-    margin-bottom: 10px; /* Space below content */
-    color: rgba(0, 0, 0, 0.6); /* Lighter color */
+    white-space: pre-wrap; 
+    margin-bottom: 10px; 
+    color: rgba(0, 0, 0, 0.6); 
 }
 
-.reply-icons {
+/* Reply Form */
+.reply-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.reply-form textarea {
+    border-radius: 12px;
+    background-color: #fbf8ef;
+    padding: 14px 18px;
+    border: 2px solid transparent;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.reply-form textarea:focus {
+    border-color: #f9e92f;
+    background-color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(249, 233, 47, 0.1);
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.anonymous-option {
     display: flex;
     align-items: center;
-    gap: 20px; /* Space between icons */
+    gap: 8px;
+    cursor: pointer;
 }
 
-.reply-likes {
-    display: flex;
-    align-items: center;
+.anonymous-option input[type="checkbox"] {
+    margin: 0;
 }
 
-.reply-likes img {
-    width: 20px; /* Adjust icon size */
-    height: 20px;
-    margin-right: 5px; /* Space between icon and number */
+.reply-form .action-button {
+    background-color: #f9e92f;
+    color: #192838;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.reply-likes span {
-    font-size: 14px; /* Adjust font size */
+.reply-form .action-button:hover {
+    background-color: #fade1a;
 }

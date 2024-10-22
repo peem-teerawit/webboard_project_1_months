@@ -1,41 +1,57 @@
-<div class="container">
-    <ul class="thread-list">
-      <li class="post-container">
-        <div class="div-7">
-          <div class="div-8">
-            <div class="user-001">user: {{ thread?.is_anonymous ? 'Anonymous' : thread?.user_name }}</div> <!-- Show "Anonymous" if the thread is anonymous -->
-            <div class="time-ago">{{ thread?.created_at | date:'short' }}</div>
-          </div>
+<div class="container thread-detail-page"> 
+  <ul class="thread-list">
+    <li class="post-container">
+      <div class="div-7">
+        <div class="div-8">
+          <div class="user-001">user: {{ thread?.is_anonymous ? 'Anonymous' : thread?.user_name }}</div>
+          <div class="time-ago">{{ thread?.created_at | date:'short' }}</div>
         </div>
-        <h2 class="post-title">{{ thread?.title }}</h2>
-        <p class="post-content">{{ thread?.content }}</p>
-        <div class="post-tags">
-          <span *ngFor="let tag of thread?.tags" class="tag">#{{ tag }}</span>
+      </div>
+      <h2 class="post-title">{{ thread?.title }}</h2>
+      <p class="post-content">{{ thread?.content }}</p>
+      <div class="post-tags">
+        <span *ngFor="let tag of thread?.tags" class="tag">#{{ tag }}</span>
+      </div>
+    </li>
+  </ul>
+
+  <!-- Comment Section -->
+  <div class="comment-section">
+    <h3>Replies ({{ replies.length }})</h3>
+    <ul class="comments-list">
+      <li *ngFor="let reply of replies" class="reply-container">
+        <div class="div-reply-header">
+          <strong>{{ getReplyDisplayName(reply) }}</strong>
+          <span class="reply-time">{{ reply.created_at | date: 'short' }}</span>
         </div>
+        <div class="reply-content">{{ reply.content }}</div>
       </li>
     </ul>
   
-    <!-- Comment Section -->
-    <div class="comment-section">
-      <h3>Replies ({{ replies.length }})</h3>
-      <ul class="comments-list">
-        <li *ngFor="let reply of replies" class="reply-container">
-          <div class="div-reply-header">
-            <strong>{{ getReplyDisplayName(reply) }}</strong> <!-- Use getReplyDisplayName method -->
-            <span class="reply-time">{{ reply.created_at | date: 'short' }}</span>
-          </div>
-          <div class="reply-content">
-            {{ reply.content }}
-          </div>
-        </li>
-      </ul>
-      <div class="comment-input">
-        <textarea [(ngModel)]="replyContent" placeholder="Write a reply..." rows="3"></textarea>
-        <label>
-          <input type="checkbox" [(ngModel)]="isAnonymous" /> Post anonymously
-        </label>
-        <button (click)="createReply()" class="post-reply-button">Post Reply</button>
+    <form (ngSubmit)="createReply()" class="reply-form">
+      <div class="form-group">
+        <textarea 
+          [(ngModel)]="replyContent"
+          name="replyContent"
+          placeholder="Write a reply..."
+          rows="3"
+          class="reply-textarea">
+        </textarea>
       </div>
-    </div>
-  </div>
   
+      <div class="form-options">
+        <label class="anonymous-option">
+          <input 
+            type="checkbox" 
+            [(ngModel)]="isAnonymous"
+            name="isAnonymous" />
+          <span>Post anonymously</span>
+        </label>
+  
+        <button type="submit" class="action-button post-reply">
+          Post Reply
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -28,10 +28,10 @@
           </div>
           <!-- Add Edit link conditionally -->
           <ng-container *ngIf="canEdit(thread)">
-            <a [routerLink]="['/edit-thread', thread._id]" class="action-link">Edit</a>
-          </ng-container>
-        </div>
-      </li>
-    </ul>
-  </div>
+            <a [routerLink]="['/edit-thread', thread._id]" class="action-button edit-button">Edit</a>
+        </ng-container>
+    </div>
+</li>
+</ul>
+</div>
   
