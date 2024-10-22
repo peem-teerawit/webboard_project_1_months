@@ -47,4 +47,17 @@ export class ThreadHistoryComponent implements OnInit {
       );
     }
   }
+
+  // Method to truncate content to 20 words
+  truncateContent(content: string): string {
+    const englishWords = content.match(/\w+('\w+)?/g) || [];
+    const thaiWords = content.match(/[\u0E00-\u0E7F]+/g) || [];
+
+    const combinedWords = [...new Set([...englishWords, ...thaiWords])];
+
+    if (combinedWords.length > 20) {
+      return combinedWords.slice(0, 20).join(' ') + '...';
+    }
+    return content;
+  }
 }

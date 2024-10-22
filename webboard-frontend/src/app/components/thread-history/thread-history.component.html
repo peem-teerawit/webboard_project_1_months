@@ -16,7 +16,7 @@
           </h3>
           <small>Posted on: {{ thread.created_at | date:'short' }}</small>
         </div>
-        <p>{{ thread.content }}</p>
+        <p>{{ truncateContent(thread.content) }}</p>
         <div class="thread-actions">
           <!-- Link to edit the thread -->
           <a [routerLink]="['/edit-thread', thread._id]" class="action-link">Edit</a>
