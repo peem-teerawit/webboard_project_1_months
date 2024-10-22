@@ -52,7 +52,7 @@ export class ThreadsComponent implements OnInit {
     const combinedWords = [...new Set([...englishWords, ...thaiWords])];
 
     if (combinedWords.length > 50) {
-      return combinedWords.slice(0, 50).join(' ') + '...'; // Limit to 50 words and add ellipsis
+      return combinedWords.slice(0, 50).join(' ') + '...'; // Join first 50 words and add '...'
     }
     return content; // Return original content if fewer than 50 words
   }
