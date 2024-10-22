@@ -46,12 +46,15 @@ exports.getThreadById = async (req, res) => {
 
 // Edit a thread
 exports.updateThread = async (req, res) => {
-    const { title, content } = req.body;
+    const { title, content, tags, is_anonymous, expire_at } = req.body;
     const thread = await Thread.findById(req.params.id);
 
     if (thread && String(thread.user_id) === req.user.id) {
         thread.title = title;
         thread.content = content;
+        thread.tags = tags;
+        thread.is_anonymous = is_anonymous;
+        thread.expire_at = expire_at;
         await thread.save();
         res.json(thread);
     } else {

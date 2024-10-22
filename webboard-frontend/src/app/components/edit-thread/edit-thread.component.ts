@@ -39,10 +39,11 @@ export class EditThreadComponent implements OnInit {
   // Update the thread information
   updateThread(): void {
     if (this.threadId) {
+      console.log(this.threadData); // Log the data to check if it's correctly capturing the fields
       this.apiService.updateThread(this.threadId, this.threadData).subscribe(
         () => {
           console.log('Thread updated successfully');
-          this.router.navigate([`/thread-detail/${this.threadId}`]); // Redirect to the thread detail page after successful update
+          this.router.navigate([`/thread-detail/${this.threadId}`]);
         },
         (error) => {
           console.error('Error updating thread', error);
@@ -50,4 +51,5 @@ export class EditThreadComponent implements OnInit {
       );
     }
   }
+  
 }
