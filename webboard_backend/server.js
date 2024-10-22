@@ -6,6 +6,8 @@ const authRoutes = require('./routes/authRoutes');
 const threadRoutes = require('./routes/threadRoutes');
 const replyRoutes = require('./routes/replyRoutes');
 // const analyticsRoutes = require('./routes/analyticsRoutes');
+const cron = require('node-cron');
+const { deleteExpiredThreads } = require('./controllers/threadController');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -22,6 +24,12 @@ app.use('/api/auth', authRoutes);
 app.use('/api/threads', threadRoutes);
 app.use('/api/replies', replyRoutes);
 // app.use('/api/analytics', analyticsRoutes);
+
+// Schedule a job to run every hour
+cron.schedule('0 * * * *', () => {
+    console.log('Checking for expired threads...');
+    deleteExpiredThreads(); // Call the function to delete expired threads
+});
 
 // Start the server
 app.listen(PORT, () => {

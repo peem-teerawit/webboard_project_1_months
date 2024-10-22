@@ -91,4 +91,23 @@ exports.getThreadsByUsername = async (req, res) => {
     }
 };
 
+// Delete expired threads
+exports.deleteExpiredThreads = async () => {
+    try {
+        // Get the current date
+        const currentDate = new Date();
+
+        // Find and delete threads where expire_at is less than the current date and not null
+        const result = await Thread.deleteMany({
+            expire_at: { $lt: currentDate, $ne: null } // $ne: null excludes threads with no expiration date
+        });
+
+        console.log(`Deleted ${result.deletedCount} expired threads.`);
+    } catch (error) {
+        console.error('Error deleting expired threads:', error);
+    }
+};
+
+
+
 
