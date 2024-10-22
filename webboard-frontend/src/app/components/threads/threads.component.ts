@@ -12,8 +12,7 @@ export class ThreadsComponent implements OnInit {
   currentUsername: string | null;
 
   constructor(private apiService: ApiService) {
-    // Get the username from local storage
-    this.currentUsername = localStorage.getItem('username'); // Adjust the key as needed
+    this.currentUsername = localStorage.getItem('username');
   }
 
   ngOnInit() {
@@ -23,7 +22,10 @@ export class ThreadsComponent implements OnInit {
   loadThreads() {
     this.apiService.getThreads().subscribe(
       (data) => {
-        this.threads = data;
+        // เรียงลำดับ threads จากวันที่ล่าสุดไปเก่าสุด
+        this.threads = data.sort((a: any, b: any) => {
+          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        });
       },
       (error) => {
         console.error('Error loading threads', error);
@@ -33,36 +35,35 @@ export class ThreadsComponent implements OnInit {
 
   // Method to format tags
   formatTags(tags: string[]): string {
-    return tags.map(tag => `#${tag}`).join(' '); // Format tags as #tag1 #tag2
+    return tags.map(tag => `#${tag}`).join(' ');
   }
 
   // Method to format the created_at timestamp
   formatCreatedAt(createdAt: string): string {
-    const date = new Date(createdAt); // Convert string to Date object
-    return formatDistanceToNow(date, { addSuffix: true }); // Format to relative time
+    const date = new Date(createdAt);
+    return formatDistanceToNow(date, { addSuffix: true });
   }
 
-  // Method to truncate content to 50 words
+  // Method to truncate content to 20 words
   truncateContent(content: string): string {
-    const englishWords = content.match(/\w+('\w+)?/g) || []; // Match English words
-    const thaiWords = content.match(/[\u0E00-\u0E7F]+/g) || []; // Match Thai words
+    const englishWords = content.match(/\w+('\w+)?/g) || [];
+    const thaiWords = content.match(/[\u0E00-\u0E7F]+/g) || [];
 
-    // Combine both word arrays, ensuring uniqueness
     const combinedWords = [...new Set([...englishWords, ...thaiWords])];
 
     if (combinedWords.length > 20) {
-      return combinedWords.slice(0, 20).join(' ') + '...'; // Join first 50 words and add '...'
+      return combinedWords.slice(0, 20).join(' ') + '...';
     }
-    return content; // Return original content if it's 50 words or fewer
+    return content;
   }
 
   // Method to check if the current user can edit the thread
   canEdit(thread: any): boolean {
-    return thread.user_name === this.currentUsername; // Compare thread username with current username
+    return thread.user_name === this.currentUsername;
   }
 
   // Method to check if the thread should display 'anonymous' instead of the username
   getDisplayedUsername(thread: any): string {
-    return thread.is_anonymous ? 'anonymous' : thread.user_name; // Return 'anonymous' if is_anonymous is true
+    return thread.is_anonymous ? 'anonymous' : thread.user_name;
   }
 }
