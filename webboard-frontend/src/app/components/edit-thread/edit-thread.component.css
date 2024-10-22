@@ -96,4 +96,49 @@
       font-size: 28px;
     }
   }
+
+  /* Styling for the checkbox */
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-label {
+  font-weight: 600;
+  color: #192838;
+  margin-left: 10px;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  border: 2px solid #edebe5;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  border-color: #f9e92f;
+  background-color: #f9e92f;
+}
+
+/* Styling for the date picker */
+input[type="date"] {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #edebe5;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+input[type="date"]:focus {
+  outline: none;
+  border-color: #f9e92f;
+}
+
+
+  
   

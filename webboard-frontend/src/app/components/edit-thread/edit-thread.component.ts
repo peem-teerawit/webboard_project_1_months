@@ -9,7 +9,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class EditThreadComponent implements OnInit {
   threadId: string | null = null; // Thread ID to edit
-  threadData: any = { title: '', content: '', tags: [] }; // Holds the thread data to be edited
+  threadData: any = { title: '', content: '', tags: [], is_anonymous: false, expire_at: '' }; // Holds the thread data to be edited
 
   constructor(
     private apiService: ApiService,

@@ -33,6 +33,31 @@
         placeholder="Comma-separated tags"
       />
     </div>
+    
+    <!-- is_anonymous checkbox -->
+    <div class="form-group">
+      <label for="is_anonymous">Post Anonymously:</label>
+      <input
+        type="checkbox"
+        id="is_anonymous"
+        [(ngModel)]="threadData.is_anonymous"
+        name="is_anonymous"
+        class="form-control"
+      />
+    </div>
+    
+    <!-- expire_at date picker -->
+    <div class="form-group">
+      <label for="expire_at">Expiration Date:</label>
+      <input
+        type="date"
+        id="expire_at"
+        [(ngModel)]="threadData.expire_at"
+        name="expire_at"
+        class="form-control"
+      />
+    </div>
+
     <button type="submit" class="action-button">Update Thread</button>
   </form>
 </div>
