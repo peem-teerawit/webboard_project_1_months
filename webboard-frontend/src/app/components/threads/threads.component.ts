@@ -8,8 +8,8 @@ import { formatDistanceToNow } from 'date-fns';
   styleUrls: ['./threads.component.css']
 })
 export class ThreadsComponent implements OnInit {
-  threads: any[] = []; // Holds the threads data
-  currentUsername: string | null; // Current logged-in user's username
+  threads: any[] = [];
+  currentUsername: string | null;
 
   constructor(private apiService: ApiService) {
     // Get the username from local storage
@@ -17,47 +17,52 @@ export class ThreadsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadThreads(); // Load threads when component initializes
+    this.loadThreads();
   }
 
-  // Load the list of threads from the API
   loadThreads() {
     this.apiService.getThreads().subscribe(
       (data) => {
-        this.threads = data; // Assign the fetched data to the threads array
+        this.threads = data;
       },
       (error) => {
-        console.error('Error loading threads', error); // Handle error if thread loading fails
+        console.error('Error loading threads', error);
       }
     );
   }
 
-  // Method to format tags (e.g., #tag1 #tag2)
+  // Method to format tags
   formatTags(tags: string[]): string {
-    return tags.map(tag => `#${tag}`).join(' '); // Format each tag with a '#' prefix and join them with spaces
+    return tags.map(tag => `#${tag}`).join(' '); // Format tags as #tag1 #tag2
   }
 
-  // Method to format the created_at timestamp into a relative time (e.g., "2 hours ago")
+  // Method to format the created_at timestamp
   formatCreatedAt(createdAt: string): string {
-    const date = new Date(createdAt); // Convert the created_at string to a Date object
-    return formatDistanceToNow(date, { addSuffix: true }); // Format as relative time using date-fns
+    const date = new Date(createdAt); // Convert string to Date object
+    return formatDistanceToNow(date, { addSuffix: true }); // Format to relative time
   }
 
-  // Method to truncate thread content to 50 words (supports both English and Thai)
+  // Method to truncate content to 50 words
   truncateContent(content: string): string {
     const englishWords = content.match(/\w+('\w+)?/g) || []; // Match English words
     const thaiWords = content.match(/[\u0E00-\u0E7F]+/g) || []; // Match Thai words
 
-    // Combine both English and Thai words into a single array
+    // Combine both word arrays, ensuring uniqueness
     const combinedWords = [...new Set([...englishWords, ...thaiWords])];
 
-    if (combinedWords.length > 50) {
-      return combinedWords.slice(0, 50).join(' ') + '...'; // Join first 50 words and add '...'
+    if (combinedWords.length > 20) {
+      return combinedWords.slice(0, 20).join(' ') + '...'; // Join first 50 words and add '...'
     }
-    return content; // Return original content if fewer than 50 words
+    return content; // Return original content if it's 50 words or fewer
   }
 
+  // Method to check if the current user can edit the thread
   canEdit(thread: any): boolean {
-    return thread.user_name === this.currentUsername; 
+    return thread.user_name === this.currentUsername; // Compare thread username with current username
+  }
+
+  // Method to check if the thread should display 'anonymous' instead of the username
+  getDisplayedUsername(thread: any): string {
+    return thread.is_anonymous ? 'anonymous' : thread.user_name; // Return 'anonymous' if is_anonymous is true
   }
 }

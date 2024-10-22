@@ -52,6 +52,12 @@ export class ThreadDetailComponent implements OnInit {
     );
   }
 
+    // Modify the reply display method to show "Anonymous" if reply is anonymous
+  getReplyDisplayName(reply: any): string {
+    return reply.is_anonymous ? 'Anonymous' : reply.user_name; // Show "Anonymous" if is_anonymous is true
+  }
+
+
   
 
 }
