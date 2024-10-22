@@ -9,7 +9,13 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class EditThreadComponent implements OnInit {
   threadId: string | null = null; // Thread ID to edit
-  threadData: any = { title: '', content: '', tags: [], is_anonymous: false, expire_at: '' }; // Holds the thread data to be edited
+  threadData: any = { 
+    title: '', 
+    content: '', 
+    tags: [], 
+    is_anonymous: false, 
+    expire_at: null // Initialize as null or set to a default date value
+  }; // Holds the thread data to be edited
 
   constructor(
     private apiService: ApiService,
@@ -28,12 +34,28 @@ export class EditThreadComponent implements OnInit {
       this.apiService.getThread(this.threadId).subscribe(
         (response: any) => {
           this.threadData = response; // Assign the retrieved thread data to threadData
+          // Ensure expire_at is formatted correctly
+          if (this.threadData.expire_at) {
+            this.threadData.expire_at = this.formatDate(this.threadData.expire_at);
+          }
         },
         (error) => {
           console.error('Error retrieving thread details', error);
         }
       );
     }
+  }
+
+  // Function to format the date to 'yyyy-MM-ddThh:mm'
+  formatDate(date: string): string {
+    const d = new Date(date);
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const dd = String(d.getDate()).padStart(2, '0');
+    const hh = String(d.getHours()).padStart(2, '0');
+    const mi = String(d.getMinutes()).padStart(2, '0');
+
+    return `${yyyy}-${mm}-${dd}T${hh}:${mi}`; // Format as 'yyyy-MM-ddThh:mm'
   }
 
   // Update the thread information
@@ -51,5 +73,4 @@ export class EditThreadComponent implements OnInit {
       );
     }
   }
-  
 }
