@@ -52,6 +52,7 @@ body {
     box-sizing: border-box;
     padding: 14px 18px;
     transition: all 0.3s ease;
+    margin-bottom: 25px;
 }
 
 .input-field:focus {
