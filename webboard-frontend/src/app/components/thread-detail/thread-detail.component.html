@@ -18,14 +18,6 @@
     <!-- Comment Section -->
     <div class="comment-section">
         <h3>Replies ({{ replies.length }})</h3> <!-- Display reply count here -->
-        <div class="comment-input">
-            <textarea [(ngModel)]="replyContent" placeholder="Write a reply..." rows="3"></textarea>
-            <label>
-                <input type="checkbox" [(ngModel)]="isAnonymous" /> Post anonymously
-            </label>
-            <button (click)="createReply()" class="post-reply-button">Post Reply</button>
-        </div>
-
         <ul class="comments-list">
             <li *ngFor="let reply of replies" class="reply-container">
                 <div class="div-reply-header">
@@ -37,5 +29,12 @@
                 </div>
             </li>
         </ul>
+        <div class="comment-input">
+            <textarea [(ngModel)]="replyContent" placeholder="Write a reply..." rows="3"></textarea>
+            <label>
+                <input type="checkbox" [(ngModel)]="isAnonymous" /> Post anonymously
+            </label>
+            <button (click)="createReply()" class="post-reply-button">Post Reply</button>
+        </div>
     </div>
 </div>

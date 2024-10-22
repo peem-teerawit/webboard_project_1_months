@@ -50,8 +50,8 @@ export class ThreadsComponent implements OnInit {
     // Combine both word arrays, ensuring uniqueness
     const combinedWords = [...new Set([...englishWords, ...thaiWords])];
 
-    if (combinedWords.length > 50) {
-      return combinedWords.slice(0, 50).join(' ') + '...'; // Join first 50 words and add '...'
+    if (combinedWords.length > 20) {
+      return combinedWords.slice(0, 20).join(' ') + '...'; // Join first 50 words and add '...'
     }
     return content; // Return original content if it's 50 words or fewer
   }
