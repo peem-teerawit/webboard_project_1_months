@@ -61,6 +61,11 @@ export class EditThreadComponent implements OnInit {
   // Update the thread information
   updateThread(): void {
     if (this.threadId) {
+      // Check if 'tags' is a string and needs to be split into an array
+      if (typeof this.threadData.tags === 'string') {
+        this.threadData.tags = this.threadData.tags.split(',').map((tag: string) => tag.trim());
+      }
+  
       console.log(this.threadData); // Log the data to check if it's correctly capturing the fields
       this.apiService.updateThread(this.threadId, this.threadData).subscribe(
         () => {
@@ -73,4 +78,5 @@ export class EditThreadComponent implements OnInit {
       );
     }
   }
+
 }
