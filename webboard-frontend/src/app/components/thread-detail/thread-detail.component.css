@@ -161,6 +161,12 @@
     align-items: center;
 }
 
+.left-options {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 .anonymous-option {
     display: flex;
     align-items: center;
@@ -172,7 +178,96 @@
     margin: 0;
 }
 
-.reply-form .action-button {
+.speech-recognition-control {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.speech-button {
+    background-color: #1867b5;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.speech-button:hover {
+    background-color: #f7d11a;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.speech-button:active {
+    transform: translateY(0);
+}
+
+.listening-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: rgba(255, 76, 76, 0.1);
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 76, 76, 0.2);
+}
+
+.listening-text {
+    color: #ff4c4c;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.dot-animation {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.dot {
+    width: 4px;
+    height: 4px;
+    background-color: #ff4c4c;
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 1;
+    }
+}
+
+.listening-indicator:hover {
+    background-color: rgba(255, 76, 76, 0.15);
+    border-color: rgba(255, 76, 76, 0.3);
+}
+
+.listening-indicator, .speech-button {
+    transition: all 0.3s ease;
+}
+
+.post-reply {
     background-color: #f9e92f;
     color: #192838;
     padding: 10px 20px;
@@ -182,34 +277,6 @@
     transition: all 0.3s ease;
 }
 
-.reply-form .action-button:hover {
+.post-reply:hover {
     background-color: #fade1a;
 }
-
-.speech-recognition-control {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  
-  .speech-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .speech-button:hover {
-    background-color: #45a049;
-  }
-  
-  .listening-indicator {
-    color: #ff4c4c;
-    font-weight: bold;
-  }
-  
-  
