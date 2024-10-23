@@ -10,6 +10,7 @@ import { formatDistanceToNow, format } from 'date-fns';
 export class ThreadsComponent implements OnInit {
   threads: any[] = [];
   currentUsername: string | null;
+  trendingTags: string[] = [];
 
   constructor(private apiService: ApiService) {
     this.currentUsername = localStorage.getItem('username');
@@ -25,11 +26,29 @@ export class ThreadsComponent implements OnInit {
         this.threads = data.sort((a: any, b: any) => {
           return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
         });
+        this.extractTrendingTags();  
       },
       (error) => {
         console.error('Error loading threads', error);
       }
     );
+  }
+
+  extractTrendingTags() {
+    const tagCount: { [key: string]: number } = {};
+
+    // Count occurrences of each tag
+    this.threads.forEach(thread => {
+      thread.tags.forEach((tag: string) => {
+        tagCount[tag] = (tagCount[tag] || 0) + 1;
+      });
+    });
+
+    // Sort tags by their count and take the top 7
+    this.trendingTags = Object.entries(tagCount)
+      .sort((a, b) => b[1] - a[1])  
+      .slice(0, 7)                  
+      .map(entry => entry[0]);       
   }
 
   formatTags(tags: string[]): string {

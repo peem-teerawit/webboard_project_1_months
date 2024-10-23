@@ -17,19 +17,31 @@
           <div class="post-content">{{ truncateContent(thread.content) }}</div>
         </a>
         <div class="div-10" style="position: relative;">
-            <div class="div-11">
-                <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/d7e7499a56be9b581e37d9a0bddb00227978dba8f8e63869f9048e4e4cbaf3bc?placeholderIfAbsent=true&apiKey=192ff7338de4457c8649492ee5300f1f" class="img-5" alt="Likes icon" />
-                <div>{{ thread.likes }}</div>
-            </div>
-            <div class="div-12">
-                <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/a7466bc6960d24a1c98c4d6c6809f81ffc65c56595a63787cda6cc957989b4c0?placeholderIfAbsent=true&apiKey=192ff7338de4457c8649492ee5300f1f" class="img-6" alt="Comments icon" />
-                <div class="comments-count">{{ thread.comments }}</div>
-            </div>
-            <!-- Show the expiration time if set -->
-            <div *ngIf="thread.expire_at" class="expire-at">{{ formatExpireAt(thread.expire_at) }}</div>
-            <!-- Add Edit link conditionally -->
-            <ng-container *ngIf="canEdit(thread)">
-                <a [routerLink]="['/edit-thread', thread._id]" class="action-button edit-button">Edit</a>
-            </ng-container>
+          <div class="div-11">
+            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/d7e7499a56be9b581e37d9a0bddb00227978dba8f8e63869f9048e4e4cbaf3bc?placeholderIfAbsent=true&apiKey=192ff7338de4457c8649492ee5300f1f" class="img-5" alt="Likes icon" />
+            <div>{{ thread.likes }}</div>
+          </div>
+          <div class="div-12">
+            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/a7466bc6960d24a1c98c4d6c6809f81ffc65c56595a63787cda6cc957989b4c0?placeholderIfAbsent=true&apiKey=192ff7338de4457c8649492ee5300f1f" class="img-6" alt="Comments icon" />
+            <div class="comments-count">{{ thread.comments }}</div>
+          </div>
+          <!-- Show the expiration time if set -->
+          <div *ngIf="thread.expire_at" class="expire-at">{{ formatExpireAt(thread.expire_at) }}</div>
+          <!-- Add Edit link conditionally -->
+          <ng-container *ngIf="canEdit(thread)">
+            <a [routerLink]="['/edit-thread', thread._id]" class="action-button edit-button">Edit</a>
+          </ng-container>
         </div>
-        
+      </li>
+    </ul>
+    
+    <section class="trending-page">
+      <div class="trending-container">
+        <h2 class="trending-title">Trending</h2>
+        <div class="topic-group" *ngIf="trendingTags.length">
+          <span class="topic-tag" *ngFor="let tag of trendingTags">#{{ tag }}</span>
+        </div>
+      </div>
+    </section>
+  </div>
+  
