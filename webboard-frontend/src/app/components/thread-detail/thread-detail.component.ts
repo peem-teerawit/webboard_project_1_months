@@ -10,8 +10,8 @@ import { ApiService } from 'src/app/services/api.service';
 export class ThreadDetailComponent implements OnInit, OnDestroy {
   thread: any;
   replies: any[] = [];
-  replyContent: string = ''; // Variable for reply content
-  isAnonymous: boolean = false; // Variable for anonymity
+  replyContent: string = '';
+  isAnonymous: boolean = false;
   recognition: any; // SpeechRecognition object
   isListening: boolean = false; // To track whether the recognition is active
 
