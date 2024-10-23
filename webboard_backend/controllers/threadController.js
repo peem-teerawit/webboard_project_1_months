@@ -1,4 +1,5 @@
 const Thread = require('../models/threadModel');
+const Reply = require('../models/replyModel'); // Import the Reply model
 
 // Create a new thread
 exports.createThread = async (req, res) => {
@@ -91,24 +92,36 @@ exports.getThreadsByUsername = async (req, res) => {
     }
 };
 
-// Delete expired threads
+// Delete expired threads and their replies
 exports.deleteExpiredThreads = async () => {
     try {
         // Get the current date
         const currentDate = new Date();
 
-        // Find and delete threads where expire_at is less than the current date and not null
-        const result = await Thread.deleteMany({
-            expire_at: { $lt: currentDate, $ne: null } // $ne: null excludes threads with no expiration date
+        // Find threads where expire_at is less than the current date and not null
+        const expiredThreads = await Thread.find({
+            expire_at: { $lt: currentDate, $ne: null }
         });
 
-        if (result.deletedCount > 0) {
-            console.log(`Deleted ${result.deletedCount} expired thread(s).`);
+        if (expiredThreads.length > 0) {
+            const threadIds = expiredThreads.map(thread => thread._id); // Collect the thread IDs of expired threads
+
+            // Delete the expired threads
+            const threadResult = await Thread.deleteMany({
+                _id: { $in: threadIds }
+            });
+
+            // Delete replies related to the expired threads
+            const replyResult = await Reply.deleteMany({
+                thread_id: { $in: threadIds }
+            });
+
+            console.log(`Deleted ${threadResult.deletedCount} expired thread(s) and ${replyResult.deletedCount} reply/replies.`);
         } else {
             console.log('There are no expired threads.');
         }
     } catch (error) {
-        console.error('Error deleting expired threads:', error);
+        console.error('Error deleting expired threads and their replies:', error);
     }
 };
 
