@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNow, format } from 'date-fns';
 
 @Component({
   selector: 'app-threads',
@@ -32,18 +32,24 @@ export class ThreadsComponent implements OnInit {
     );
   }
 
-  // Method to format tags
   formatTags(tags: string[]): string {
     return tags.map(tag => `#${tag}`).join(' ');
   }
 
-  // Method to format the created_at timestamp
   formatCreatedAt(createdAt: string): string {
     const date = new Date(createdAt);
     return formatDistanceToNow(date, { addSuffix: true });
   }
 
-  // Method to truncate content to 20 words
+  // Method to format the expire_at timestamp
+  formatExpireAt(expireAt: string | null): string {
+    if (expireAt) {
+      const date = new Date(expireAt);
+      return `Expires on: ${format(date, 'MMMM dd, yyyy HH:mm')}`;
+    }
+    return '';
+  }
+
   truncateContent(content: string): string {
     const englishWords = content.match(/\w+('\w+)?/g) || [];
     const thaiWords = content.match(/[\u0E00-\u0E7F]+/g) || [];
@@ -56,12 +62,10 @@ export class ThreadsComponent implements OnInit {
     return content;
   }
 
-  // Method to check if the current user can edit the thread
   canEdit(thread: any): boolean {
     return thread.user_name === this.currentUsername;
   }
 
-  // Method to check if the thread should display 'anonymous' instead of the username
   getDisplayedUsername(thread: any): string {
     return thread.is_anonymous ? 'anonymous' : thread.user_name;
   }

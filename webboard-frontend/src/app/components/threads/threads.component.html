@@ -1,37 +1,35 @@
 <div class="container">
-  <ul class="thread-list">
+    <ul class="thread-list">
       <li *ngFor="let thread of threads; let i = index" class="post-container">
-          <a [routerLink]="['/threads', thread._id]" style="text-decoration: none;">
-              <div class="div-7">
-                  <div class="div-8">
-                      <!-- Display anonymous or the actual username -->
-                      <div class="user-001">user: {{ getDisplayedUsername(thread) }}</div>
-                      <div class="time-ago">{{ formatCreatedAt(thread.created_at) }}</div> 
-                  </div>
-                  <div class="div-9">
-                      <!-- Separate each tag into its own div with # in front -->
-                      <div *ngFor="let tag of thread.tags" class="tag">
-                          #{{ tag }}
-                      </div>
-                  </div>
+        <a [routerLink]="['/threads', thread._id]" style="text-decoration: none;">
+          <div class="div-7">
+            <div class="div-8">
+              <div class="user-001">user: {{ getDisplayedUsername(thread) }}</div>
+              <div class="time-ago">{{ formatCreatedAt(thread.created_at) }}</div>
+            </div>
+            <div class="div-9">
+              <div *ngFor="let tag of thread.tags" class="tag">
+                #{{ tag }}
               </div>
-              <div class="post-title">{{ thread.title }}</div>
-              <div class="post-content">{{ truncateContent(thread.content) }}</div>
-          </a>
-          <div class="div-10">
-              <div class="div-11">
-                  <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/d7e7499a56be9b581e37d9a0bddb00227978dba8f8e63869f9048e4e4cbaf3bc?placeholderIfAbsent=true&apiKey=192ff7338de4457c8649492ee5300f1f" class="img-5" alt="Likes icon" />
-                  <div>{{ thread.likes }}</div>
-              </div>
-              <div class="div-12">
-                  <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/a7466bc6960d24a1c98c4d6c6809f81ffc65c56595a63787cda6cc957989b4c0?placeholderIfAbsent=true&apiKey=192ff7338de4457c8649492ee5300f1f" class="img-6" alt="Comments icon" />
-                  <div class="comments-count">{{ thread.comments }}</div>
-              </div>
-              <!-- Add Edit link conditionally -->
-              <ng-container *ngIf="canEdit(thread)">
-                  <a [routerLink]="['/edit-thread', thread._id]" class="action-button edit-button">Edit</a>
-              </ng-container>
+            </div>
           </div>
-      </li>
-  </ul>
-</div>
+          <div class="post-title">{{ thread.title }}</div>
+          <div class="post-content">{{ truncateContent(thread.content) }}</div>
+        </a>
+        <div class="div-10" style="position: relative;">
+            <div class="div-11">
+                <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/d7e7499a56be9b581e37d9a0bddb00227978dba8f8e63869f9048e4e4cbaf3bc?placeholderIfAbsent=true&apiKey=192ff7338de4457c8649492ee5300f1f" class="img-5" alt="Likes icon" />
+                <div>{{ thread.likes }}</div>
+            </div>
+            <div class="div-12">
+                <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/a7466bc6960d24a1c98c4d6c6809f81ffc65c56595a63787cda6cc957989b4c0?placeholderIfAbsent=true&apiKey=192ff7338de4457c8649492ee5300f1f" class="img-6" alt="Comments icon" />
+                <div class="comments-count">{{ thread.comments }}</div>
+            </div>
+            <!-- Show the expiration time if set -->
+            <div *ngIf="thread.expire_at" class="expire-at">{{ formatExpireAt(thread.expire_at) }}</div>
+            <!-- Add Edit link conditionally -->
+            <ng-container *ngIf="canEdit(thread)">
+                <a [routerLink]="['/edit-thread', thread._id]" class="action-button edit-button">Edit</a>
+            </ng-container>
+        </div>
+        
