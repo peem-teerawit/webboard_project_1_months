@@ -102,11 +102,16 @@ exports.deleteExpiredThreads = async () => {
             expire_at: { $lt: currentDate, $ne: null } // $ne: null excludes threads with no expiration date
         });
 
-        console.log(`Deleted ${result.deletedCount} expired threads.`);
+        if (result.deletedCount > 0) {
+            console.log(`Deleted ${result.deletedCount} expired thread(s).`);
+        } else {
+            console.log('There are no expired threads.');
+        }
     } catch (error) {
         console.error('Error deleting expired threads:', error);
     }
 };
+
 
 
 

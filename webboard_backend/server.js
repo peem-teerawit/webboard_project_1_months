@@ -25,11 +25,12 @@ app.use('/api/threads', threadRoutes);
 app.use('/api/replies', replyRoutes);
 // app.use('/api/analytics', analyticsRoutes);
 
-// Schedule a job to run every hour
-cron.schedule('0 * * * *', () => {
+// Schedule a job to run every 1 minutes
+cron.schedule('* * * * *', () => {
     console.log('Checking for expired threads...');
     deleteExpiredThreads(); // Call the function to delete expired threads
 });
+
 
 // Start the server
 app.listen(PORT, () => {
