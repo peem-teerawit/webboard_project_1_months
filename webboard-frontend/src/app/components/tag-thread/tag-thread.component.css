@@ -1,22 +1,23 @@
 :host {
     display: block; 
-  }
-  
-  .container {
+}
+
+.container {
     display: flex;
     justify-content: space-between;
     padding: 10px; 
     gap: 20px; 
     align-items: flex-start; 
+    max-width: 1200px; /* Set a max-width to limit how wide it can grow */
+    margin: 0 auto; /* Center the container */
 }
 
-  
 .thread-list {
     list-style-type: none;
     padding: 0;
-    width: 85%; /* เปลี่ยนขนาดให้เล็กลงเพื่อเพิ่มพื้นที่สำหรับ Trending */
+    width: 85%; /* Adjust size to create space for Trending */
 }
-  
+
 .post-container {
     border-radius: 10px;
     background-color: rgba(251, 248, 239, 1);
@@ -28,12 +29,12 @@
     flex-direction: column;
     transition: transform 0.3s;
 }
-  
-  .post-container:hover {
+
+.post-container:hover {
     transform: scale(1.02);
-  }
-  
-  .expire-at {
+}
+
+.expire-at {
     font-size: 14px;
     color: white; 
     background-color: rgba(255, 99, 71, 0.85); 
@@ -45,75 +46,75 @@
     text-align: center; 
     font-weight: bold;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
-  }
-  
-  .div-7 {
+}
+
+.div-7 {
     display: flex;
     justify-content: space-between; 
     align-items: center; 
     margin-bottom: 10px; 
-  }
-  
-  .div-8 {
+}
+
+.div-8 {
     display: flex;
     flex-direction: row; 
     gap: 10px;
     text-decoration: none;
-  }
-  
-  .user-001 {
+}
+
+.user-001 {
     font-weight: bold; 
-  }
-  
-  .time-ago {
+}
+
+.time-ago {
     color: rgba(97, 97, 97, 1);
     font-size: 14px;
-  }
-  
-  .div-9 {
+}
+
+.div-9 {
     display: flex;
     flex-wrap: wrap; 
     margin-top: 7px;
     gap: 2px;
-  }
-  
-  .tag {
+}
+
+.tag {
     background-color: #f7d11a; 
     color: #333; 
     padding: 5px 10px; 
     border-radius: 12px; 
     margin: 5px; 
     transition: background-color 0.3s; 
-  }
-  
-  .tag:hover {
+}
+
+.tag:hover {
     background-color: #eef691;
     cursor: pointer; 
-  }
-  
-  .post-title {
+}
+
+.post-title {
     font-size: 1.5em; 
     margin: 10px 0; 
     color: rgba(0, 0, 0, 0.85); 
     font-weight: bold;
-  }
-  
-  .post-content {
+}
+
+.post-content {
     color: rgba(0, 0, 0, 0.6); 
     margin: 10px 0; 
     white-space: normal; 
     word-break: break-word; 
     overflow-wrap: break-word; 
-  }
-  
-  .div-10 {
+}
+
+.div-10 {
     display: flex;
     justify-content: flex-start; 
     margin-top: 5px; 
     gap: 20px; 
-  }
-  
-  .create-thread-button {
+}
+
+.create-thread-button {
     margin-top: 20px; 
     padding: 10px 20px; 
     font-size: 1em; 
@@ -123,25 +124,25 @@
     border-radius: 5px; 
     cursor: pointer; 
     transition: background-color 0.3s; 
-  }
-  
-  .create-thread-button:hover {
+}
+
+.create-thread-button:hover {
     background-color: #3b47b3; 
-  }
-  
-  .action-link {
+}
+
+.action-link {
     color: #4e5ae8; 
     font-weight: bold; 
     text-decoration: none; 
     margin-left: 10px;
     transition: color 0.3s; 
-  }
-  
-  .action-link:hover {
+}
+
+.action-link:hover {
     color: #3b47b3; 
-  }
-  
-  .action-button {
+}
+
+.action-button {
     background-color: transparent;
     border: none;
     color: #4e5ae8;
@@ -150,15 +151,21 @@
     cursor: pointer;
     padding: 5px 10px;
     border-radius: 5px;
-  }
-  
-  .edit-button:hover {
+}
+
+.edit-button:hover {
     background-color: rgba(78, 90, 232, 0.1);
     color: rgb(132, 203, 26);
-  }
-  
+}
 
-  .trending-container {
+.trending-page {
+    top: 20px; 
+    margin-top: 20px; 
+    align-self: flex-start;
+    padding: 20px; /* Add padding to create space inside the section */
+}
+
+.trending-container {
     border-radius: 20px; 
     background: linear-gradient(135deg, #fbe170 0%, #f0d300 100%); 
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
@@ -166,14 +173,14 @@
     flex-direction: column;
     align-items: flex-start;
     padding: 12px;
-    margin-top: 20px;
+    margin-top: 20px; 
     margin: 15px; 
     width: 100%; 
-    max-width: 240px; 
+    max-width: 240px; /* This ensures the container doesn't stretch too wide */
     position: sticky;
     top: 20px;
+    box-sizing: border-box; /* Ensure padding is included in the width */
 }
-
 
 .trending-title {
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
@@ -181,12 +188,6 @@
     margin: 0 0 12px; 
     color: #3b47b3; 
     font-weight: bold; 
-}
-
-.trending-page {
-    top: 20px; 
-    margin-top: 20px; 
-    align-self: flex-start;
 }
 
 .topic-group {
