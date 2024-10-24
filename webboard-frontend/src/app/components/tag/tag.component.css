@@ -1,0 +1,91 @@
+.tag-list-container {
+    padding: 20px;
+    background-color: #fefaf5;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    max-width: 800px;
+    margin: 20px auto;
+  }
+  
+  .tag-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .tag-item {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .tag-item:hover {
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tag-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .tag-icon {
+    font-size: 24px;
+    color: #ff9800;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+  }
+  
+
+  .tag-info {
+    flex-grow: 1;
+  }
+  
+  .tag-name {
+    font-weight: 600;
+    font-size: 18px;
+    color: #333333;
+  }
+  
+  .tag-threads {
+    font-size: 14px;
+    color: #777777;
+    margin-top: 2px;
+  }
+  
+  .bookmark-icon {
+    font-size: 24px;
+    color: #999999;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .bookmark-icon:hover {
+    color: #ff9800;
+  }
+  
+  .section-title {
+    color: #192838;
+    font: 700 32px 'Inter', sans-serif;
+    margin-bottom: 40px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .section-title:after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: #f9e92f;
+    margin: 15px auto 0;
+    border-radius: 2px;
+  }

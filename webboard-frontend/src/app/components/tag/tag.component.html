@@ -1,13 +1,21 @@
-<div *ngIf="tagsWithCounts.length > 0; else noTags">
-    <h2>Tags Summary</h2>
-    <ul>
-      <li *ngFor="let tag of tagsWithCounts">
-        {{ tag._id }} ({{ tag.count }})
-      </li>
-    </ul>
-  </div>
-  
-  <ng-template #noTags>
-    <p>No tags available.</p>
-  </ng-template>
-  
+<div class="container thread-history-page">
+  <h2 class="section-title">Tags Summary </h2>
+
+<div class="tag-list-container">
+  <ul class="tag-list">
+    <li *ngFor="let tag of tagsWithCounts" class="tag-item">
+      <a [routerLink]="['/tag-thread', tag._id]" class="tag-content"> 
+        <div class="tag-icon">
+          <i class="fas fa-tag"></i> 
+        </div>
+        <div class="tag-info">
+          <div class="tag-name">{{ tag._id }}</div>
+          <div class="tag-threads">({{ tag.count }} threads)</div>
+        </div>
+        <div class="bookmark-icon">
+          <i class="far fa-bookmark"></i> 
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>

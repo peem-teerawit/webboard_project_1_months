@@ -12,8 +12,8 @@ export class TagThreadComponent implements OnInit {
   threads: any[] = [];
   tag: string | null = null;
   currentUsername: string | null;
-  threadCount: number = 0; // Add a property for thread count
-  
+  threadCount: number = 0; 
+
   constructor(private apiService: ApiService, private route: ActivatedRoute) {
     this.currentUsername = localStorage.getItem('username');
   }
@@ -30,13 +30,14 @@ export class TagThreadComponent implements OnInit {
   loadThreadsByTag(tag: string): void {
     this.apiService.getThreadsByTag(tag).subscribe(
       (data) => {
+        // Sorting threads by creation date in descending order
         this.threads = data.sort((a: any, b: any) => {
           return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
         });
-        this.threadCount = this.threads.length; // Set thread count based on the retrieved threads
+        this.threadCount = this.threads.length; 
       },
       (error) => {
-        console.error('Error loading threads by tag', error);
+        console.error('Error loading threads by tag:', error);
       }
     );
   }
@@ -55,11 +56,11 @@ export class TagThreadComponent implements OnInit {
   }
 
   canEdit(thread: any): boolean {
-    return thread.user_name === this.currentUsername;
+    return thread.user_name === this.currentUsername; 
   }
 
   getDisplayedUsername(thread: any): string {
-    return thread.is_anonymous ? 'anonymous' : thread.user_name;
+    return thread.is_anonymous ? 'anonymous' : thread.user_name; 
   }
 
   truncateContent(content: string): string {
@@ -68,7 +69,7 @@ export class TagThreadComponent implements OnInit {
     const combinedWords = [...new Set([...englishWords, ...thaiWords])];
 
     if (combinedWords.length > 20) {
-      return combinedWords.slice(0, 20).join(' ') + '...';
+      return combinedWords.slice(0, 20).join(' ') + '...'; 
     }
     return content;
   }
