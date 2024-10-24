@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-thread-detail',
@@ -12,8 +13,8 @@ export class ThreadDetailComponent implements OnInit, OnDestroy {
   replies: any[] = [];
   replyContent: string = '';
   isAnonymous: boolean = false;
-  recognition: any; // SpeechRecognition object
-  isListening: boolean = false; // To track whether the recognition is active
+  recognition: any; 
+  isListening: boolean = false; 
 
   constructor(private route: ActivatedRoute, private apiService: ApiService, private zone: NgZone) {}
 
@@ -22,7 +23,7 @@ export class ThreadDetailComponent implements OnInit, OnDestroy {
     this.apiService.getThread(id!).subscribe(
       (data) => {
         this.thread = data;
-        this.loadReplies(id!); // Load replies after fetching the thread
+        this.loadReplies(id!);
       },
       (error) => {
         console.error('Error loading thread detail', error);
@@ -32,9 +33,9 @@ export class ThreadDetailComponent implements OnInit, OnDestroy {
     // Initialize SpeechRecognition API
     const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
     this.recognition = new SpeechRecognition();
-    this.recognition.lang = 'th-TH'; // Set recognition language to Thai
-    this.recognition.continuous = true; // Keep recognizing speech continuously
-    this.recognition.interimResults = true; // Get interim results
+    this.recognition.lang = 'th-TH';
+    this.recognition.continuous = true; 
+    this.recognition.interimResults = true; 
 
     // Handle speech result
     this.recognition.onresult = (event: any) => {
@@ -42,13 +43,12 @@ export class ThreadDetailComponent implements OnInit, OnDestroy {
       for (let i = event.resultIndex; i < event.results.length; i++) {
         if (event.results[i].isFinal) {
           this.zone.run(() => {
-            this.replyContent += event.results[i][0].transcript + ' '; // Add space for separation
+            this.replyContent += event.results[i][0].transcript + ' ';
           });
         } else {
-          interimTranscript += event.results[i][0].transcript; // Add interim result
+          interimTranscript += event.results[i][0].transcript;
         }
       }
-      // Optional: Log interim results to the console for debugging
       console.log('Interim transcript:', interimTranscript);
     };
 
@@ -68,21 +68,21 @@ export class ThreadDetailComponent implements OnInit, OnDestroy {
   loadReplies(threadId: string) {
     this.apiService.getRepliesByThreadId(threadId).subscribe(
       (data) => {
-        this.replies = data; // Assign the replies to the replies property
+        this.replies = data; 
       },
       (error) => {
         console.error('Error loading replies', error);
       }
-    );   
+    );
   }
 
   // Method to create a reply
   createReply() {
-    const threadId = this.thread._id; // Assuming thread ID is available
+    const threadId = this.thread._id; 
     this.apiService.createReply(threadId, this.replyContent, this.isAnonymous).subscribe(
       (data) => {
-        this.replies.push(data); // Add the new reply to the replies list
-        this.replyContent = ''; // Clear the input field
+        this.replies.push(data);
+        this.replyContent = ''; 
       },
       (error) => {
         console.error('Error creating reply', error);
@@ -92,7 +92,7 @@ export class ThreadDetailComponent implements OnInit, OnDestroy {
 
   // Modify the reply display method to show "Anonymous" if reply is anonymous
   getReplyDisplayName(reply: any): string {
-    return reply.is_anonymous ? 'Anonymous' : reply.user_name; // Show "Anonymous" if is_anonymous is true
+    return reply.is_anonymous ? 'Anonymous' : reply.user_name; 
   }
 
   // Start or stop speech recognition
@@ -103,5 +103,14 @@ export class ThreadDetailComponent implements OnInit, OnDestroy {
       this.recognition.start();
     }
     this.isListening = !this.isListening;
+  }
+
+  // New method to format expireAt
+  formatExpireAt(expireAt: string | null): string {
+    if (expireAt) {
+      const date = new Date(expireAt);
+      return `Expires on: ${format(date, 'MMMM dd, yyyy HH:mm')}`;
+    }
+    return '';
   }
 }

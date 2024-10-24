@@ -12,6 +12,8 @@
       <div class="post-tags">
         <span *ngFor="let tag of thread?.tags" class="tag">#{{ tag }}</span>
       </div>
+      <div *ngIf="thread.expire_at" class="expire-at right-aligned">{{ formatExpireAt(thread.expire_at) }}</div>
+
     </li>
   </ul>
 

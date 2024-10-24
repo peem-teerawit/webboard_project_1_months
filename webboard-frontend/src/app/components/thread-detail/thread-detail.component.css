@@ -280,3 +280,32 @@
 .post-reply:hover {
     background-color: #fade1a;
 }
+
+.expire-at {
+    background-color: #fe7960;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: 1px solid #d9534f;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 10px;
+    width: fit-content;
+    margin-left: auto; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.expire-at::before {
+    content: "Expires on:";
+    font-weight: 600;
+    margin-right: 8px;
+    color:white;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: white;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 2px 0;
+}
