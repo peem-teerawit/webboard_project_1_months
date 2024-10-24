@@ -75,7 +75,9 @@ export class ApiService {
     return this.http.get<any[]>(`${this.baseUrl}/threads/tags/${tag}`);
   }
 
-
-
+    // Fetch tags summary with counts
+  getTagsSummary(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/threads/tags-summary`);
+  }
 
 }

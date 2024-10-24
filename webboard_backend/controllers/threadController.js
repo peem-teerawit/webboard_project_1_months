@@ -129,6 +129,7 @@ exports.deleteExpiredThreads = async () => {
 exports.getThreadsByTag = async (req, res) => {
     try {
         const tag = req.params.tag;
+        console.log(`Searching for threads with tag: ${tag}`);
 
         // Find threads that contain the specified tag in the 'tags' array
         const threadsWithTag = await Thread.find({ tags: tag });
@@ -136,17 +137,37 @@ exports.getThreadsByTag = async (req, res) => {
         if (threadsWithTag.length > 0) {
             res.json(threadsWithTag);
         } else {
+            console.log(`No threads found for tag: ${tag}`);
             res.status(404).json({ message: 'No threads found with the specified tag' });
         }
     } catch (error) {
+        console.error('Error retrieving threads by tag:', error);
         res.status(500).json({ message: 'Error retrieving threads by tag', error });
     }
 };
 
 
+// Get all tags and their counts
+exports.getAllTagsWithCounts = async (req, res) => {
+    try {
+        // Use aggregation to unwind the tags array and count occurrences of each tag
+        const tagsWithCounts = await Thread.aggregate([
+            { $unwind: "$tags" }, // Decompose the tags array into individual tags
+            { $group: { _id: "$tags", count: { $sum: 1 } } }, // Group by each tag and count occurrences
+            { $sort: { count: -1 } } // Sort by count in descending order
+        ]);
 
+        // Check if no tags are found
+        if (tagsWithCounts.length === 0) {
+            return res.status(404).json({ message: 'No tags found' });
+        }
 
-
+        // Return the tags with counts
+        res.json(tagsWithCounts);
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving tags with counts', error });
+    }
+};
 
 
 

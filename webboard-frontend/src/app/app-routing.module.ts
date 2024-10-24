@@ -8,6 +8,7 @@ import { CreateThreadComponent } from './components/create-thread/create-thread.
 import { ThreadHistoryComponent } from './components/thread-history/thread-history.component';
 import { EditThreadComponent } from './components/edit-thread/edit-thread.component';
 import { TagThreadComponent } from './components/tag-thread/tag-thread.component';
+import { TagComponent } from './components/tag/tag.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/threads', pathMatch: 'full' },
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'edit-thread/:id', component: EditThreadComponent },
   { path: 'threads/edit/:id', component: EditThreadComponent },
   { path: 'thread-detail/:id', component: ThreadDetailComponent },
-  {path: "tag-thread/:tags", component:TagThreadComponent}
+  {path: "tag-thread/:tags", component:TagThreadComponent},
+  {path:"tags-summary", component:TagComponent}
 ];
 
 @NgModule({

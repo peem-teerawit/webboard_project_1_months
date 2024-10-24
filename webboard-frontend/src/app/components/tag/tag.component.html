@@ -1,1 +1,13 @@
-<p>tag works!</p>
+<div *ngIf="tagsWithCounts.length > 0; else noTags">
+    <h2>Tags Summary</h2>
+    <ul>
+      <li *ngFor="let tag of tagsWithCounts">
+        {{ tag._id }} ({{ tag.count }})
+      </li>
+    </ul>
+  </div>
+  
+  <ng-template #noTags>
+    <p>No tags available.</p>
+  </ng-template>
+  
