@@ -1,0 +1,211 @@
+:host {
+    display: block; 
+  }
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px; 
+    gap: 20px; 
+    align-items: flex-start; 
+}
+
+  
+.thread-list {
+    list-style-type: none;
+    padding: 0;
+    width: 85%; /* เปลี่ยนขนาดให้เล็กลงเพื่อเพิ่มพื้นที่สำหรับ Trending */
+}
+  
+.post-container {
+    border-radius: 10px;
+    background-color: rgba(251, 248, 239, 1);
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid rgba(188, 188, 188, 0.5);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s;
+}
+  
+  .post-container:hover {
+    transform: scale(1.02);
+  }
+  
+  .expire-at {
+    font-size: 14px;
+    color: white; 
+    background-color: rgba(255, 99, 71, 0.85); 
+    padding: 5px 10px; 
+    border-radius: 15px; 
+    position: absolute;
+    right: 0; 
+    top: 10px; 
+    text-align: center; 
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+  }
+  
+  .div-7 {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 10px; 
+  }
+  
+  .div-8 {
+    display: flex;
+    flex-direction: row; 
+    gap: 10px;
+    text-decoration: none;
+  }
+  
+  .user-001 {
+    font-weight: bold; 
+  }
+  
+  .time-ago {
+    color: rgba(97, 97, 97, 1);
+    font-size: 14px;
+  }
+  
+  .div-9 {
+    display: flex;
+    flex-wrap: wrap; 
+    margin-top: 7px;
+    gap: 2px;
+  }
+  
+  .tag {
+    background-color: #f7d11a; 
+    color: #333; 
+    padding: 5px 10px; 
+    border-radius: 12px; 
+    margin: 5px; 
+    transition: background-color 0.3s; 
+  }
+  
+  .tag:hover {
+    background-color: #eef691;
+    cursor: pointer; 
+  }
+  
+  .post-title {
+    font-size: 1.5em; 
+    margin: 10px 0; 
+    color: rgba(0, 0, 0, 0.85); 
+    font-weight: bold;
+  }
+  
+  .post-content {
+    color: rgba(0, 0, 0, 0.6); 
+    margin: 10px 0; 
+    white-space: normal; 
+    word-break: break-word; 
+    overflow-wrap: break-word; 
+  }
+  
+  .div-10 {
+    display: flex;
+    justify-content: flex-start; 
+    margin-top: 5px; 
+    gap: 20px; 
+  }
+  
+  .create-thread-button {
+    margin-top: 20px; 
+    padding: 10px 20px; 
+    font-size: 1em; 
+    background-color: #4e5ae8; 
+    color: white;
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+  }
+  
+  .create-thread-button:hover {
+    background-color: #3b47b3; 
+  }
+  
+  .action-link {
+    color: #4e5ae8; 
+    font-weight: bold; 
+    text-decoration: none; 
+    margin-left: 10px;
+    transition: color 0.3s; 
+  }
+  
+  .action-link:hover {
+    color: #3b47b3; 
+  }
+  
+  .action-button {
+    background-color: transparent;
+    border: none;
+    color: #4e5ae8;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .edit-button:hover {
+    background-color: rgba(78, 90, 232, 0.1);
+    color: rgb(132, 203, 26);
+  }
+  
+
+  .trending-container {
+    border-radius: 20px; 
+    background: linear-gradient(135deg, #fbe170 0%, #f0d300 100%); 
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px;
+    margin-top: 20px;
+    margin: 15px; 
+    width: 100%; 
+    max-width: 240px; 
+    position: sticky;
+    top: 20px;
+}
+
+
+.trending-title {
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+    font-size: 28px; 
+    margin: 0 0 12px; 
+    color: #3b47b3; 
+    font-weight: bold; 
+}
+
+.trending-page {
+    top: 20px; 
+    margin-top: 20px; 
+    align-self: flex-start;
+}
+
+.topic-group {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 8px; 
+    margin-top: 8px; 
+}
+
+.topic-tag {
+    background: linear-gradient(135deg, rgba(210, 32, 32, 0.1) 0%, rgba(232, 158, 78, 0.3) 100%); 
+    border-radius: 20px; 
+    padding: 8px 12px; 
+    font-size: 14px;
+    color: red; 
+    box-shadow: 0 1px 3px rgba(212, 104, 104, 0.1); 
+    transition: background 0.3s; 
+}
+
+.topic-tag:hover {
+    background: linear-gradient(135deg, rgba(232, 104, 78, 0.2) 0%, rgba(199, 57, 41, 0.4) 100%); 
+}
