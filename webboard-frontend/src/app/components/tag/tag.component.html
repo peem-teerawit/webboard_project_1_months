@@ -4,7 +4,7 @@
 <div class="tag-list-container">
   <ul class="tag-list">
     <li *ngFor="let tag of tagsWithCounts" class="tag-item">
-      <a [routerLink]="['/tag-thread', tag._id]" class="tag-content"> 
+      <a [routerLink]="['/tag-thread', tag._id]" class="tag-content" style="text-decoration: none;"> 
         <div class="tag-icon">
           <i class="fas fa-tag"></i> 
         </div>
