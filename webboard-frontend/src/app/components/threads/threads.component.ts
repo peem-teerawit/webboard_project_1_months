@@ -70,15 +70,12 @@ export class ThreadsComponent implements OnInit {
   }
 
   truncateContent(content: string): string {
-    const englishWords = content.match(/\w+('\w+)?/g) || [];
-    const thaiWords = content.match(/[\u0E00-\u0E7F]+/g) || [];
+    const maxLength = 100;
 
-    const combinedWords = [...new Set([...englishWords, ...thaiWords])];
-
-    if (combinedWords.length > 20) {
-      return combinedWords.slice(0, 20).join(' ') + '...';
+    if (content.length > maxLength) {
+      return content.substring(0, maxLength) + '...'; 
     }
-    return content;
+    return content; 
   }
 
   canEdit(thread: any): boolean {
