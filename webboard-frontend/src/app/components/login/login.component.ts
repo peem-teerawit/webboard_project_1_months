@@ -28,6 +28,8 @@ export class LoginComponent {
         (response: any) => {
           localStorage.setItem('token', response.token);
           localStorage.setItem('username', this.username);
+          // localStorage.setItem('userId', response.userId);
+          localStorage.setItem('role', response.role);
           this.router.navigate(['/threads']).then(() => {
             window.location.reload();
           });

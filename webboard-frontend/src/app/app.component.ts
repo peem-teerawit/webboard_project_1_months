@@ -30,6 +30,8 @@ export class AppComponent implements OnInit {
     this.loading = true; 
     localStorage.removeItem('token');
     localStorage.removeItem('username');
+    localStorage.removeItem('role');
+    // localStorage.removeItem('userId');
     this.token = null; 
     this.username = null;
     this.closeDropdown();
