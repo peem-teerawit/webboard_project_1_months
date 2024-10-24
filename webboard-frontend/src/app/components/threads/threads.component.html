@@ -39,7 +39,7 @@
       <div class="trending-container">
         <h2 class="trending-title">Trending Tags #</h2>
         <div class="topic-group" *ngIf="trendingTags.length">
-          <span class="topic-tag" *ngFor="let tag of trendingTags">#{{ tag }}</span>
+          <a [routerLink]="['/tag-thread', tag]" class="topic-tag" *ngFor="let tag of trendingTags">#{{ tag }}</a>
         </div>
       </div>
     </section>

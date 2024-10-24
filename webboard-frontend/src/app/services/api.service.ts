@@ -71,7 +71,9 @@ export class ApiService {
     return this.http.put(`${this.baseUrl}/threads/${threadId}`, threadData, { headers });
   }
   
-  
+  getThreadsByTag(tag: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/threads/tags/${tag}`);
+  }
 
 
 

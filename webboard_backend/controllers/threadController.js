@@ -125,6 +125,27 @@ exports.deleteExpiredThreads = async () => {
     }
 };
 
+// Get threads by tag
+exports.getThreadsByTag = async (req, res) => {
+    try {
+        const tag = req.params.tag;
+
+        // Find threads that contain the specified tag in the 'tags' array
+        const threadsWithTag = await Thread.find({ tags: tag });
+
+        if (threadsWithTag.length > 0) {
+            res.json(threadsWithTag);
+        } else {
+            res.status(404).json({ message: 'No threads found with the specified tag' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving threads by tag', error });
+    }
+};
+
+
+
+
 
 
 

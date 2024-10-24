@@ -1,1 +1,12 @@
-<p>tag-thread works!</p>
+<div class="container">
+    <h2>Threads tagged with: #{{ tag }}</h2>
+    <ul class="thread-list">
+      <li *ngFor="let thread of threads" class="post-container">
+        <a [routerLink]="['/threads', thread._id]" style="text-decoration: none;">
+          <div class="post-title">{{ thread.title }}</div>
+          <div class="post-content">{{ truncateContent(thread.content) }}</div>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
