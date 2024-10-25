@@ -60,6 +60,20 @@ export class ThreadsComponent implements OnInit {
     return formatDistanceToNow(date, { addSuffix: true });
   }
 
+  toggleLike(thread: any): void {
+    if (typeof thread.likes !== 'number') {
+      thread.likes = 0; 
+    }
+  
+    thread.isLiked = !thread.isLiked; 
+  
+    if (thread.isLiked) {
+      thread.likes++; 
+    } else {
+      thread.likes--; 
+    }
+  }
+
   // Method to format the expire_at timestamp
   formatExpireAt(expireAt: string | null): string {
     if (expireAt) {
@@ -86,3 +100,4 @@ export class ThreadsComponent implements OnInit {
     return thread.is_anonymous ? 'anonymous' : thread.user_name;
   }
 }
+
