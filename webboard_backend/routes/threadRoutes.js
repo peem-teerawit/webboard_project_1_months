@@ -22,12 +22,12 @@ router.get('/user/threads', authMiddleware, getThreadsByUsername);
 router.get('/tags/:tag', getThreadsByTag);
 router.get('/popular-thread', getPopularThreads);
 
-// Add a route for getting threads liked by the user, before the ID-based route
+//getting threads liked by the user
 router.get('/liked', authMiddleware, getUserLikedThreads);
 
 router.post('/:threadId/like', authMiddleware, likeThread);
 router.post('/:threadId/unlike', authMiddleware, unlikeThread);
-router.get('/:id', getThreadById); // Ensure this is placed after `/liked`
+router.get('/:id', getThreadById);
 router.put('/:id', authMiddleware, updateThread);
 router.delete('/:id', authMiddleware, deleteThread);
 router.get('/', getAllThreads);
