@@ -14,7 +14,7 @@
 .thread-list {
     list-style-type: none;
     padding: 0;
-    width: 85%; /* เปลี่ยนขนาดให้เล็กลงเพื่อเพิ่มพื้นที่สำหรับ Trending */
+    width: 85%; 
 }
   
 .post-container {
