@@ -24,13 +24,31 @@ exports.createThread = async (req, res) => {
     }
 };
 
-// Get all threads
+// Get all threads with reply counts
 exports.getAllThreads = async (req, res) => {
     try {
-        const threads = await Thread.find().exec(); // Removed populate
+        const threads = await Thread.aggregate([
+            {
+                $lookup: {
+                    from: 'replies', // Ensure this matches your replies collection name
+                    localField: '_id',
+                    foreignField: 'thread_id',
+                    as: 'replies'
+                }
+            },
+            {
+                $addFields: {
+                    comments: { $size: "$replies" } // Add 'comments' as the count of replies
+                }
+            },
+            {
+                $project: { replies: 0 } // Optional: exclude the replies array itself if not needed
+            }
+        ]);
+
         res.json(threads);
     } catch (error) {
-        res.status(500).json({ message: 'Error retrieving threads', error });
+        res.status(500).json({ message: 'Error retrieving threads with reply counts', error });
     }
 };
 

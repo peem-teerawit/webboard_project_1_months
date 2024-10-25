@@ -113,4 +113,6 @@ export class ThreadDetailComponent implements OnInit, OnDestroy {
     }
     return '';
   }
+
+  
 }

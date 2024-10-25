@@ -32,7 +32,7 @@ export class ThreadsComponent implements OnInit {
         console.error('Error loading threads', error);
       }
     );
-  }
+  }  
 
   extractTrendingTags() {
     const tagCount: { [key: string]: number } = {};

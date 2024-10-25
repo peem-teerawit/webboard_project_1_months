@@ -14,6 +14,7 @@ import { TagThreadComponent } from './components/tag-thread/tag-thread.component
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ThreadHistoryComponent } from './components/thread-history/thread-history.component';
+import { PopularThreadComponent } from './components/popular-thread/popular-thread.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ThreadHistoryComponent } from './components/thread-history/thread-histo
     EditThreadComponent,
     TagComponent,
     TagThreadComponent,
-    ThreadHistoryComponent
+    ThreadHistoryComponent,
+    PopularThreadComponent
   ],
   imports: [
     BrowserModule,
