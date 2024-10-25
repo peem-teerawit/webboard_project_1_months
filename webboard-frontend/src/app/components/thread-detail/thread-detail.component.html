@@ -10,8 +10,11 @@
       <h2 class="post-title">{{ thread?.title }}</h2>
       <p class="post-content">{{ thread?.content }}</p>
       <div class="post-tags">
-        <span *ngFor="let tag of thread?.tags" class="tag">#{{ tag }}</span>
+        <span *ngFor="let tag of thread?.tags" class="tag">
+          <a [routerLink]="['/tag-thread', tag]" class="tag-link">#{{ tag }}</a>
+        </span>
       </div>
+      
       <div *ngIf="thread.expire_at" class="expire-at right-aligned">{{ formatExpireAt(thread.expire_at) }}</div>
 
     </li>
