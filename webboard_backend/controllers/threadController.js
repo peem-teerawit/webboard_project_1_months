@@ -85,14 +85,17 @@ exports.getPopularThreads = async (req, res) => {
     }
 };
 
-
 // Get a thread by ID
 exports.getThreadById = async (req, res) => {
-    const thread = await Thread.findById(req.params.id).populate('user_id', 'username').exec();
-    if (thread) {
-        res.json(thread);
-    } else {
-        res.status(404).json({ message: 'Thread not found' });
+    try {
+        const thread = await Thread.findById(req.params.id).populate('user_id', 'username').exec();
+        if (thread) {
+            res.json(thread);
+        } else {
+            res.status(404).json({ message: 'Thread not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving thread', error });
     }
 };
 
@@ -119,7 +122,7 @@ exports.deleteThread = async (req, res) => {
     try {
         const thread = await Thread.findById(req.params.id);
         if (thread && String(thread.user_id) === req.user.id) {
-            await Thread.findByIdAndDelete(req.params.id); // Use findByIdAndDelete
+            await Thread.findByIdAndDelete(req.params.id);
             res.json({ message: 'Thread deleted successfully' });
         } else {
             res.status(403).json({ message: 'Unauthorized to delete this thread' });
@@ -132,9 +135,8 @@ exports.deleteThread = async (req, res) => {
 // Get all threads by a specific username
 exports.getThreadsByUsername = async (req, res) => {
     try {
-        const username = req.user.username; // Assuming username is available in req.user (from JWT token)
+        const username = req.user.username;
 
-        // Find all threads where the user_name matches the logged-in user's username
         const userThreads = await Thread.find({ user_name: username });
 
         res.json(userThreads);
@@ -146,23 +148,19 @@ exports.getThreadsByUsername = async (req, res) => {
 // Delete expired threads and their replies
 exports.deleteExpiredThreads = async () => {
     try {
-        // Get the current date
         const currentDate = new Date();
 
-        // Find threads where expire_at is less than the current date and not null
         const expiredThreads = await Thread.find({
             expire_at: { $lt: currentDate, $ne: null }
         });
 
         if (expiredThreads.length > 0) {
-            const threadIds = expiredThreads.map(thread => thread._id); // Collect the thread IDs of expired threads
+            const threadIds = expiredThreads.map(thread => thread._id);
 
-            // Delete the expired threads
             const threadResult = await Thread.deleteMany({
                 _id: { $in: threadIds }
             });
 
-            // Delete replies related to the expired threads
             const replyResult = await Reply.deleteMany({
                 thread_id: { $in: threadIds }
             });
@@ -182,7 +180,6 @@ exports.getThreadsByTag = async (req, res) => {
         const tag = req.params.tag;
         console.log(`Searching for threads with tag: ${tag}`);
 
-        // Find threads that contain the specified tag in the 'tags' array
         const threadsWithTag = await Thread.find({ tags: tag });
 
         if (threadsWithTag.length > 0) {
@@ -197,28 +194,73 @@ exports.getThreadsByTag = async (req, res) => {
     }
 };
 
-
 // Get all tags and their counts
 exports.getAllTagsWithCounts = async (req, res) => {
     try {
-        // Use aggregation to unwind the tags array and count occurrences of each tag
         const tagsWithCounts = await Thread.aggregate([
-            { $unwind: "$tags" }, // Decompose the tags array into individual tags
-            { $group: { _id: "$tags", count: { $sum: 1 } } }, // Group by each tag and count occurrences
-            { $sort: { count: -1 } } // Sort by count in descending order
+            { $unwind: "$tags" },
+            { $group: { _id: "$tags", count: { $sum: 1 } } },
+            { $sort: { count: -1 } }
         ]);
 
-        // Check if no tags are found
         if (tagsWithCounts.length === 0) {
             return res.status(404).json({ message: 'No tags found' });
         }
 
-        // Return the tags with counts
         res.json(tagsWithCounts);
     } catch (error) {
         res.status(500).json({ message: 'Error retrieving tags with counts', error });
     }
 };
 
+// Like a thread
+exports.likeThread = async (req, res) => {
+    try {
+        const thread = await Thread.findById(req.params.threadId);
+        if (!thread) {
+            return res.status(404).json({ message: 'Thread not found' });
+        }
 
+        if (!thread.liked_by.includes(req.user.id)) {
+            thread.likes++;
+            thread.liked_by.push(req.user.id);
+            await thread.save();
+            return res.status(200).json(thread);
+        }
 
+        res.status(400).json({ message: 'User already liked this thread' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error liking thread', error });
+    }
+};
+
+// Unlike a thread
+exports.unlikeThread = async (req, res) => {
+    try {
+        const thread = await Thread.findById(req.params.threadId);
+        if (!thread) {
+            return res.status(404).json({ message: 'Thread not found' });
+        }
+
+        if (thread.liked_by.includes(req.user.id)) {
+            thread.likes--;
+            thread.liked_by = thread.liked_by.filter(userId => userId.toString() !== req.user.id);
+            await thread.save();
+            return res.status(200).json(thread);
+        }
+
+        res.status(400).json({ message: 'User has not liked this thread' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error unliking thread', error });
+    }
+};
+
+// Get liked threads for the current user
+exports.getUserLikedThreads = async (req, res) => {
+    try {
+        const threads = await Thread.find({ liked_by: req.user.id });
+        res.json(threads);
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving liked threads', error });
+    }
+};

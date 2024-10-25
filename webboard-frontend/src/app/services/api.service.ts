@@ -38,7 +38,6 @@ export class ApiService {
     return this.http.get<any[]>(`${this.baseUrl}/replies?thread_id=${threadId}`);
   }
 
-
   createReply(threadId: string, content: string, isAnonymous: boolean): Observable<any> {
     const token = localStorage.getItem('token'); // Get the token from local storage
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`); // Set the token in the headers
@@ -75,7 +74,7 @@ export class ApiService {
     return this.http.get<any[]>(`${this.baseUrl}/threads/tags/${tag}`);
   }
 
-    // Fetch tags summary with counts
+  // Fetch tags summary with counts
   getTagsSummary(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/threads/tags-summary`);
   }
@@ -84,4 +83,27 @@ export class ApiService {
   getPopularThreads(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/threads/popular-thread`);
   }
+
+  // Like a thread
+  likeThread(threadId: string): Observable<any> {
+    const token = localStorage.getItem('token'); // Get the token from local storage
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`); // Set the token in the headers
+    return this.http.post(`${this.baseUrl}/threads/${threadId}/like`, {}, { headers });
+  }
+
+  // Unlike a thread
+  unlikeThread(threadId: string): Observable<any> {
+    const token = localStorage.getItem('token'); // Get the token from local storage
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`); // Set the token in the headers
+    return this.http.post(`${this.baseUrl}/threads/${threadId}/unlike`, {}, { headers });
+  }
+
+  // Fetch threads liked by the user
+  getUserLikedThreads(): Observable<any[]> {
+    const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`); // Set the token in headers
+
+    return this.http.get<any[]>(`${this.baseUrl}/threads/liked`, { headers }); // Send the GET request with headers
+  }
+
 }

@@ -36,7 +36,9 @@ export class AppComponent implements OnInit {
     this.username = null;
     this.closeDropdown();
     await new Promise(resolve => setTimeout(resolve, 1000));
-    this.router.navigate(['/threads']); 
+    this.router.navigate(['/threads']).then(() => {
+      window.location.reload();
+    });
     this.loading = false; 
   }
 

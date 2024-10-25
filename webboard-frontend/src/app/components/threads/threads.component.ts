@@ -23,17 +23,22 @@ export class ThreadsComponent implements OnInit {
   loadThreads() {
     this.apiService.getThreads().subscribe(
       (data) => {
+        // Initialize threads with actual like counts from backend
         this.threads = data.sort((a: any, b: any) => {
           return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-        });
-        this.loadLikedThreads(); // เรียกใช้ฟังก์ชันนี้ที่นี่
+        }).map(thread => ({
+          ...thread,
+          isLiked: false // Initialize isLiked to false; likes count from backend
+        }));
+
+        this.loadLikedThreads(); // Load liked threads on init
         this.extractTrendingTags();  
       },
       (error) => {
         console.error('Error loading threads', error);
       }
     );
-  }  
+  } 
 
   extractTrendingTags() {
     const tagCount: { [key: string]: number } = {};
@@ -48,7 +53,7 @@ export class ThreadsComponent implements OnInit {
     // Sort tags by their count and take the top 7
     this.trendingTags = Object.entries(tagCount)
       .sort((a, b) => b[1] - a[1])  
-      .slice(0, 7)                  
+      .slice(0, 7)                   
       .map(entry => entry[0]);       
   }
 
@@ -58,22 +63,29 @@ export class ThreadsComponent implements OnInit {
   }
 
   toggleLike(thread: any): void {
-    // Initialize likes if not present
-    if (typeof thread.likes !== 'number') {
-      thread.likes = 0; 
-    }
-
-    // Toggle like status
-    thread.isLiked = !thread.isLiked; 
-
+    // Check if the user has already liked the thread
     if (thread.isLiked) {
-      thread.likes++; 
-    } else {
-      thread.likes--; 
-    }
+      // User is unliking the thread
+      thread.likes--;
+      thread.isLiked = false;
 
-    // Update the local storage with the liked threads
-    this.updateLocalStorage();
+      // Optionally, send a request to the backend to remove the like
+      this.apiService.unlikeThread(thread._id).subscribe(
+        () => console.log('Thread unliked'),
+        (error) => console.error('Error unliking thread', error)
+      );
+    } else {
+      // User is liking the thread
+      thread.likes++;
+      thread.isLiked = true;
+
+      // Send a request to the backend to like the thread
+      this.apiService.likeThread(thread._id).subscribe(
+        () => console.log('Thread liked'),
+        (error) => console.error('Error liking thread', error)
+      );
+    }
+    this.updateLocalStorage(); // Update local storage after toggling like
   }
 
   updateLocalStorage(): void {
@@ -83,28 +95,36 @@ export class ThreadsComponent implements OnInit {
       likes: thread.likes
     }));
 
+    console.log('Saving liked threads to localStorage:', likedThreads);
     localStorage.setItem('likedThreads', JSON.stringify(likedThreads));
   }
 
   loadLikedThreads(): void {
-    const likedThreads = localStorage.getItem('likedThreads');
-
-    if (likedThreads) {
-      const parsedThreads = JSON.parse(likedThreads);
-
-      // Update isLiked status and likes count for each thread
-      this.threads.forEach(thread => {
-        const likedThread = parsedThreads.find((t: any) => t.id === thread._id);
-        if (likedThread) {
-          thread.isLiked = likedThread.isLiked;
-          thread.likes = likedThread.likes; 
-        } else {
-          thread.isLiked = false;
-          thread.likes = 0;
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.apiService.getUserLikedThreads().subscribe(
+        (likedThreads) => {
+          // Update isLiked status for each thread based on liked threads
+          this.threads.forEach(thread => {
+            const likedThread = likedThreads.find((t: any) => t._id === thread._id);
+            if (likedThread) {
+              thread.isLiked = true;
+              thread.likes = likedThread.likes; // Use the like count from liked threads if available
+            }
+          });
+        },
+        (error) => {
+          console.error('Error loading liked threads', error);
         }
+      );
+    } else {
+      // No token means user is logged out, so only reset isLiked flag, not likes count
+      this.threads.forEach(thread => {
+        thread.isLiked = false;
       });
     }
   }
+
 
   // Method to format the expire_at timestamp
   formatExpireAt(expireAt: string | null): string {
