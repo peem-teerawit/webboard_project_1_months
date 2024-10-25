@@ -52,6 +52,39 @@ exports.getAllThreads = async (req, res) => {
     }
 };
 
+// Get popular threads
+exports.getPopularThreads = async (req, res) => {
+    try {
+        const threads = await Thread.aggregate([
+            {
+                $lookup: {
+                    from: 'replies',
+                    localField: '_id',
+                    foreignField: 'thread_id',
+                    as: 'replies'
+                }
+            },
+            {
+                $addFields: {
+                    comments: { $size: "$replies" }
+                }
+            },
+            {
+                $sort: { comments: -1 } // Sort by most comments
+            },
+            {
+                $limit: 5 // Limit the result to top 5 threads
+            },
+            {
+                $project: { replies: 0 }
+            }
+        ]);
+        res.json(threads);
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving popular threads', error });
+    }
+};
+
 
 // Get a thread by ID
 exports.getThreadById = async (req, res) => {

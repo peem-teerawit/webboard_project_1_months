@@ -1,1 +1,14 @@
-<p>popular-thread works!</p>
+<div *ngIf="popularThreads.length > 0; else noThreads">
+    <h2>Popular Threads</h2>
+    <div *ngFor="let thread of popularThreads" class="thread-card">
+      <h3>{{ thread.title }}</h3>
+      <p>{{ thread.content }}</p>
+      <p><strong>Comments:</strong> {{ thread.comments }}</p>
+      <p><strong>Posted by:</strong> {{ thread.user_name }}</p>
+    </div>
+  </div>
+  
+  <ng-template #noThreads>
+    <p>No popular threads available at the moment.</p>
+  </ng-template>
+  

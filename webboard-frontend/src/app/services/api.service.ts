@@ -80,4 +80,8 @@ export class ApiService {
     return this.http.get<any[]>(`${this.baseUrl}/threads/tags-summary`);
   }
 
+  // Fetch popular threads
+  getPopularThreads(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/threads/popular-thread`);
+  }
 }

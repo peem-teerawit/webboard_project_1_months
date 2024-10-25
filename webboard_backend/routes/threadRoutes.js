@@ -7,15 +7,17 @@ const {
     deleteThread,
     getThreadsByUsername,
     getThreadsByTag,
-    getAllTagsWithCounts
+    getAllTagsWithCounts,
+    getPopularThreads
 } = require('../controllers/threadController');
 const authMiddleware = require('../middleware/authMiddleware');
 const router = express.Router();
 
 router.post('/', authMiddleware, createThread);
-router.get('/tags-summary', getAllTagsWithCounts); // Specific route for tags summary before dynamic routes
+router.get('/tags-summary', getAllTagsWithCounts);
 router.get('/user/threads', authMiddleware, getThreadsByUsername);
 router.get('/tags/:tag', getThreadsByTag);
+router.get('/popular-thread', getPopularThreads);
 router.get('/:id', getThreadById);
 router.put('/:id', authMiddleware, updateThread);
 router.delete('/:id', authMiddleware, deleteThread);
