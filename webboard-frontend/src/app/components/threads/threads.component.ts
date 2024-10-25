@@ -26,6 +26,7 @@ export class ThreadsComponent implements OnInit {
         this.threads = data.sort((a: any, b: any) => {
           return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
         });
+        this.loadLikedThreads(); // เรียกใช้ฟังก์ชันนี้ที่นี่
         this.extractTrendingTags();  
       },
       (error) => {
@@ -51,26 +52,57 @@ export class ThreadsComponent implements OnInit {
       .map(entry => entry[0]);       
   }
 
-  formatTags(tags: string[]): string {
-    return tags.map(tag => `#${tag}`).join(' ');
-  }
-
   formatCreatedAt(createdAt: string): string {
     const date = new Date(createdAt);
     return formatDistanceToNow(date, { addSuffix: true });
   }
 
   toggleLike(thread: any): void {
+    // Initialize likes if not present
     if (typeof thread.likes !== 'number') {
       thread.likes = 0; 
     }
-  
+
+    // Toggle like status
     thread.isLiked = !thread.isLiked; 
-  
+
     if (thread.isLiked) {
       thread.likes++; 
     } else {
       thread.likes--; 
+    }
+
+    // Update the local storage with the liked threads
+    this.updateLocalStorage();
+  }
+
+  updateLocalStorage(): void {
+    const likedThreads = this.threads.map(thread => ({
+      id: thread._id,
+      isLiked: thread.isLiked,
+      likes: thread.likes
+    }));
+
+    localStorage.setItem('likedThreads', JSON.stringify(likedThreads));
+  }
+
+  loadLikedThreads(): void {
+    const likedThreads = localStorage.getItem('likedThreads');
+
+    if (likedThreads) {
+      const parsedThreads = JSON.parse(likedThreads);
+
+      // Update isLiked status and likes count for each thread
+      this.threads.forEach(thread => {
+        const likedThread = parsedThreads.find((t: any) => t.id === thread._id);
+        if (likedThread) {
+          thread.isLiked = likedThread.isLiked;
+          thread.likes = likedThread.likes; 
+        } else {
+          thread.isLiked = false;
+          thread.likes = 0;
+        }
+      });
     }
   }
 
@@ -100,4 +132,3 @@ export class ThreadsComponent implements OnInit {
     return thread.is_anonymous ? 'anonymous' : thread.user_name;
   }
 }
-
