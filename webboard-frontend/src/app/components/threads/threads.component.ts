@@ -149,17 +149,15 @@ export class ThreadsComponent implements OnInit {
   truncateContent(content: string): string {
     const maxLength = 100;
 
-    // Remove HTML tags
-    let plainText = content.replace(/<[^>]*>/g, '');
-
-    // Replace HTML entities like &#160; with a space
-    plainText = plainText.replace(/&#160;/g, ' ');
+    // Decode HTML entities
+    const parser = new DOMParser();
+    const decodedContent = parser.parseFromString(content, 'text/html').body.textContent || '';
 
     // Truncate the plain text if it exceeds max length
-    if (plainText.length > maxLength) {
-        return plainText.substring(0, maxLength) + '...';
+    if (decodedContent.length > maxLength) {
+      return decodedContent.substring(0, maxLength) + '...';
     }
-    return plainText;
+    return decodedContent;
   }
 
   canEdit(thread: any): boolean {

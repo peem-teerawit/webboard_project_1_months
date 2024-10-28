@@ -11,7 +11,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
   styleUrls: ['./thread-detail.component.css']
 })
 export class ThreadDetailComponent implements OnInit, OnDestroy {
-  thread: any;
+  thread: any = {}; // Initialize to an empty object
   replies: any[] = [];
   replyContent: string = '';
   isAnonymous: boolean = false;
@@ -19,6 +19,7 @@ export class ThreadDetailComponent implements OnInit, OnDestroy {
   isListening: boolean = false; 
   sanitizedContent: SafeHtml = '';
 
+  // Angular Editor Config
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -28,7 +29,6 @@ export class ThreadDetailComponent implements OnInit, OnDestroy {
     translate: 'no',
     defaultParagraphSeparator: 'p',
     defaultFontName: 'Arial',
-   
   }
 
   constructor(private route: ActivatedRoute, private apiService: ApiService, private zone: NgZone, private sanitizer: DomSanitizer) {}
@@ -37,6 +37,7 @@ export class ThreadDetailComponent implements OnInit, OnDestroy {
     const id = this.route.snapshot.paramMap.get('id');
     this.apiService.getThread(id!).subscribe(
       (data) => {
+        console.log('Thread data:', data); // Log the thread data
         this.thread = data;
         this.sanitizedContent = this.sanitizer.bypassSecurityTrustHtml(this.thread.content);
         this.loadReplies(id!);
@@ -129,11 +130,8 @@ export class ThreadDetailComponent implements OnInit, OnDestroy {
     }
     return '';
   }
-
-    // thread-detail.component.ts
+  
   sanitizeReplyContent(content: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(content);
   }
-
-  
 }
