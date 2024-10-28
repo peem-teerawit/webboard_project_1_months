@@ -49,15 +49,31 @@ export class ThreadHistoryComponent implements OnInit {
   }
 
   // Method to truncate content to 20 words
+  // truncateContent(content: string): string {
+  //   const englishWords = content.match(/\w+('\w+)?/g) || [];
+  //   const thaiWords = content.match(/[\u0E00-\u0E7F]+/g) || [];
+
+  //   const combinedWords = [...new Set([...englishWords, ...thaiWords])];
+
+  //   if (combinedWords.length > 20) {
+  //     return combinedWords.slice(0, 20).join(' ') + '...';
+  //   }
+  //   return content;
+  // }
+
   truncateContent(content: string): string {
-    const englishWords = content.match(/\w+('\w+)?/g) || [];
-    const thaiWords = content.match(/[\u0E00-\u0E7F]+/g) || [];
+    const maxLength = 100;
 
-    const combinedWords = [...new Set([...englishWords, ...thaiWords])];
+    // Remove HTML tags
+    let plainText = content.replace(/<[^>]*>/g, '');
 
-    if (combinedWords.length > 20) {
-      return combinedWords.slice(0, 20).join(' ') + '...';
+    // Replace HTML entities like &#160; with a space
+    plainText = plainText.replace(/&#160;/g, ' ');
+
+    // Truncate the plain text if it exceeds max length
+    if (plainText.length > maxLength) {
+        return plainText.substring(0, maxLength) + '...';
     }
-    return content;
+    return plainText;
   }
 }
