@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { format } from 'date-fns';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-thread-detail',
@@ -15,14 +17,28 @@ export class ThreadDetailComponent implements OnInit, OnDestroy {
   isAnonymous: boolean = false;
   recognition: any; 
   isListening: boolean = false; 
+  sanitizedContent: SafeHtml = '';
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService, private zone: NgZone) {}
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+   
+  }
+
+  constructor(private route: ActivatedRoute, private apiService: ApiService, private zone: NgZone, private sanitizer: DomSanitizer) {}
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.apiService.getThread(id!).subscribe(
       (data) => {
         this.thread = data;
+        this.sanitizedContent = this.sanitizer.bypassSecurityTrustHtml(this.thread.content);
         this.loadReplies(id!);
       },
       (error) => {
@@ -112,6 +128,11 @@ export class ThreadDetailComponent implements OnInit, OnDestroy {
       return `Expires on: ${format(date, 'MMMM dd, yyyy HH:mm')}`;
     }
     return '';
+  }
+
+    // thread-detail.component.ts
+  sanitizeReplyContent(content: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(content);
   }
 
   

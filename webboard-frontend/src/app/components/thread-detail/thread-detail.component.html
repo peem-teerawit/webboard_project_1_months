@@ -8,7 +8,7 @@
         </div>
       </div>
       <h2 class="post-title">{{ thread?.title }}</h2>
-      <p class="post-content">{{ thread?.content }}</p>
+      <p class="post-content" [innerHTML]="sanitizedContent"></p>
       <div class="post-tags">
         <span *ngFor="let tag of thread?.tags" class="tag">
           <a [routerLink]="['/tag-thread', tag]" class="tag-link">#{{ tag }}</a>
@@ -24,24 +24,25 @@
   <div class="comment-section">
     <h3>Replies ({{ replies.length }})</h3>
     <ul class="comments-list">
-      <li *ngFor="let reply of replies" class="reply-container">
-        <div class="div-reply-header">
-          <strong>{{ getReplyDisplayName(reply) }}</strong>
-          <span class="reply-time">{{ reply.created_at | date: 'short' }}</span>
-        </div>
-        <div class="reply-content">{{ reply.content }}</div>
-      </li>
+        <li *ngFor="let reply of replies" class="reply-container">
+            <div class="div-reply-header">
+              <strong>{{ getReplyDisplayName(reply) }}</strong>
+              <span class="reply-time">{{ reply.created_at | date: 'short' }}</span>
+            </div>
+            <div class="reply-content" [innerHTML]="sanitizeReplyContent(reply.content)"></div>
+          </li>          
     </ul>
 
     <form (ngSubmit)="createReply()" class="reply-form">
       <div class="form-group">
-        <textarea 
+        <!-- <textarea 
           [(ngModel)]="replyContent"
           name="replyContent"
           placeholder="Write a reply..."
           rows="3"
           class="reply-textarea">
-        </textarea>
+        </textarea> -->
+        <angular-editor [placeholder]="'Enter reply here...'" [config] = 'config' [(ngModel)]="replyContent" name="replyContent" id="replyContent"></angular-editor>
       </div>
 
       <div class="form-options">
