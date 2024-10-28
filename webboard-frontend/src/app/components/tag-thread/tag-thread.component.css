@@ -8,14 +8,14 @@
     padding: 10px; 
     gap: 20px; 
     align-items: flex-start; 
-    max-width: 1200px; /* Set a max-width to limit how wide it can grow */
-    margin: 0 auto; /* Center the container */
+    max-width: 1200px; 
+    margin: 0 auto;
 }
 
 .thread-list {
     list-style-type: none;
     padding: 0;
-    width: 85%; /* Adjust size to create space for Trending */
+    width: 85%; 
 }
 
 .post-container {
@@ -162,7 +162,7 @@
     top: 20px; 
     margin-top: 20px; 
     align-self: flex-start;
-    padding: 20px; /* Add padding to create space inside the section */
+    padding: 20px;
 }
 
 .trending-container {
@@ -176,10 +176,10 @@
     margin-top: 20px; 
     margin: 15px; 
     width: 100%; 
-    max-width: 240px; /* This ensures the container doesn't stretch too wide */
+    max-width: 240px; 
     position: sticky;
     top: 20px;
-    box-sizing: border-box; /* Ensure padding is included in the width */
+    box-sizing: border-box;
 }
 
 .trending-title {
@@ -242,20 +242,33 @@
   }
   
   .div-12 {
-    display: flex;
-    align-items: center;
+    display: flex; 
+    align-items: center; 
     cursor: pointer;
     padding: 5px 10px;
     background-color: #f9f9f9; 
     border-radius: 20px; 
     transition: background-color 0.3s, transform 0.3s; 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-    cursor: pointer; 
     text-decoration: none;
-  }
+}
   
   .div-12:hover {
     background-color: #e0f7fa; 
     transform: translateY(-2px);
   }
   
+  .div-12 .div-12-count {
+    font-size: 15px;
+    font-weight: 600;
+    color: #555;
+    font-family: 'Roboto', sans-serif; 
+  }
+
+  .icon-container {
+    display: flex; 
+    align-items: center; 
+}
+.comment-icon {
+    text-decoration: none; 
+}
