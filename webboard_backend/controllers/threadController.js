@@ -117,13 +117,17 @@ exports.updateThread = async (req, res) => {
     }
 };
 
-// Delete a thread
+// Delete a thread and its related replies
 exports.deleteThread = async (req, res) => {
     try {
         const thread = await Thread.findById(req.params.id);
         if (thread && String(thread.user_id) === req.user.id) {
+            // First, delete the replies related to this thread
+            await Reply.deleteMany({ thread_id: thread._id });
+
+            // Then, delete the thread itself
             await Thread.findByIdAndDelete(req.params.id);
-            res.json({ message: 'Thread deleted successfully' });
+            res.json({ message: 'Thread and its replies deleted successfully' });
         } else {
             res.status(403).json({ message: 'Unauthorized to delete this thread' });
         }
@@ -131,6 +135,7 @@ exports.deleteThread = async (req, res) => {
         res.status(500).json({ message: 'Error deleting thread', error });
     }
 };
+
 
 // Get all threads by a specific username
 exports.getThreadsByUsername = async (req, res) => {
