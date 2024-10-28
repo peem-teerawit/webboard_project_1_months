@@ -142,13 +142,18 @@ export class TagThreadComponent implements OnInit {
   }
 
   truncateContent(content: string): string {
-    const englishWords = content.match(/\w+('\w+)?/g) || [];
-    const thaiWords = content.match(/[\u0E00-\u0E7F]+/g) || [];
-    const combinedWords = [...new Set([...englishWords, ...thaiWords])];
+    const maxLength = 100;
 
-    if (combinedWords.length > 20) {
-      return combinedWords.slice(0, 20).join(' ') + '...'; 
+    // Remove HTML tags
+    let plainText = content.replace(/<[^>]*>/g, '');
+
+    // Replace HTML entities like &#160; with a space
+    plainText = plainText.replace(/&#160;/g, ' ');
+
+    // Truncate the plain text if it exceeds max length
+    if (plainText.length > maxLength) {
+        return plainText.substring(0, maxLength) + '...';
     }
-    return content;
+    return plainText;
   }
 }

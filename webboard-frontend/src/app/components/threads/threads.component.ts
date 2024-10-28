@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { formatDistanceToNow, format } from 'date-fns';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-threads',
@@ -12,7 +13,7 @@ export class ThreadsComponent implements OnInit {
   currentUsername: string | null;
   trendingTags: string[] = [];
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private sanitizer: DomSanitizer) {
     this.currentUsername = localStorage.getItem('username');
   }
 
@@ -135,13 +136,30 @@ export class ThreadsComponent implements OnInit {
     return '';
   }
 
+  // truncateContent(content: string): SafeHtml {
+  //   const maxLength = 100;
+
+  //   if (content.length > maxLength) {
+  //       content = content.substring(0, maxLength) + '...';
+  //   }
+
+  //   return this.sanitizer.bypassSecurityTrustHtml(content);
+  // }
+
   truncateContent(content: string): string {
     const maxLength = 100;
 
-    if (content.length > maxLength) {
-      return content.substring(0, maxLength) + '...'; 
+    // Remove HTML tags
+    let plainText = content.replace(/<[^>]*>/g, '');
+
+    // Replace HTML entities like &#160; with a space
+    plainText = plainText.replace(/&#160;/g, ' ');
+
+    // Truncate the plain text if it exceeds max length
+    if (plainText.length > maxLength) {
+        return plainText.substring(0, maxLength) + '...';
     }
-    return content; 
+    return plainText;
   }
 
   canEdit(thread: any): boolean {
