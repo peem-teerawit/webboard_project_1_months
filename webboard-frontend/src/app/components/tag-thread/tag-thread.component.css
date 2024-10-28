@@ -9,7 +9,7 @@
     gap: 20px; 
     align-items: flex-start; 
     max-width: 1200px; 
-    margin: 0 auto;
+    margin: 0 auto; 
 }
 
 .thread-list {
@@ -236,35 +236,6 @@
     transform: scale(1.2); 
 }
 
-.div-12 {
-    font-size: 14px;
-    color: #333; 
-  }
-  
-  .div-12 {
-    display: flex; 
-    align-items: center; 
-    cursor: pointer;
-    padding: 5px 10px;
-    background-color: #f9f9f9; 
-    border-radius: 20px; 
-    transition: background-color 0.3s, transform 0.3s; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-    text-decoration: none;
-}
-  
-  .div-12:hover {
-    background-color: #e0f7fa; 
-    transform: translateY(-2px);
-  }
-  
-  .div-12 .div-12-count {
-    font-size: 15px;
-    font-weight: 600;
-    color: #555;
-    font-family: 'Roboto', sans-serif; 
-  }
-
   .icon-container {
     display: flex; 
     align-items: center; 
@@ -272,3 +243,68 @@
 .comment-icon {
     text-decoration: none; 
 }
+.div-11.unliked img {
+    filter: none; 
+    transition: filter 0.3s ease;
+}
+
+.div-11.liked img {
+    filter: invert(21%) sepia(100%) saturate(7414%) hue-rotate(359deg) brightness(94%) contrast(117%); /* เปลี่ยนเป็นสีแดง */
+    transition: filter 0.3s ease;
+}
+
+.div-11.liked {
+    color: red; 
+}
+
+.div-12 {
+    display: flex;
+    align-items: center;
+    gap: 5px; 
+}
+
+.comments-count {
+    font-size: 14px;
+    color: #333; 
+  }
+  
+  .comment-icon {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px 10px;
+    background-color: #f9f9f9; 
+    border-radius: 20px; 
+    transition: background-color 0.3s, transform 0.3s; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    cursor: pointer; 
+    text-decoration: none;
+  }
+  
+  .comment-icon:hover {
+    background-color: #e0f7fa; 
+    transform: translateY(-2px);
+  }
+  
+  .comment-icon img {
+    margin-right: 8px;
+    width: 20px; 
+    height: 20px;
+  }
+  
+  .comment-icon .comments-count {
+    font-size: 15px;
+    font-weight: 600;
+    color: #555;
+    font-family: 'Roboto', sans-serif; 
+  }
+  
+  .comment-icon .comments-count:hover {
+    color: #00796b;
+  }
+
+  .div-12 {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }

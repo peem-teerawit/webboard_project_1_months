@@ -106,4 +106,8 @@ export class ApiService {
     return this.http.get<any[]>(`${this.baseUrl}/threads/liked`, { headers }); // Send the GET request with headers
   }
 
+  getReplyCount(threadId: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/replies/count/${threadId}`);
+  }
+
 }
