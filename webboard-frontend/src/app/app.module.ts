@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ThreadHistoryComponent } from './components/thread-history/thread-history.component';
 import { PopularThreadComponent } from './components/popular-thread/popular-thread.component';
-import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +36,6 @@ import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    RichTextEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

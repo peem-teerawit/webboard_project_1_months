@@ -38,9 +38,8 @@
                             class="img-6" alt="Comments icon" />
                         <div class="comments-count">{{ thread.comments }}</div>
                     </a>
-                </div>         
-
-                <div *ngIf="thread.expire_at" class="expire-at">{{ formatExpireAt(thread.expire_at) }}</div>
+                </div>
+            <div *ngIf="thread.expire_at" class="expire-at">{{ formatExpireAt(thread.expire_at) }}</div>
                 <ng-container *ngIf="canEdit(thread)">
                     <a [routerLink]="['/edit-thread', thread._id]" class="action-button edit-button">Edit</a>
                 </ng-container>

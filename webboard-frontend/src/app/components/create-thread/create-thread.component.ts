@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
-import { ToolbarService, LinkService, ImageService, HtmlEditorService, RichTextEditorModule, QuickToolbarService, VideoService, AudioService, TableService, PasteCleanupService } from '@syncfusion/ej2-angular-richtexteditor';
 
 @Component({
   selector: 'app-create-thread',
   templateUrl: './create-thread.component.html',
   styleUrls: ['./create-thread.component.css'],
-  providers: [ToolbarService, LinkService, ImageService, HtmlEditorService, QuickToolbarService, VideoService, AudioService, TableService, PasteCleanupService],
 
 })
 export class CreateThreadComponent {
