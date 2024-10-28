@@ -175,12 +175,13 @@
     padding: 12px;
     margin-top: 20px; 
     margin: 15px; 
-    width: 100%; 
-    max-width: 240px; 
+    width: fit-content; 
+    max-width: 100%; 
     position: sticky;
     top: 20px;
     box-sizing: border-box;
 }
+
 
 .trending-title {
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);

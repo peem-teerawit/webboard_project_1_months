@@ -21,6 +21,7 @@
     "@kolkov/angular-editor": "^3.0.0-beta.0",
     "@ng-web-apis/common": "^4.11.1",
     "@ng-web-apis/speech": "^4.11.1",
+    "@syncfusion/ej2-angular-richtexteditor": "^27.1.55",
     "angular-font-awesome": "^3.1.2",
     "date-fns": "^4.1.0",
     "jwt-decode": "^4.0.0",

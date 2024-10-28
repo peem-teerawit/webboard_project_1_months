@@ -200,10 +200,11 @@
     background: linear-gradient(135deg, rgba(210, 32, 32, 0.1) 0%, rgba(232, 158, 78, 0.3) 100%); 
     border-radius: 20px; 
     padding: 8px 12px; 
-    font-size: 14px;
-    color: red; 
+    font-size: 15px;
+    color: black; 
     box-shadow: 0 1px 3px rgba(212, 104, 104, 0.1); 
     transition: background 0.3s; 
+    text-decoration: none;
 }
 
 .topic-tag:hover {
