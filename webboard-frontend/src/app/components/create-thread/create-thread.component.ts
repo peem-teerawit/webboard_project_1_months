@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+
+
 
 @Component({
   selector: 'app-create-thread',
@@ -17,6 +20,18 @@ export class CreateThreadComponent {
   expireAt?: Date;
   showPopup: boolean = false;
   popupMessage: string = '';
+
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+   
+  }
 
   constructor(private apiService: ApiService, private router: Router) {}
 

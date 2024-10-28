@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ThreadHistoryComponent } from './components/thread-history/thread-history.component';
 import { PopularThreadComponent } from './components/popular-thread/popular-thread.component';
-
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   declarations: [
@@ -36,6 +36,7 @@ import { PopularThreadComponent } from './components/popular-thread/popular-thre
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    AngularEditorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -28,14 +28,15 @@
 
         <!-- Rich Text Editor for Content -->
         <label for="content" class="input-label">Content:</label>
-        <textarea
+        <!-- <textarea
           id="content"
           class="input-field thread-content"
           [(ngModel)]="content"
           name="content"
           placeholder="Enter thread content"
           required
-        ></textarea>
+        ></textarea> -->
+        <angular-editor [placeholder]="'Enter thread here...'" [config] = 'config' [(ngModel)]="content" name="content" id="content"></angular-editor>
 
         <!-- Anonymous Post Checkbox -->
         <div class="options-container">
