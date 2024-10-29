@@ -14,14 +14,15 @@
     </div>
     <div class="form-group">
       <label for="content">Content:</label>
-      <textarea
+      <!-- <textarea
         id="content"
         [(ngModel)]="threadData.content"
         name="content"
         required
         class="form-control"
         placeholder="Enter the content"
-      ></textarea>
+      ></textarea> -->
+      <angular-editor [placeholder]="'Enter the content...'" [config] = 'config' [(ngModel)]="threadData.content" name="content" id="content"></angular-editor>
     </div>
     <div class="form-group">
       <label for="tags">Tags:</label>

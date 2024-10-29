@@ -1,21 +1,22 @@
 <div class="popular-threads-container" *ngIf="popularThreads.length > 0; else noThreads">
-  <h2 class="section-title">
-    <i class="fas fa-star star-icon"></i> Popular Threads <i class="fas fa-star star-icon"></i>
-  </h2>
-  <div *ngFor="let thread of popularThreads" class="thread-card">
-    <a [routerLink]="['/threads', thread._id]" class="thread-link">
-      <div class="thread-content">
-        <h3 class="thread-title">{{ thread.title }}</h3>
-        <p class="thread-description">{{ thread.content }}</p>
-        <div class="thread-info">
-          <p class="thread-comments"><i class="fas fa-comments comment-icon"></i> Comments: {{ thread.comments }}</p>
-          <p class="thread-user"><i class="fas fa-user user-icon"></i> Posted by: {{ thread.user_name }}</p>
+    <h2 class="section-title">
+      <i class="fas fa-star star-icon"></i> Popular Threads <i class="fas fa-star star-icon"></i>
+    </h2>
+    <div *ngFor="let thread of popularThreads" class="thread-card">
+      <a [routerLink]="['/threads', thread._id]" class="thread-link">
+        <div class="thread-content">
+          <h3 class="thread-title">{{ thread.title }}</h3>
+          <p class="thread-description">{{ getLimitedContent(thread.content) }}</p>
+          <div class="thread-info">
+            <p class="thread-comments"><i class="fas fa-comments comment-icon"></i> Comments: {{ thread.comments }}</p>
+            <p class="thread-user"><i class="fas fa-user user-icon"></i> Posted by: {{ thread.user_name }}</p>
+          </div>
         </div>
-      </div>
-    </a>
+      </a>
+    </div>
   </div>
-</div>
-
-<ng-template #noThreads>
-  <p class="no-threads-message">No popular threads available at the moment.</p>
-</ng-template>
+  
+  <ng-template #noThreads>
+    <p class="no-threads-message">No popular threads available at the moment.</p>
+  </ng-template>
+  

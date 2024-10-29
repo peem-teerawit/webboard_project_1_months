@@ -155,7 +155,7 @@ export class ThreadsComponent implements OnInit {
 
     // Truncate the plain text if it exceeds max length
     if (decodedContent.length > maxLength) {
-      return decodedContent.substring(0, maxLength) + '...';
+        return decodedContent.substring(0, maxLength) + '...';
     }
     return decodedContent;
   }

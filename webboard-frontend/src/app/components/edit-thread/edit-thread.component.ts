@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'; 
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-edit-thread',
@@ -17,6 +18,18 @@ export class EditThreadComponent implements OnInit {
     expire_at: null // Initialize as null or set to a default date value
   }; // Holds the thread data to be edited
 
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+   
+  }
+  
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,

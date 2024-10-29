@@ -63,17 +63,25 @@ export class ThreadHistoryComponent implements OnInit {
 
   truncateContent(content: string): string {
     const maxLength = 100;
-
+  
+    // Decode HTML entities
+    const decodedContent = this.decodeHTMLEntities(content);
+  
     // Remove HTML tags
-    let plainText = content.replace(/<[^>]*>/g, '');
-
-    // Replace HTML entities like &#160; with a space
-    plainText = plainText.replace(/&#160;/g, ' ');
-
+    let plainText = decodedContent.replace(/<[^>]*>/g, '');
+  
     // Truncate the plain text if it exceeds max length
     if (plainText.length > maxLength) {
         return plainText.substring(0, maxLength) + '...';
     }
     return plainText;
   }
+  
+  // Helper function to decode HTML entities
+  decodeHTMLEntities(text: string): string {
+    const textArea = document.createElement('textarea');
+    textArea.innerHTML = text;
+    return textArea.value;
+  }
+  
 }
