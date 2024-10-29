@@ -4,11 +4,11 @@ const jwt = require('jsonwebtoken');
 
 // Register a new user
 exports.register = async (req, res) => {
-    const { username, email, password } = req.body;
+    const { username, email, password, role } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
 
     try {
-        const newUser = new User({ username, email, password: hashedPassword });
+        const newUser = new User({ username, email, password: hashedPassword, role: role || 'user' });  // ตั้ง role เป็น user โดยค่าเริ่มต้น
         await newUser.save();
         res.status(201).json({ message: 'User registered successfully!' });
     } catch (error) {
