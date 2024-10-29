@@ -143,16 +143,15 @@ export class TagThreadComponent implements OnInit {
 
   truncateContent(content: string): string {
     const maxLength = 100;
-
-    // Remove HTML tags
-    let plainText = content.replace(/<[^>]*>/g, '');
-
-    // Replace HTML entities like &#160; with a space
-    plainText = plainText.replace(/&#160;/g, ' ');
-
-    // Truncate the plain text if it exceeds max length
+  
+    let div = document.createElement('div');
+    div.innerHTML = content;
+    let plainText = div.textContent || div.innerText || '';
+  
+    plainText = plainText.replace(/<[^>]*>/g, '');
+  
     if (plainText.length > maxLength) {
-        return plainText.substring(0, maxLength) + '...';
+      return plainText.substring(0, maxLength) + '...';
     }
     return plainText;
   }
