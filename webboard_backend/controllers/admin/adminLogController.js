@@ -48,3 +48,30 @@ exports.getLogSummary = async (req, res) => {
         res.status(500).json({ message: 'Error fetching log summary', error });
     }
 };
+
+// Function to get logs for a specific user
+exports.getUserLogs = async (req, res) => {
+    const { userId } = req.params; // Get userId from request parameters
+
+    try {
+        // Fetch logs for the specific user and populate fields
+        const userLogs = await Log.find({ userId })
+            .populate('userId', 'username') // Populate the username field
+            .populate('threadId', 'title') // Populate the thread title
+            .exec();
+
+        // Extract the username from the populated data
+        const username = userLogs.length > 0 ? userLogs[0].userId.username : 'Unknown User';
+
+        // Calculate the total number of actions for each type
+        const actionSummary = userLogs.reduce((acc, log) => {
+            acc[log.action] = (acc[log.action] || 0) + 1;
+            return acc;
+        }, {});
+
+        // Send response with userId, username, action summary, and logs
+        res.status(200).json({ userId, username, actionSummary, logs: userLogs });
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching user logs', error });
+    }
+};
