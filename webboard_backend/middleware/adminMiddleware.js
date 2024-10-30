@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
+const Log = require('../models/logModel'); // Import Log model
 
 exports.authMiddleware = async (req, res, next) => {
     try {
@@ -21,9 +22,23 @@ exports.authMiddleware = async (req, res, next) => {
     }
 };
 
-exports.adminMiddleware = (req, res, next) => {
+// Admin middleware to check if the user is an admin
+exports.adminMiddleware = async (req, res, next) => {
     if (req.user.role !== 'admin') {
         return res.status(403).json({ message: 'Admin access required' });
     }
+
+    // Log admin access
+    const logEntry = new Log({
+        action: 'admin_access',
+        userId: req.user._id,
+    });
+
+    try {
+        await logEntry.save();
+    } catch (error) {
+        console.error('Error logging admin access:', error);
+    }
+
     next();
 };

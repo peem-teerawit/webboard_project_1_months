@@ -1,6 +1,6 @@
 const Thread = require('../models/threadModel');
 const Reply = require('../models/replyModel'); // Import the Reply model
-
+const Log = require('../models/logModel');
 // Create a new thread
 exports.createThread = async (req, res) => {
     const { title, content, is_anonymous, tags, expire_at } = req.body;
@@ -19,6 +19,13 @@ exports.createThread = async (req, res) => {
     try {
         await newThread.save();
         res.status(201).json(newThread);
+        // Create a log entry
+        await Log.create({ 
+            action: 'create_thread', 
+            userId: req.user.id,
+            username: req.user.username,
+            threadId: newThread._id 
+        });
     } catch (error) {
         res.status(400).json({ message: 'Error creating thread', error });
     }
@@ -45,7 +52,7 @@ exports.getAllThreads = async (req, res) => {
                 $project: { replies: 0 } // Optional: exclude the replies array itself if not needed
             }
         ]);
-
+        
         res.json(threads);
     } catch (error) {
         res.status(500).json({ message: 'Error retrieving threads with reply counts', error });
@@ -79,25 +86,38 @@ exports.getPopularThreads = async (req, res) => {
                 $project: { replies: 0 }
             }
         ]);
+        
         res.json(threads);
     } catch (error) {
         res.status(500).json({ message: 'Error retrieving popular threads', error });
     }
 };
 
-// Get a thread by ID
 exports.getThreadById = async (req, res) => {
     try {
+        // console.log('Fetching thread with ID:', req.params.id); // Log the thread ID
         const thread = await Thread.findById(req.params.id).populate('user_id', 'username').exec();
-        if (thread) {
-            res.json(thread);
-        } else {
-            res.status(404).json({ message: 'Thread not found' });
+        if (!thread) {
+            console.log('Thread not found');
+            return res.status(404).json({ message: 'Thread not found' });
         }
+
+        // Log the action
+        const logEntry = new Log({
+            action: 'view_thread',
+            userId: req.user.id,
+            username: req.user.username,
+            threadId: thread._id,
+        });
+        await logEntry.save(); // Save the log entry
+
+        res.json(thread);
     } catch (error) {
+        console.error('Error retrieving thread:', error); // Log the error
         res.status(500).json({ message: 'Error retrieving thread', error });
     }
 };
+
 
 // Edit a thread
 exports.updateThread = async (req, res) => {
@@ -111,6 +131,13 @@ exports.updateThread = async (req, res) => {
         thread.is_anonymous = is_anonymous;
         thread.expire_at = expire_at;
         await thread.save();
+        // Log successful update
+        await Log.create({
+            action: 'thread_updated',
+            userId: req.user.id,
+            username: req.user.username, // Include username
+            threadId: thread._id,
+        });
         res.json(thread);
     } else {
         res.status(403).json({ message: 'Unauthorized to edit this thread' });
@@ -127,6 +154,13 @@ exports.deleteThread = async (req, res) => {
 
             // Then, delete the thread itself
             await Thread.findByIdAndDelete(req.params.id);
+
+            await Log.create({ 
+                action: 'thread_deleted', 
+                userId: req.user.id, 
+                username: req.user.username,
+                threadId: thread._id 
+            });
             res.json({ message: 'Thread and its replies deleted successfully' });
         } else {
             res.status(403).json({ message: 'Unauthorized to delete this thread' });
@@ -143,7 +177,6 @@ exports.getThreadsByUsername = async (req, res) => {
         const username = req.user.username;
 
         const userThreads = await Thread.find({ user_name: username });
-
         res.json(userThreads);
     } catch (error) {
         res.status(500).json({ message: 'Error retrieving user threads', error });
@@ -211,7 +244,6 @@ exports.getAllTagsWithCounts = async (req, res) => {
         if (tagsWithCounts.length === 0) {
             return res.status(404).json({ message: 'No tags found' });
         }
-
         res.json(tagsWithCounts);
     } catch (error) {
         res.status(500).json({ message: 'Error retrieving tags with counts', error });

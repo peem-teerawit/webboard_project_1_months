@@ -9,6 +9,7 @@ const replyRoutes = require('./routes/replyRoutes');
 const adminUserRoutes = require('./routes/admin/adminUserRoutes');
 const adminThreadRoutes = require('./routes/admin/adminThreadRoutes');
 const adminReplyRoutes = require('./routes/admin/adminReplyRoutes');
+const adminLogRoutes = require('./routes/admin/adminLogRoutes')
 const cron = require('node-cron');
 const { deleteExpiredThreads } = require('./controllers/threadController');
 
@@ -31,7 +32,7 @@ app.use('/api/replies', replyRoutes);
 app.use('/api/admin', adminUserRoutes);
 app.use('/api/admin', adminThreadRoutes);
 app.use('/api/admin', adminReplyRoutes);
-
+app.use('/api/admin',adminLogRoutes);
 // Schedule a job to run every 1 minutes
 cron.schedule('* * * * *', () => {
     console.log('Checking for expired threads...');
