@@ -5,7 +5,8 @@ const {
     deleteReply,
     getRepliesByThreadId // Import the new method
 } = require('../controllers/replyController');
-const { authMiddleware, adminMiddleware } = require('../middleware/authMiddleware');
+const { authMiddleware } = require('../middleware/authMiddleware');
+
 const router = express.Router();
 
 router.post('/', authMiddleware, createReply);

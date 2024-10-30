@@ -5,7 +5,10 @@ const { connectDB } = require('./config/db.config');
 const authRoutes = require('./routes/authRoutes');
 const threadRoutes = require('./routes/threadRoutes');
 const replyRoutes = require('./routes/replyRoutes');
-// const analyticsRoutes = require('./routes/analyticsRoutes');
+
+const adminUserRoutes = require('./routes/admin/adminUserRoutes');
+const adminThreadRoutes = require('./routes/admin/adminThreadRoutes');
+const adminReplyRoutes = require('./routes/admin/adminReplyRoutes');
 const cron = require('node-cron');
 const { deleteExpiredThreads } = require('./controllers/threadController');
 
@@ -23,7 +26,11 @@ app.use(bodyParser.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/threads', threadRoutes);
 app.use('/api/replies', replyRoutes);
-// app.use('/api/analytics', analyticsRoutes);
+
+// Admin routes
+app.use('/api/admin', adminUserRoutes);
+app.use('/api/admin', adminThreadRoutes);
+app.use('/api/admin', adminReplyRoutes);
 
 // Schedule a job to run every 1 minutes
 cron.schedule('* * * * *', () => {

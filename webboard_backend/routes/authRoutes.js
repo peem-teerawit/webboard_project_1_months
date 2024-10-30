@@ -1,12 +1,13 @@
 const express = require('express');
-const { register, login } = require('../controllers/authController');
-const { authMiddleware, adminMiddleware } = require('../middleware/authMiddleware');
+const { register, login, deleteUser } = require('../controllers/authController');
+const { deleteReply } = require('../controllers/replyController');
+const { deleteThread } = require('../controllers/threadController');
+
 const router = express.Router();
 
+// User registration
 router.post('/register', register);
+// User login
 router.post('/login', login);
-router.get('/admin', authMiddleware, adminMiddleware, (req, res) => {
-    res.json({ message: 'Welcome Admin!' });
-});
 
 module.exports = router;

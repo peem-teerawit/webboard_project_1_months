@@ -13,7 +13,7 @@ const {
     unlikeThread,
     getUserLikedThreads
 } = require('../controllers/threadController');
-const { authMiddleware, adminMiddleware } = require('../middleware/authMiddleware'); // ตรวจสอบการนำเข้าด้วย
+const { authMiddleware, adminMiddleware, deleteUser } = require('../middleware/adminMiddleware'); 
 const router = express.Router();
 
 router.post('/', authMiddleware, createThread);
@@ -27,9 +27,6 @@ router.post('/:threadId/unlike', authMiddleware, unlikeThread);
 router.get('/:id', getThreadById);
 router.put('/:id', authMiddleware, updateThread);
 router.delete('/:id', authMiddleware, deleteThread);
-router.delete('/:id', authMiddleware, adminMiddleware, deleteThread); // อาจจะมีบรรทัดนี้ซ้ำให้ตรวจสอบ
-
-// ย้ายบรรทัดนี้ไปที่จุดสิ้นสุด
 router.get('/', getAllThreads);
 
 module.exports = router;
