@@ -15,7 +15,7 @@ const {
     unlikeThread,
     getUserLikedThreads
 } = require('../controllers/threadController');
-const { authMiddleware, adminMiddleware, deleteUser } = require('../middleware/adminMiddleware'); 
+const { authMiddleware } = require('../middleware/adminMiddleware'); 
 const router = express.Router();
 
 router.post('/', authMiddleware, createThread);
@@ -26,7 +26,7 @@ router.get('/popular-thread', getPopularThreads);
 router.get('/liked', authMiddleware, getUserLikedThreads);
 router.post('/:threadId/like', authMiddleware, likeThread);
 router.post('/:threadId/unlike', authMiddleware, unlikeThread);
-router.get('/:id', authMiddleware, getThreadById); // Apply authMiddleware here
+router.get('/:id', authMiddleware, getThreadById);
 router.put('/:id', authMiddleware, updateThread);
 router.delete('/:id', authMiddleware, deleteThread);
 router.get('/', getAllThreads);

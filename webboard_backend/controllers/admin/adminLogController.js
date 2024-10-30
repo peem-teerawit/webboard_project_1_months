@@ -75,3 +75,41 @@ exports.getUserLogs = async (req, res) => {
         res.status(500).json({ message: 'Error fetching user logs', error });
     }
 };
+
+// function to get all users's name in the logs 
+exports.getAllUsernamesInLogs = async (req, res) => {
+    try {
+        // Aggregate logs to get unique user IDs and populate the username field
+        const userNames = await Log.aggregate([
+            {
+                $group: {
+                    _id: "$userId", // Group by userId
+                },
+            },
+            {
+                $lookup: { // Populate userId to get username
+                    from: "users", // Name of the users collection
+                    localField: "_id",
+                    foreignField: "_id",
+                    as: "userInfo",
+                },
+            },
+            {
+                $unwind: "$userInfo", // Unwind the userInfo array to access the username field
+            },
+            {
+                $project: {
+                    _id: 0, // Remove the _id field
+                    username: "$userInfo.username", // Only include username in results
+                },
+            },
+        ]);
+
+        // Extract only usernames into a list
+        const usernames = userNames.map(user => user.username);
+
+        res.status(200).json({ usernames });
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching usernames from logs', error });
+    }
+};
