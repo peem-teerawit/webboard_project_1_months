@@ -12,7 +12,7 @@ const authMiddleware = async (req, res, next) => {
     const bearerToken = tokenParts[1];
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET); // Use your JWT secret
+        const decoded = jwt.verify(bearerToken, 'your_jwt_secret');
         console.log('Decoded JWT:', decoded);
 
         req.user = await User.findById(decoded.id);
