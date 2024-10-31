@@ -1,0 +1,297 @@
+:root {
+    --primary: #4776E6;
+    --secondary: #8E54E9;
+    --card1: linear-gradient(45deg, #FF4B2B, #FF416C);
+    --card2: linear-gradient(45deg, #00B4DB, #0083B0);
+    --card3: linear-gradient(45deg, #F7971E, #FFD200);
+    --text-dark: #2B2D42;
+    --text-light: #ffffff;
+    --shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
+.dashboard-container {
+    background: #EEF2FF;
+    min-height: 100vh;
+    padding: 20px; /* ปรับ padding */
+    font-family: 'Prompt', sans-serif;
+}
+
+.dashboard-header {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    margin-bottom: 20px; /* ปรับ margin */
+    padding: 25px; /* ปรับ padding */
+    border-radius: 15px; /* ปรับ border-radius */
+    box-shadow: var(--shadow);
+
+    .header-content {
+        i {
+            font-size: 36px; /* ปรับขนาดฟอนต์ */
+            color: var(--text-light);
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+        }
+
+        h1 {
+            font-size: 30px; /* ปรับขนาดฟอนต์ */
+            color: var(--text-light);
+            font-weight: 700;
+            margin-left: 15px; /* ปรับ margin */
+            letter-spacing: 1px;
+        }
+    }
+
+    .update-time {
+        margin-top: 10px; /* ปรับ margin */
+        color: var(--text-light);
+        font-size: 16px; /* ปรับขนาดฟอนต์ */
+        opacity: 0.9;
+    }
+}
+
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* ปรับขนาด */
+    gap: 20px; /* ปรับ gap */
+}
+
+.stats-card {
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: all 0.4s ease;
+
+    &:nth-child(1) { background: var(--card1); }
+    &:nth-child(2) { background: var(--card2); }
+    &:nth-child(3) { background: var(--card3); }
+
+    &:hover {
+        transform: translateY(-10px);
+        box-shadow: rgba(184, 104, 0, 0.25) 0px 48px 100px 0px;
+    }
+
+    .card-header {
+        padding: 30px;
+        background: #ffd700; /* เปลี่ยนสีพื้นหลังให้เข้มขึ้น */
+        
+        i {
+            font-size: 32px;
+            color: white; /* เปลี่ยนสีตัวอักษร */
+            background: #1867b5;
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+        h2 {
+            color: var(--text-light);
+            font-size: 28px;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+    }
+}
+
+
+    .card-body {
+        background: rgba(255,255,255,0.95);
+        padding: 5px;
+        border-radius: 12px 12px 0 0; 
+    }
+
+
+.stat-row {
+    padding: 20px;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+
+    &:hover {
+        background: rgba(238, 242, 255, 0.8);
+    }
+
+    .stat-icon {
+        width: 50px; 
+        height: 50px; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px; /* ปรับ border-radius */
+        margin-right: 15px; 
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        box-shadow: 0 4px 15px rgba(71, 118, 230, 0.2);
+
+        i {
+            font-size: 20px; 
+            color: var(--text-light);
+        }
+    }
+
+    .stat-info {
+        .stat-label {
+            font-size: 16px; 
+            color: #64748B;
+            margin-bottom: 5px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 24px; 
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: 0.5px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            margin-left: 10px; 
+        }
+    }
+}
+
+button {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: var(--text-light);
+    border: none;
+    padding: 12px 25px; /* ปรับ padding */
+    font-size: 16px; /* ปรับขนาดฟอนต์ */
+    font-weight: 600;
+    border-radius: 12px; /* ปรับ border-radius */
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(71, 118, 230, 0.2);
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: translateY(-2px); /* ปรับขนาด */
+        box-shadow: 0 8px 25px rgba(71, 118, 230, 0.3);
+    }
+
+    i {
+        margin-right: 8px; /* ปรับ margin */
+        font-size: 18px; /* ปรับขนาดฟอนต์ */
+    }
+}
+
+.user-views-container {
+    margin-top: 20px; /* ปรับ margin */
+    height: 430px; /* กำหนดความสูงของกรอบ */
+    overflow-y: auto; /* เพิ่มการเลื่อนแนวตั้ง */
+    padding: 10px; /* เพิ่ม padding */
+    background: #ffffff; /* สีพื้นหลัง */
+    border-radius: 8px; /* ปรับมุมให้มน */
+    box-shadow: var(--shadow); /* เพิ่มเงา */
+}
+
+.user-views-container h2 {
+    font-size: 28px; 
+    color: #333; /* ใช้สีเทาเข้ม */
+    margin-bottom: 20px; /* ปรับ margin */
+    font-weight: 700; /* เพิ่มน้ำหนักของฟอนต์ */
+    text-align: center; /* จัดกลางข้อความ */
+    text-transform: uppercase; /* ทำให้ตัวพิมพ์ใหญ่ */
+    letter-spacing: 1px; /* เพิ่มระยะห่างระหว่างตัวอักษร */
+}
+
+ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* ปรับขนาดให้ดูมีระเบียบ */
+    gap: 20px; /* ปรับ gap */
+    padding: 0; /* ลบ padding */
+    list-style: none; /* ไม่ให้มีจุดนำหน้า */
+}
+
+li {
+    background: #f9f9f9; /* ใช้สีพื้นหลังการ์ด */
+    padding: 20px; /* ปรับ padding */
+    border-radius: 15px; /* ปรับ border-radius */
+    font-size: 18px; /* ปรับขนาดฟอนต์ */
+    font-weight: 600; /* เพิ่มน้ำหนักของฟอนต์ */
+    color: #444; /* ใช้สีเทาเข้ม */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* เพิ่มการเคลื่อนไหว */
+    text-align: center; /* จัดกลางข้อความ */
+    position: relative; /* เพิ่มการจัดตำแหน่ง */
+    overflow: hidden; /* ซ่อนเนื้อหาที่เกิน */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* เพิ่มเงาให้ดูมีมิติ */
+
+    /* เพิ่มรูปภาพที่ด้านบน */
+    &:before {
+        content: "";
+        position: absolute;
+        top: -20px; /* วางตำแหน่งให้สูงขึ้น */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px; /* กำหนดขนาด */
+        height: 60px; /* กำหนดขนาด */
+        background-size: contain; /* ปรับขนาดรูปให้พอดี */
+    }
+
+    &:hover {
+        transform: translateY(-5px); /* เคลื่อนไหวขึ้นเมื่อ hover */
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2); /* เปลี่ยนเงาเมื่อ hover */
+    }
+}
+
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 15px; /* ปรับ padding */
+    }
+
+    .dashboard-header {
+        padding: 20px; /* ปรับ padding */
+
+        .header-content h1 {
+            font-size: 26px; /* ปรับขนาดฟอนต์ */
+        }
+    }
+
+    .stats-container {
+        grid-template-columns: 1fr; /* ปรับให้แสดงหนึ่งคอลัมน์ */
+    }
+
+    .stat-row .stat-info .stat-value {
+        font-size: 22px; /* ปรับขนาดฟอนต์ */
+    }
+}
+
+.refresh-button {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: var(--text-light);
+    border: none;
+    padding: 12px 25px; /* ปรับ padding */
+    font-size: 16px; /* ปรับขนาดฟอนต์ */
+    font-weight: 600;
+    border-radius: 12px; 
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(71, 118, 230, 0.2);
+    transition: all 0.3s ease;
+    position: relative; 
+    overflow: hidden; 
+}
+
+.refresh-button:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.1); /* เอฟเฟกต์แสง */
+    border-radius: 50%; /* รูปวงกลม */
+    transition: all 0.5s ease;
+    transform: translate(-50%, -50%) scale(0); /* ซ่อนแสง */
+    z-index: 0; /* ด้านหลังข้อความ */
+}
+
+.refresh-button:hover:before {
+    transform: translate(-50%, -50%) scale(1); /* แสดงแสงเมื่อ hover */
+}
+
+.refresh-button:hover {
+    transform: translateY(-2px); /* ปรับขนาด */
+    box-shadow: 0 8px 25px rgba(71, 118, 230, 0.3);
+}
+
+.refresh-button i {
+    margin-right: 8px; /* ปรับ margin */
+    font-size: 18px; /* ปรับขนาดฟอนต์ */
+    z-index: 1; /* ข้อความอยู่ข้างหน้าชั้นแสง */
+}
+

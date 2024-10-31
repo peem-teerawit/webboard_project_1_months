@@ -1,18 +1,21 @@
 <div>
   <!-- Side Navigation -->
-  <div class="sidenav">
-    <a routerLink="/threads" class="nav-item">
-      <i class="fas fa-home"></i>
-      <span>Home</span>
-    </a>
-    <a routerLink="/popular-thread" class="nav-item">
-      <i class="fas fa-fire"></i>
-      <span>Popular</span>
-    </a>
-    <a routerLink="/tags-summary" class="nav-item">
-      <i class="fas fa-tags"></i>
-      <span>Tags</span>
-    </a>
+  <div *ngIf="!isAdmin">
+    <!-- Side Navigation สำหรับผู้ใช้ปกติเท่านั้น -->
+    <div class="sidenav">
+      <a routerLink="/threads" class="nav-item">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+      <a routerLink="/popular-thread" class="nav-item">
+        <i class="fas fa-fire"></i>
+        <span>Popular</span>
+      </a>
+      <a routerLink="/tags-summary" class="nav-item">
+        <i class="fas fa-tags"></i>
+        <span>Tags</span>
+      </a>
+    </div>
   </div>
 
   <!-- Top Navigation -->
@@ -59,6 +62,10 @@
               <div *ngIf="dropdownOpen" class="dropdown-content">
                 <a *ngIf="!username" routerLink="/login" class="dropdown-item">เข้าสู่ระบบ</a>
                 <a *ngIf="token" routerLink="/thread-history" class="dropdown-item">ประวัติกระทู้</a>
+                
+                <!-- Dashboard Link only for Admins -->
+                <a *ngIf="isAdmin" routerLink="/admin/dashboard" class="dropdown-item">Dashboard</a>
+
                 <button *ngIf="username" (click)="logOut()" class="dropdown-item">ออกจากระบบ</button>
               </div>
             </div>
@@ -73,7 +80,7 @@
     <span class="loading-text">กำลังออกจากระบบ...</span>
   </div>
 
-  <div class="container mt-3">
+  <div [ngClass]="isAdmin ? 'admin-container' : 'container'">
     <router-outlet></router-outlet>
   </div>
 </div>

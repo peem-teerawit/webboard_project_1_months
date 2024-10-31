@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   token: string | null = '';
   dropdownOpen = false;
   loading = false; 
+  isAdmin = false; // New variable to store admin status
 
   navItems = [
     { path: '/threads', icon: 'fa-home', label: 'Home' },
@@ -24,6 +25,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.token = localStorage.getItem('token'); 
     this.username = localStorage.getItem('username'); 
+    const role = localStorage.getItem('role'); // Retrieve role from local storage
+    this.isAdmin = role === 'admin'; // Set isAdmin to true if role is 'admin'
   }
 
   async logOut() {
@@ -31,7 +34,6 @@ export class AppComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
     localStorage.removeItem('role');
-    // localStorage.removeItem('userId');
     this.token = null; 
     this.username = null;
     this.closeDropdown();
@@ -49,4 +51,4 @@ export class AppComponent implements OnInit {
   closeDropdown() {
     this.dropdownOpen = false;
   }
-}
+} 

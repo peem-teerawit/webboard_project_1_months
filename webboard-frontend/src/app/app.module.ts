@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ThreadHistoryComponent } from './components/thread-history/thread-history.component';
 import { PopularThreadComponent } from './components/popular-thread/popular-thread.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     TagComponent,
     TagThreadComponent,
     ThreadHistoryComponent,
-    PopularThreadComponent
+    PopularThreadComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,

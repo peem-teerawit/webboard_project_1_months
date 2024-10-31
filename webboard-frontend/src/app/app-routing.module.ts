@@ -10,6 +10,7 @@ import { EditThreadComponent } from './components/edit-thread/edit-thread.compon
 import { TagThreadComponent } from './components/tag-thread/tag-thread.component';
 import { TagComponent } from './components/tag/tag.component';
 import { PopularThreadComponent } from './components/popular-thread/popular-thread.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/threads', pathMatch: 'full' },
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'thread-detail/:id', component: ThreadDetailComponent },
   {path: "tag-thread/:tags", component:TagThreadComponent},
   {path:"tags-summary", component:TagComponent},
-  {path: 'popular-thread', component: PopularThreadComponent}
+  {path: 'popular-thread', component: PopularThreadComponent},
+  { path: 'admin/dashboard', component: AdminDashboardComponent }
 ];
 
 @NgModule({

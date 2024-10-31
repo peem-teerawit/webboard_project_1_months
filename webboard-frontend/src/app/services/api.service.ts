@@ -112,4 +112,25 @@ export class ApiService {
     return this.http.get<any>(`${this.baseUrl}/replies/count/${threadId}`);
   }
 
+  // Fetch log summary
+  getLogSummary(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get(`${this.baseUrl}/admin/logs`, { headers });
+  }
+
+  // Fetch logs for a specific user
+  getUserLogs(userId: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get(`${this.baseUrl}/admin/user/${userId}/logs`, { headers });
+  }
+
+  // Fetch all usernames in logs
+  getAllUsernamesInLogs(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get(`${this.baseUrl}/admin/get-all-user`, { headers });
+  }
+
 }
