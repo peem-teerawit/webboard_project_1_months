@@ -138,17 +138,20 @@ exports.getThreadById = async (req, res) => {
 
 
 // Edit a thread
+// Edit a thread
 exports.updateThread = async (req, res) => {
     const { title, content, tags, is_anonymous, expire_at } = req.body;
     const thread = await Thread.findById(req.params.id);
 
-    if (thread && String(thread.user_id) === req.user.id) {
+    // Check if the thread exists and if the user is either the author or an admin
+    if (thread && (String(thread.user_id) === req.user.id || req.user.role === "admin")) {
         thread.title = title;
         thread.content = content;
         thread.tags = tags;
         thread.is_anonymous = is_anonymous;
         thread.expire_at = expire_at;
         await thread.save();
+
         // Log successful update
         await Log.create({
             action: 'thread_updated',
@@ -156,11 +159,13 @@ exports.updateThread = async (req, res) => {
             username: req.user.username, // Include username
             threadId: thread._id,
         });
+
         res.json(thread);
     } else {
         res.status(403).json({ message: 'Unauthorized to edit this thread' });
     }
 };
+
 
 // Delete a thread and its related replies
 exports.deleteThread = async (req, res) => {
