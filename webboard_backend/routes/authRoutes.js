@@ -1,7 +1,5 @@
 const express = require('express');
-const { register, login, deleteUser } = require('../controllers/authController');
-const { deleteReply } = require('../controllers/replyController');
-const { deleteThread } = require('../controllers/threadController');
+const { register, login } = require('../controllers/authController');
 
 const router = express.Router();
 
