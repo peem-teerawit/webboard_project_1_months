@@ -125,12 +125,56 @@
           </li>
         </ul>
       </div>
+
+      
+
   
-      <button (click)="refreshStats()" aria-label="Refresh statistics">
-        <i class="fas fa-sync-alt"></i>
-        รีเฟรชข้อมูล
-    </button>
+<button class="refresh-button" (click)="refreshStats()" aria-label="Refresh statistics">
+    <i class="fas fa-sync-alt"></i>
+    รีเฟรชข้อมูล
+</button>
     </div>
   </div>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Popular Posts Section -->
+<!-- Content Wrapper -->
+<div class="content-wrapper">
+  <!-- Popular Posts Section -->
+  <div class="popular-posts"> 
+      <h3 class="section-title">โพสต์ยอดนิยม</h3>
+      <div class="posts-container">
+          <ul class="posts-list">
+              <div *ngFor="let post of popularThreads | slice:0:5" class="post-item"> 
+                  <div class="post-card">
+                    <a [routerLink]="['/threads', post._id]" class="post-link"> 
+                      <h4 class="post-title">{{ post.title }}</h4>
+                      <p class="post-description">{{ post.description }}</p>
+                      <p class="post-content">{{ truncateContent(post.content, 100) }}</p> </a>
+                      <div class="post-meta">
+                        <span class="post-author">{{ post.author }}</span>
+                        <span class="post-date">{{ post.date | date }}</span>
+                          <span class="post-comments ">Comments: {{ post.comments }} </span> 
+                          <span class="post-user">โดย: {{ post.user_name }}</span> 
+                          <span class="post-date">{{ post.date }}</span>
+                      </div>
+                  </div>
+              </div>
+          </ul>
+      </div>
+  </div>
+
+  <!-- Most Popular Tags Section -->
+  <div class="popular-tags">
+    <h3 class="section-title">แท็กยอดนิยม</h3>
+    <div class="tags-container">
+        <ul class="tags-list">
+            <li *ngFor="let tag of popularTags | slice:0:5" class="tag-item">
+                <a [routerLink]="['/tag-thread', tag.tag]" class="tag-label">{{ tag.tag }}</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+

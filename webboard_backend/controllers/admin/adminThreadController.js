@@ -48,7 +48,7 @@ exports.deleteThread = async (req, res) => {
     }
 };
 
-exports.getPopularThreads = async (req, res) => {
+exports.getPopularThreadsbyAdmin = async (req, res) => {
     try {
         const threads = await Thread.aggregate([
             {
@@ -87,7 +87,7 @@ exports.getPopularThreads = async (req, res) => {
     }
 };
 
-exports.getPopularTags = async (req, res) => {
+exports.getPopularTagsbyAdmin = async (req, res) => {
     try {
         const tags = await Thread.aggregate([
             { $unwind: '$tags' }, 
@@ -98,13 +98,24 @@ exports.getPopularTags = async (req, res) => {
                 }
             },
             { $sort: { count: -1 } }, 
-            { $limit: 10 } 
+            { $limit: 10 },
+            {
+                $project: { 
+                    tag: '$_id', // Renames `_id` to `tag`
+                    count: 1,    // Includes `count`
+                    _id: 0       // Excludes `_id`
+                }
+            }
         ]).exec();
 
-        res.status(200).json(tags);
+        // Reformatting the output to have tag above count
+        const formattedTags = tags.map(item => ({ tag: item.tag, count: item.count }));
+
+        res.status(200).json(formattedTags);
     } catch (error) {
         console.error("Error fetching popular tags:", error);
         res.status(500).json({ message: 'Error fetching popular tags', error: error.message || error });
     }
 };
+
 

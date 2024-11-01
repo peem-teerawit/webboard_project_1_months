@@ -14,6 +14,8 @@
     min-height: 100vh;
     padding: 20px; /* ปรับ padding */
     font-family: 'Prompt', sans-serif;
+    display: flex; /* ใช้ flexbox */
+    flex-direction: column; /* แนวตั้ง */
 }
 
 .dashboard-header {
@@ -190,7 +192,6 @@ button {
 }
 
 ul {
-    display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* ปรับขนาดให้ดูมีระเบียบ */
     gap: 20px; /* ปรับ gap */
     padding: 0; /* ลบ padding */
@@ -199,55 +200,54 @@ ul {
 
 li {
     background: #f9f9f9; /* ใช้สีพื้นหลังการ์ด */
-    padding: 20px; /* ปรับ padding */
-    border-radius: 15px; /* ปรับ border-radius */
-    font-size: 18px; /* ปรับขนาดฟอนต์ */
-    font-weight: 600; /* เพิ่มน้ำหนักของฟอนต์ */
-    color: #444; /* ใช้สีเทาเข้ม */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* เพิ่มการเคลื่อนไหว */
-    text-align: center; /* จัดกลางข้อความ */
-    position: relative; /* เพิ่มการจัดตำแหน่ง */
-    overflow: hidden; /* ซ่อนเนื้อหาที่เกิน */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* เพิ่มเงาให้ดูมีมิติ */
+    padding: 20px;
+    border-radius: 15px; 
+    font-size: 18px; 
+    font-weight: 600; 
+    color: #444; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    text-align: center; 
+    position: relative; 
+    overflow: hidden; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
-    /* เพิ่มรูปภาพที่ด้านบน */
     &:before {
         content: "";
         position: absolute;
-        top: -20px; /* วางตำแหน่งให้สูงขึ้น */
+        top: -20px; 
         left: 50%;
         transform: translateX(-50%);
-        width: 60px; /* กำหนดขนาด */
-        height: 60px; /* กำหนดขนาด */
-        background-size: contain; /* ปรับขนาดรูปให้พอดี */
+        width: 60px;
+        height: 60px; 
+        background-size: contain; 
     }
 
     &:hover {
-        transform: translateY(-5px); /* เคลื่อนไหวขึ้นเมื่อ hover */
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2); /* เปลี่ยนเงาเมื่อ hover */
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2); 
     }
 }
 
 
 @media (max-width: 768px) {
     .dashboard-container {
-        padding: 15px; /* ปรับ padding */
+        padding: 15px; 
     }
 
     .dashboard-header {
-        padding: 20px; /* ปรับ padding */
+        padding: 20px; 
 
         .header-content h1 {
-            font-size: 26px; /* ปรับขนาดฟอนต์ */
+            font-size: 26px; 
         }
     }
 
     .stats-container {
-        grid-template-columns: 1fr; /* ปรับให้แสดงหนึ่งคอลัมน์ */
+        grid-template-columns: 1fr; 
     }
 
     .stat-row .stat-info .stat-value {
-        font-size: 22px; /* ปรับขนาดฟอนต์ */
+        font-size: 22px; 
     }
 }
 
@@ -255,8 +255,8 @@ li {
     background: linear-gradient(45deg, var(--primary), var(--secondary));
     color: var(--text-light);
     border: none;
-    padding: 12px 25px; /* ปรับ padding */
-    font-size: 16px; /* ปรับขนาดฟอนต์ */
+    padding: 12px 25px; 
+    font-size: 16px; 
     font-weight: 600;
     border-radius: 12px; 
     cursor: pointer;
@@ -264,6 +264,7 @@ li {
     transition: all 0.3s ease;
     position: relative; 
     overflow: hidden; 
+    margin-top: auto;
 }
 
 .refresh-button:before {
@@ -273,25 +274,195 @@ li {
     left: 50%;
     width: 300%;
     height: 300%;
-    background: rgba(255, 255, 255, 0.1); /* เอฟเฟกต์แสง */
-    border-radius: 50%; /* รูปวงกลม */
+    background: rgba(255, 255, 255, 0.1); 
+    border-radius: 50%; 
     transition: all 0.5s ease;
-    transform: translate(-50%, -50%) scale(0); /* ซ่อนแสง */
-    z-index: 0; /* ด้านหลังข้อความ */
+    transform: translate(-50%, -50%) scale(0); 
+    z-index: 0; 
 }
 
 .refresh-button:hover:before {
-    transform: translate(-50%, -50%) scale(1); /* แสดงแสงเมื่อ hover */
+    transform: translate(-50%, -50%) scale(1); 
 }
 
 .refresh-button:hover {
-    transform: translateY(-2px); /* ปรับขนาด */
+    transform: translateY(-2px); 
     box-shadow: 0 8px 25px rgba(71, 118, 230, 0.3);
 }
 
 .refresh-button i {
-    margin-right: 8px; /* ปรับ margin */
-    font-size: 18px; /* ปรับขนาดฟอนต์ */
-    z-index: 1; /* ข้อความอยู่ข้างหน้าชั้นแสง */
+    margin-right: 8px; 
+    font-size: 18px; 
+    z-index: 1; 
 }
 
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #426fca; 
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+/* Popular Posts Section */
+.popular-posts {
+    flex: 1;
+    padding: 20px;
+    background-color: #f5f7fa; 
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin: 0;
+}
+
+.post-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 15px rgba(24, 103, 181, 0.15); 
+}
+
+.post-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1867b5;
+    margin: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.post-description {
+    font-size: 15px;
+    color: #555;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.post-content {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+    line-height: 1.7;
+}
+
+.post-meta {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    margin-top: 12px;
+    padding-top: 8px;
+    border-top: 1px solid #ddd;
+}
+
+.post-comments {
+    flex: 1; 
+    font-size: 13px; 
+    color: #888; 
+    margin: 0; 
+}
+
+.post-user {
+    font-size: 13px;
+    color: #1867b5;
+    font-weight: 500;
+}
+
+.post-date {
+    font-size: 13px;
+    color: #888;
+}
+
+.popular-posts .post-link {
+    text-decoration: none; 
+    color: inherit; 
+}
+
+.popular-posts .post-link:hover {
+    text-decoration: underline; 
+}
+
+
+/* Most Popular Tags Section */
+.popular-tags {
+    flex: 1;
+    background-color: #f0f4f8;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin: 20px 0;
+}
+
+.section-title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #1a73e8;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.tags-container {
+    display: flex;
+    justify-content: center; 
+}
+
+.tags-list {
+    list-style: none;
+    padding: 0;
+    display: block; 
+    width: 100%; 
+    max-width: 400px; 
+}
+
+.tag-item {
+    margin-bottom: 12px;
+}
+
+.tag-label {
+    background-color: #ffd700;
+    color: #fff;
+    padding: 15px 6px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    width: 100%; 
+    text-align: center; 
+}
+
+.tag-label:hover {
+    background-color: #e6b800;
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+}
+
+.tag-label {
+    text-decoration: none; 
+    color: inherit; 
+}
+
+.tag-label:hover {
+    text-decoration: underline; 
+}

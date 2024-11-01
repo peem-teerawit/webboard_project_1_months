@@ -133,4 +133,18 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}/admin/get-all-user`, { headers });
   }
 
+  // Fetch popular threads by admin
+  getPopularThreadsbyAdmin(): Observable<any[]> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any[]>(`${this.baseUrl}/admin/threads/popular`, { headers });
+  }
+
+  // Fetch popular tags by admin
+  getPopularTagsbyAdmin(): Observable<any[]> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any[]>(`${this.baseUrl}/admin/threads/popular/tags`, { headers });
+  }
+
 }

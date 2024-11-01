@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'; 
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +13,8 @@ export class AppComponent implements OnInit {
   dropdownOpen = false;
   loading = false; 
   isAdmin = false; // New variable to store admin status
+  isDashboardPage = false; 
+
 
   navItems = [
     { path: '/threads', icon: 'fa-home', label: 'Home' },
@@ -20,13 +22,21 @@ export class AppComponent implements OnInit {
     { path: '/tags', icon: 'fa-tags', label: 'Tags' }
   ];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) { 
+    this.router.events.subscribe((event) => {
+    if (event instanceof NavigationEnd) {
+      this.isDashboardPage = event.url === '/admin/dashboard';
+    }
+  });
+}
+
 
   ngOnInit() {
     this.token = localStorage.getItem('token'); 
     this.username = localStorage.getItem('username'); 
     const role = localStorage.getItem('role'); // Retrieve role from local storage
     this.isAdmin = role === 'admin'; // Set isAdmin to true if role is 'admin'
+    
   }
 
   async logOut() {
