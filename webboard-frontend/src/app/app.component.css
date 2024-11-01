@@ -262,29 +262,3 @@
     padding: 20px; 
 }
 
-/* CSS ทั่วไปสำหรับ container */
-.container {
-    margin-top: 60px; /* ระยะห่างจากด้านบนสำหรับหน้าทั่วไป */
-    padding: 20px; /* เพิ่มพื้นที่ภายใน */
-    background-color: #f9f9f9; /* สีพื้นหลัง */
-    border-radius: 10px; /* มุมโค้งมน */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* เงาของกล่อง */
-    max-width: 1200px; /* ความกว้างสูงสุด */
-    margin-left: auto; /* จัดกลางทางซ้าย */
-    margin-right: auto; /* จัดกลางทางขวา */
-}
-
-/* CSS เฉพาะสำหรับหน้า admin dashboard */
-.admin-container {
-    margin-top: 60px; /* ระยะห่างจากด้านบน */
-    background-color: #ffffff; /* สีพื้นหลังแตกต่างจากหน้าอื่น */
-    border-radius: 10px; /* มุมโค้งมน */
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* เงาของกล่องที่เข้มข้นขึ้น */
-}
-
-/* ตัวอย่าง CSS สำหรับเนื้อหาภายใน dashboard */
-.admin-content {
-    display: flex; /* ใช้งาน flexbox */
-    flex-direction: column; /* จัดเรียงในแนวตั้ง */
-    gap: 20px; /* ระยะห่างระหว่างองค์ประกอบ */
-}

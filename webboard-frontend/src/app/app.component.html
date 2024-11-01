@@ -1,6 +1,7 @@
-<div class="main-container">
+<div>
   <!-- Side Navigation -->
-  <div *ngIf="!isAdmin || !isDashboardPage">
+  <div *ngIf="!isAdmin ">
+    <!-- Side Navigation สำหรับผู้ใช้ปกติเท่านั้น -->
     <div class="sidenav">
       <a routerLink="/threads" class="nav-item">
         <i class="fas fa-home"></i>
@@ -61,7 +62,10 @@
               <div *ngIf="dropdownOpen" class="dropdown-content">
                 <a *ngIf="!username" routerLink="/login" class="dropdown-item">เข้าสู่ระบบ</a>
                 <a *ngIf="token" routerLink="/thread-history" class="dropdown-item">ประวัติกระทู้</a>
+                
+                <!-- Dashboard Link only for Admins -->
                 <a *ngIf="isAdmin" routerLink="/admin/dashboard" class="dropdown-item">Dashboard</a>
+
                 <button *ngIf="username" (click)="logOut()" class="dropdown-item">ออกจากระบบ</button>
               </div>
             </div>
