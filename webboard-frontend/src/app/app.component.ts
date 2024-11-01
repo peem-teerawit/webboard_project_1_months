@@ -15,28 +15,19 @@ export class AppComponent implements OnInit {
   isAdmin = false; // New variable to store admin status
   isDashboardPage = false; 
 
-
-  navItems = [
-    { path: '/threads', icon: 'fa-home', label: 'Home' },
-    { path: '/popular', icon: 'fa-fire', label: 'Popular' },
-    { path: '/tags', icon: 'fa-tags', label: 'Tags' }
-  ];
-
   constructor(private router: Router) { 
     this.router.events.subscribe((event) => {
-    if (event instanceof NavigationEnd) {
-      this.isDashboardPage = event.url === '/admin/dashboard';
-    }
-  });
-}
-
+      if (event instanceof NavigationEnd) {
+        this.isDashboardPage = event.url === '/admin/dashboard';
+      }
+    });
+  }
 
   ngOnInit() {
     this.token = localStorage.getItem('token'); 
     this.username = localStorage.getItem('username'); 
     const role = localStorage.getItem('role'); // Retrieve role from local storage
     this.isAdmin = role === 'admin'; // Set isAdmin to true if role is 'admin'
-    
   }
 
   async logOut() {
@@ -61,4 +52,4 @@ export class AppComponent implements OnInit {
   closeDropdown() {
     this.dropdownOpen = false;
   }
-} 
+}
