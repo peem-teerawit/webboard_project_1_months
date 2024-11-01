@@ -466,3 +466,77 @@ body {
 .tag-label:hover {
     text-decoration: underline; 
 }
+
+
+.log-history-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  .log-history-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .log-history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .log-history-table th, .log-history-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .log-history-table th {
+    background-color: #4e5ae8;
+    color: white;
+  }
+  
+  .log-history-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .no-logs {
+    text-align: center;
+    color: #888;
+    padding: 20px;
+  }
+  
+  .pagination-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .pagination-button {
+    background-color: #4e5ae8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .pagination-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .pagination-button:hover:not(:disabled) {
+    background-color: #3a4db1;
+  }
+  
+  .pagination-info {
+    font-size: 16px;
+    color: #555;
+  }
+  

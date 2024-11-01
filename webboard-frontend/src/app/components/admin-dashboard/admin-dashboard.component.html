@@ -177,4 +177,38 @@
     </div>
 </div>
 
+<!-- Log History Section -->
+<div class="log-history-container">
+  <h2 class="log-history-title">ประวัติการใช้งาน</h2>
+  
+  <table class="log-history-table">
+    <thead>
+      <tr>
+        <th>ชื่อผู้ใช้</th>
+        <th>การกระทำ</th>
+        <th>หมายเลขกระทู้</th>
+        <th>เวลา</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let log of paginatedLogs">
+        <td>{{ log.username }}</td>
+        <td>{{ log.action }}</td>
+        <td>{{ log.threadId }}</td>
+        <td>{{ log.timestamp | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+      </tr>
+      <tr *ngIf="paginatedLogs.length === 0">
+        <td colspan="4" class="no-logs">ไม่มีข้อมูลบันทึก</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination Controls -->
+  <div class="pagination-controls">
+    <button class="pagination-button" (click)="previousPage()" [disabled]="currentPage === 1">ก่อนหน้า</button>
+    <span class="pagination-info">หน้า {{ currentPage }} ของ {{ totalPages }}</span>
+    <button class="pagination-button" (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= logs.length">ถัดไป</button>
+  </div>
+</div>
+
 

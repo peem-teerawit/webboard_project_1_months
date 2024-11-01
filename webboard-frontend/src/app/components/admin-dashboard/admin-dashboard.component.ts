@@ -27,12 +27,17 @@ export class AdminDashboardComponent implements OnInit {
     mostPopularPosts: [], // Add for popular posts
     mostPopularTags: []   // Add for popular tags
   };
+
   popularThreads: any[] = []; // New property to hold popular threads
   popularTags: any[] = []; // New property to hold popular tags
   logs: any[] = []; // To hold log data
   lastUpdatedDate: Date = new Date();
   loading: boolean = false;
   error: string | null = null;
+
+  // Pagination properties
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
 
   constructor(private apiService: ApiService) { }
 
@@ -45,7 +50,7 @@ export class AdminDashboardComponent implements OnInit {
 
   truncateContent(content: string, limit: number): string {
     if (content.length <= limit) return content;
-    return content.substring(0, limit) + '...'; // เพิ่ม ... ที่ท้ายเมื่อเนื้อหายาวเกิน
+    return content.substring(0, limit) + '...'; // Add ... at the end if content is too long
   }
 
   loadStats() {
@@ -58,14 +63,16 @@ export class AdminDashboardComponent implements OnInit {
         this.summary = data.summary || this.summary; // Ensure summary is initialized
         this.summary.mostPopularPosts = data.mostPopularPosts || [];
         this.summary.mostPopularTags = data.mostPopularTags || [];
-        this.logs = data.logs || [];
+        this.logs = data.logs || []; // Load logs from API
         this.lastUpdatedDate = new Date();
+
+        // Sort logs by timestamp to show recent logs
+        this.sortLogsByTimestamp();
 
         // Fetch popular threads and tags
         this.apiService.getPopularThreadsbyAdmin().subscribe({
           next: (threads) => {
             this.popularThreads = threads || []; // Update popular threads
-            //console.log(threads)
           },
           error: (error) => {
             console.error('Error fetching popular threads:', error);
@@ -76,7 +83,6 @@ export class AdminDashboardComponent implements OnInit {
         this.apiService.getPopularTagsbyAdmin().subscribe({
           next: (tags) => {
             this.popularTags = tags || []; // Update popular tags
-            // console.log(tags)
           },
           error: (error) => {
             console.error('Error fetching popular tags:', error);
@@ -96,5 +102,31 @@ export class AdminDashboardComponent implements OnInit {
 
   refreshStats(): void {
     this.loadStats();
+  }
+
+  // Sort logs by timestamp to show the most recent logs
+  private sortLogsByTimestamp() {
+    this.logs.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+  }
+
+  get paginatedLogs() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    return this.logs.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  get totalPages() {
+    return Math.ceil(this.logs.length / this.itemsPerPage);
   }
 }

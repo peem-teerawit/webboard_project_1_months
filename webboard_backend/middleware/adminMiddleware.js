@@ -28,11 +28,11 @@ exports.adminMiddleware = async (req, res, next) => {
         return res.status(403).json({ message: 'Admin access required' });
     }
 
-    // Log admin access
-    const logEntry = new Log({
-        action: 'admin_access',
-        userId: req.user._id,
-    });
+    // // Log admin access
+    // const logEntry = new Log({
+    //     action: 'admin_access',
+    //     userId: req.user._id,
+    // });
 
     try {
         await logEntry.save();

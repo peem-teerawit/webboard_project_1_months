@@ -25,9 +25,7 @@ export class ApiService {
   }
 
   getThread(id: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get(`${this.baseUrl}/threads/${id}`, { headers });
+    return this.http.get(`${this.baseUrl}/threads/${id}`); 
   }
 
   createThread(title: string, content: string, isAnonymous: boolean, tags: string[], expireAt?: Date): Observable<any> {

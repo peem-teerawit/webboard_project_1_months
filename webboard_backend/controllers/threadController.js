@@ -95,28 +95,46 @@ exports.getPopularThreads = async (req, res) => {
 
 exports.getThreadById = async (req, res) => {
     try {
-        // console.log('Fetching thread with ID:', req.params.id); // Log the thread ID
+        // Fetch the thread by ID, populating user_id if available
         const thread = await Thread.findById(req.params.id).populate('user_id', 'username').exec();
         if (!thread) {
             console.log('Thread not found');
             return res.status(404).json({ message: 'Thread not found' });
         }
 
-        // Log the action
-        const logEntry = new Log({
-            action: 'view_thread',
-            userId: req.user.id,
-            username: req.user.username,
-            threadId: thread._id,
-        });
-        await logEntry.save(); // Save the log entry
+        // Prepare response data
+        const response = {
+            id: thread._id,
+            title: thread.title,
+            content: thread.content,
+            user_id: thread.user_id, // Always include user_id from the thread
+            user_name: thread.user_id ? thread.user_id.username : null, // Include username if available
+            is_anonymous: thread.is_anonymous,
+            tags: thread.tags,
+            expire_at: thread.expire_at,
+            likes: thread.likes,
+            liked_by: thread.liked_by,
+            created_at: thread.created_at // Include created_at if you need it
+        };
 
-        res.json(thread);
+        // If the user is logged in, log the action
+        if (req.user) {
+            const logEntry = new Log({
+                action: 'view_thread',
+                userId: req.user.id,
+                username: req.user.username,
+                threadId: thread._id,
+            });
+            await logEntry.save(); // Save the log entry
+        }
+
+        res.json(response); // Send the structured response
     } catch (error) {
         console.error('Error retrieving thread:', error); // Log the error
         res.status(500).json({ message: 'Error retrieving thread', error });
     }
 };
+
 
 
 // Edit a thread
