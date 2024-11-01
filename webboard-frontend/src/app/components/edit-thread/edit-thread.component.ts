@@ -79,7 +79,7 @@ export class EditThreadComponent implements OnInit {
         this.threadData.tags = this.threadData.tags.split(',').map((tag: string) => tag.trim());
       }
   
-      console.log(this.threadData); // Log the data to check if it's correctly capturing the fields
+      // console.log(this.threadData); // Log the data to check if it's correctly capturing the fields
       this.apiService.updateThread(this.threadId, this.threadData).subscribe(
         () => {
           console.log('Thread updated successfully');

@@ -159,9 +159,12 @@ export class ThreadsComponent implements OnInit {
     }
     return decodedContent;
   }
+  isAdmin(): boolean {
+    return localStorage.getItem('role') === 'admin';
+  }
 
   canEdit(thread: any): boolean {
-    return thread.user_name === this.currentUsername;
+    return this.isAdmin() || thread.user_name === this.currentUsername;
   }
 
   getDisplayedUsername(thread: any): string {

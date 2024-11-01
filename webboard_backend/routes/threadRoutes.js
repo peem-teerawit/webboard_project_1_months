@@ -15,7 +15,7 @@ const {
     unlikeThread,
     getUserLikedThreads
 } = require('../controllers/threadController');
-const { authMiddleware } = require('../middleware/adminMiddleware'); 
+const { authMiddleware } = require('../middleware/authMiddleware'); 
 const router = express.Router();
 
 router.post('/', authMiddleware, createThread);
